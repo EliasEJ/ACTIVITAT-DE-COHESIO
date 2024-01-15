@@ -1,8 +1,8 @@
 ## DIAGRAMES
 
-- D-AC --> Diagrames d'activitat
-- D-CU --> Diagrames de casos d'ús
-- D-CL --> Diagrames de classes
+- D-AC ➡ Diagrames d'activitat
+- D-CU ➡ Diagrames de casos d'ús
+- D-CL ➡ Diagrames de classes
 
 ### DIAGRAMES D'ACTIVITATS
 
