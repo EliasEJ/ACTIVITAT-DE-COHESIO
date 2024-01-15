@@ -6,6 +6,13 @@
 
 ### DIAGRAMES D'ACTIVITATS
 
+En aquest apartat es troben els diagrames d'activitat de cada un dels actors del sistema. Aquests diagrames són els següents:
+
+- Anonim
+- Alumne
+- Professor
+- Administrador
+
 #### DIAGRAMA ANONIM
 
 ![Diagrama anonim](D-AC/D-AC-ANONIM.png)
