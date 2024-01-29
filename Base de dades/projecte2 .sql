@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 15-01-2024 a las 15:50:11
+-- Tiempo de generación: 22-01-2024 a las 16:46:41
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.2.4
 
@@ -30,15 +30,19 @@ USE `projecte2`;
 --
 
 DROP TABLE IF EXISTS `activitat`;
-CREATE TABLE `activitat` (
-  `actividad_id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `activitat` (
+  `actividad_id` int(11) NOT NULL AUTO_INCREMENT,
   `nom` varchar(50) NOT NULL,
   `descripcio` varchar(255) NOT NULL,
   `posicion_id` int(11) NOT NULL,
   `porfessor_id` int(11) NOT NULL,
   `grup1` int(11) NOT NULL,
   `grup2` int(11) NOT NULL,
-  `material_id` int(11) NOT NULL
+  `material_id` int(11) NOT NULL,
+  PRIMARY KEY (`actividad_id`),
+  UNIQUE KEY `fk_porfessor_id` (`porfessor_id`),
+  KEY `fk_material_id` (`material_id`) USING BTREE,
+  KEY `fk_posicio_id` (`posicion_id`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -48,8 +52,8 @@ CREATE TABLE `activitat` (
 --
 
 DROP TABLE IF EXISTS `admin`;
-CREATE TABLE `admin` (
-  `admin_id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `admin` (
+  `admin_id` int(11) NOT NULL AUTO_INCREMENT,
   `nom` varchar(50) NOT NULL,
   `cognom` varchar(50) NOT NULL,
   `user` varchar(20) NOT NULL,
@@ -57,7 +61,12 @@ CREATE TABLE `admin` (
   `correu` varchar(50) NOT NULL,
   `actividad_id` int(11) NOT NULL,
   `grup_id` int(11) NOT NULL,
-  `tutor` tinyint(1) NOT NULL
+  `tutor` tinyint(1) NOT NULL,
+  PRIMARY KEY (`admin_id`),
+  UNIQUE KEY `correu` (`correu`),
+  UNIQUE KEY `user` (`user`),
+  KEY `fk_grup_id` (`grup_id`),
+  KEY `fk_actividad_id` (`actividad_id`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -67,8 +76,8 @@ CREATE TABLE `admin` (
 --
 
 DROP TABLE IF EXISTS `alumne`;
-CREATE TABLE `alumne` (
-  `alume_id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `alumne` (
+  `alume_id` int(11) NOT NULL AUTO_INCREMENT,
   `nom` varchar(50) NOT NULL,
   `cognom` varchar(50) NOT NULL,
   `correu` varchar(50) NOT NULL,
@@ -76,8 +85,11 @@ CREATE TABLE `alumne` (
   `curs` enum('FP Basica','ASIX','DAW','SMX') NOT NULL,
   `any` enum('1r','2n') NOT NULL,
   `classe` enum('A','B','C','D') NOT NULL,
+  `asistencia` tinyint(1) NOT NULL,
   `grup_id` int(11) NOT NULL,
-  `tutor` tinyint(1) NOT NULL
+  `tutor` tinyint(1) NOT NULL,
+  PRIMARY KEY (`alume_id`),
+  KEY `fk_grup_id` (`grup_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -87,11 +99,13 @@ CREATE TABLE `alumne` (
 --
 
 DROP TABLE IF EXISTS `enfrentaments`;
-CREATE TABLE `enfrentaments` (
-  `enfrentament_id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `enfrentaments` (
+  `enfrentament_id` int(11) NOT NULL AUTO_INCREMENT,
   `actividad_id` int(11) NOT NULL,
   `nom` varchar(50) NOT NULL,
-  `resultat` varchar(20) NOT NULL
+  `resultat` varchar(20) NOT NULL,
+  PRIMARY KEY (`enfrentament_id`),
+  KEY `fk_actividad_id` (`actividad_id`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -101,11 +115,12 @@ CREATE TABLE `enfrentaments` (
 --
 
 DROP TABLE IF EXISTS `grup`;
-CREATE TABLE `grup` (
-  `grup_id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `grup` (
+  `grup_id` int(11) NOT NULL AUTO_INCREMENT,
   `nom` varchar(50) NOT NULL,
   `foto` text NOT NULL,
-  `puntuacio` int(11) NOT NULL
+  `puntuacio` int(11) NOT NULL,
+  PRIMARY KEY (`grup_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -115,10 +130,11 @@ CREATE TABLE `grup` (
 --
 
 DROP TABLE IF EXISTS `material`;
-CREATE TABLE `material` (
-  `material_id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `material` (
+  `material_id` int(11) NOT NULL AUTO_INCREMENT,
   `nom` int(11) NOT NULL,
-  `comprar` tinyint(1) NOT NULL
+  `comprar` tinyint(1) NOT NULL,
+  PRIMARY KEY (`material_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -128,10 +144,11 @@ CREATE TABLE `material` (
 --
 
 DROP TABLE IF EXISTS `posicio`;
-CREATE TABLE `posicio` (
-  `posicio_id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `posicio` (
+  `posicio_id` int(11) NOT NULL AUTO_INCREMENT,
   `nom` varchar(50) NOT NULL,
-  `descripcio` varchar(255) NOT NULL
+  `descripcio` varchar(255) NOT NULL,
+  PRIMARY KEY (`posicio_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -141,132 +158,20 @@ CREATE TABLE `posicio` (
 --
 
 DROP TABLE IF EXISTS `professor`;
-CREATE TABLE `professor` (
-  `professor_id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `professor` (
+  `professor_id` int(11) NOT NULL AUTO_INCREMENT,
   `nom` varchar(50) NOT NULL,
   `cognom` varchar(50) NOT NULL,
   `user` varchar(20) NOT NULL,
   `password` text NOT NULL,
   `actividad_id` int(11) NOT NULL,
   `grup_id` int(11) NOT NULL,
-  `tutor` tinyint(1) NOT NULL
+  `tutor` tinyint(1) NOT NULL,
+  PRIMARY KEY (`professor_id`),
+  UNIQUE KEY `user` (`user`),
+  KEY `fk_actividad_id` (`actividad_id`),
+  KEY `fk_grup_id` (`grup_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Índices para tablas volcadas
---
-
---
--- Indices de la tabla `activitat`
---
-ALTER TABLE `activitat`
-  ADD PRIMARY KEY (`actividad_id`),
-  ADD UNIQUE KEY `fk_porfessor_id` (`porfessor_id`),
-  ADD KEY `fk_material_id` (`material_id`) USING BTREE,
-  ADD KEY `fk_posicio_id` (`posicion_id`) USING BTREE;
-
---
--- Indices de la tabla `admin`
---
-ALTER TABLE `admin`
-  ADD PRIMARY KEY (`admin_id`),
-  ADD UNIQUE KEY `correu` (`correu`),
-  ADD UNIQUE KEY `user` (`user`),
-  ADD KEY `fk_grup_id` (`grup_id`),
-  ADD KEY `fk_actividad_id` (`actividad_id`) USING BTREE;
-
---
--- Indices de la tabla `alumne`
---
-ALTER TABLE `alumne`
-  ADD PRIMARY KEY (`alume_id`),
-  ADD KEY `fk_grup_id` (`grup_id`);
-
---
--- Indices de la tabla `enfrentaments`
---
-ALTER TABLE `enfrentaments`
-  ADD PRIMARY KEY (`enfrentament_id`),
-  ADD KEY `fk_actividad_id` (`actividad_id`) USING BTREE;
-
---
--- Indices de la tabla `grup`
---
-ALTER TABLE `grup`
-  ADD PRIMARY KEY (`grup_id`);
-
---
--- Indices de la tabla `material`
---
-ALTER TABLE `material`
-  ADD PRIMARY KEY (`material_id`);
-
---
--- Indices de la tabla `posicio`
---
-ALTER TABLE `posicio`
-  ADD PRIMARY KEY (`posicio_id`);
-
---
--- Indices de la tabla `professor`
---
-ALTER TABLE `professor`
-  ADD PRIMARY KEY (`professor_id`),
-  ADD UNIQUE KEY `user` (`user`),
-  ADD KEY `fk_actividad_id` (`actividad_id`),
-  ADD KEY `fk_grup_id` (`grup_id`);
-
---
--- AUTO_INCREMENT de las tablas volcadas
---
-
---
--- AUTO_INCREMENT de la tabla `activitat`
---
-ALTER TABLE `activitat`
-  MODIFY `actividad_id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT de la tabla `admin`
---
-ALTER TABLE `admin`
-  MODIFY `admin_id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT de la tabla `alumne`
---
-ALTER TABLE `alumne`
-  MODIFY `alume_id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT de la tabla `enfrentaments`
---
-ALTER TABLE `enfrentaments`
-  MODIFY `enfrentament_id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT de la tabla `grup`
---
-ALTER TABLE `grup`
-  MODIFY `grup_id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT de la tabla `material`
---
-ALTER TABLE `material`
-  MODIFY `material_id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT de la tabla `posicio`
---
-ALTER TABLE `posicio`
-  MODIFY `posicio_id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT de la tabla `professor`
---
-ALTER TABLE `professor`
-  MODIFY `professor_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- Restricciones para tablas volcadas

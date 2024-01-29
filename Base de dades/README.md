@@ -14,11 +14,11 @@ La nostra base de dades està formada per 8 taules, les quals són les següents
 
 ## Taula alumne
 
-| alume_id | nom       | cognom   | correu                | password   | curs     | any | classe | grup_id | tutor |
-|----------|-----------|----------|-----------------------|------------|----------|-----|--------|---------|-------|
-| 1        | Alejandro | Vázquez  | alejandro.vazquez@... | pass123    | DAW      | 2r  | A      | 4       | 1     |
-| 2        | Elias     | Jerari   | elias.jerari@...      | pass123    | DAW      | 2n  | A      | 4       | 1     |
-| 3        | Martin    | Hernán   | martin.hernan@...     | pass123    | DAW      | 2r  | A      | 4       | 1     |
+| alume_id | nom       | cognom   | correu                | password   | curs     | any | classe | asistencia | grup_id | tutor |
+|----------|-----------|----------|-----------------------|------------|----------|-----|--------|------------|---------|-------|
+| 1        | Alejandro | Vázquez  | alejandro.vazquez@... | pass123    | DAW      | 2r  | A      |Si          | 4       | 1     |
+| 2        | Elias     | Jerari   | elias.jerari@...      | pass123    | DAW      | 2n  | A      |Si          | 4       | 1     |
+| 3        | Martin    | Hernán   | martin.hernan@...     | pass123    | DAW      | 2r  | A      |Si          | 4       | 1     |
 
 
 
