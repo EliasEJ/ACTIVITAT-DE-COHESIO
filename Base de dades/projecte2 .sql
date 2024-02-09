@@ -35,14 +35,14 @@ CREATE TABLE IF NOT EXISTS `activitat` (
   `nom` varchar(50) NOT NULL,
   `descripcio` varchar(255) NOT NULL,
   `posicion_id` int(11) NOT NULL,
-  `porfessor_id` int(11) NOT NULL,
+  `professor_id` int(11) NOT NULL,
   `grup1` int(11) NOT NULL,
   `grup2` int(11) NOT NULL,
   `material_id` int(11) NOT NULL,
   PRIMARY KEY (`actividad_id`),
-  UNIQUE KEY `fk_porfessor_id` (`porfessor_id`),
+  UNIQUE KEY `fk_professor_id` (`professor_id`),
   KEY `fk_material_id` (`material_id`) USING BTREE,
-  KEY `fk_posicio_id` (`posicion_id`) USING BTREE
+  KEY `fk_posicion_id` (`posicion_id`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -57,10 +57,9 @@ CREATE TABLE IF NOT EXISTS `admin` (
   `nom` varchar(50) NOT NULL,
   `cognom` varchar(50) NOT NULL,
   `user` varchar(20) NOT NULL,
-  `password` text NOT NULL,
   `correu` varchar(50) NOT NULL,
-  `actividad_id` int(11) NOT NULL,
-  `grup_id` int(11) NOT NULL,
+  `actividad_id` int(11),
+  `grup_id` int(11),
   `tutor` tinyint(1) NOT NULL,
   PRIMARY KEY (`admin_id`),
   UNIQUE KEY `correu` (`correu`),
@@ -77,18 +76,17 @@ CREATE TABLE IF NOT EXISTS `admin` (
 
 DROP TABLE IF EXISTS `alumne`;
 CREATE TABLE IF NOT EXISTS `alumne` (
-  `alume_id` int(11) NOT NULL AUTO_INCREMENT,
+  `alumne_id` int(11) NOT NULL AUTO_INCREMENT,
   `nom` varchar(50) NOT NULL,
   `cognom` varchar(50) NOT NULL,
   `correu` varchar(50) NOT NULL,
-  `password` text NOT NULL,
   `curs` enum('FP Basica','ASIX','DAW','SMX') NOT NULL,
   `any` enum('1r','2n') NOT NULL,
   `classe` enum('A','B','C','D') NOT NULL,
   `asistencia` tinyint(1) NOT NULL,
   `grup_id` int(11) NOT NULL,
   `tutor` tinyint(1) NOT NULL,
-  PRIMARY KEY (`alume_id`),
+  PRIMARY KEY (`alumne_id`),
   KEY `fk_grup_id` (`grup_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -132,7 +130,7 @@ CREATE TABLE IF NOT EXISTS `grup` (
 DROP TABLE IF EXISTS `material`;
 CREATE TABLE IF NOT EXISTS `material` (
   `material_id` int(11) NOT NULL AUTO_INCREMENT,
-  `nom` int(11) NOT NULL,
+  `nom` varchar(11) NOT NULL,
   `comprar` tinyint(1) NOT NULL,
   PRIMARY KEY (`material_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -143,12 +141,12 @@ CREATE TABLE IF NOT EXISTS `material` (
 -- Estructura de tabla para la tabla `posicio`
 --
 
-DROP TABLE IF EXISTS `posicio`;
-CREATE TABLE IF NOT EXISTS `posicio` (
-  `posicio_id` int(11) NOT NULL AUTO_INCREMENT,
+DROP TABLE IF EXISTS `posicion`;
+CREATE TABLE IF NOT EXISTS `posicion` (
+  `posicion_id` int(11) NOT NULL AUTO_INCREMENT,
   `nom` varchar(50) NOT NULL,
   `descripcio` varchar(255) NOT NULL,
-  PRIMARY KEY (`posicio_id`)
+  PRIMARY KEY (`posicion_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -163,9 +161,8 @@ CREATE TABLE IF NOT EXISTS `professor` (
   `nom` varchar(50) NOT NULL,
   `cognom` varchar(50) NOT NULL,
   `user` varchar(20) NOT NULL,
-  `password` text NOT NULL,
-  `actividad_id` int(11) NOT NULL,
-  `grup_id` int(11) NOT NULL,
+  `actividad_id` int(11),
+  `grup_id` int(11),
   `tutor` tinyint(1) NOT NULL,
   PRIMARY KEY (`professor_id`),
   UNIQUE KEY `user` (`user`),
@@ -181,47 +178,36 @@ CREATE TABLE IF NOT EXISTS `professor` (
 -- Filtros para la tabla `activitat`
 --
 ALTER TABLE `activitat`
-  ADD CONSTRAINT `activitat_ibfk_1` FOREIGN KEY (`actividad_id`) REFERENCES `admin` (`actividad_id`),
-  ADD CONSTRAINT `activitat_ibfk_2` FOREIGN KEY (`porfessor_id`) REFERENCES `professor` (`professor_id`);
+  ADD CONSTRAINT `activitat_ibfk_2` FOREIGN KEY (`material_id`) REFERENCES `material` (`material_id`) ON UPDATE CASCADE ON DELETE CASCADE,
+  ADD CONSTRAINT `activitat_ibfk_3` FOREIGN KEY (`posicion_id`) REFERENCES `posicion` (`posicion_id`) ON UPDATE CASCADE ON DELETE CASCADE;
+
 
 --
 -- Filtros para la tabla `admin`
 --
 ALTER TABLE `admin`
-  ADD CONSTRAINT `admin_ibfk_1` FOREIGN KEY (`grup_id`) REFERENCES `grup` (`grup_id`);
+  ADD CONSTRAINT `admin_ibfk_1` FOREIGN KEY (`grup_id`) REFERENCES `grup` (`grup_id`) ON UPDATE CASCADE ON DELETE CASCADE;
 
 --
 -- Filtros para la tabla `enfrentaments`
 --
 ALTER TABLE `enfrentaments`
-  ADD CONSTRAINT `enfrentaments_ibfk_1` FOREIGN KEY (`actividad_id`) REFERENCES `activitat` (`actividad_id`);
+  ADD CONSTRAINT `enfrentaments_ibfk_1` FOREIGN KEY (`actividad_id`) REFERENCES `activitat` (`actividad_id`) ON UPDATE CASCADE ON DELETE CASCADE;
 
 --
--- Filtros para la tabla `grup`
+-- Filtros para la tabla `gr  up`
 --
-ALTER TABLE `grup`
-  ADD CONSTRAINT `grup_ibfk_1` FOREIGN KEY (`grup_id`) REFERENCES `alumne` (`grup_id`);
+ALTER TABLE `alumne`
+  ADD CONSTRAINT `alumne_ibfk_1` FOREIGN KEY (`grup_id`) REFERENCES `grup` (`grup_id`) ON UPDATE CASCADE ON DELETE CASCADE;
 
---
--- Filtros para la tabla `material`
---
-ALTER TABLE `material`
-  ADD CONSTRAINT `material_ibfk_1` FOREIGN KEY (`material_id`) REFERENCES `activitat` (`material_id`);
-
---
--- Filtros para la tabla `posicio`
---
-ALTER TABLE `posicio`
-  ADD CONSTRAINT `posicio_ibfk_1` FOREIGN KEY (`posicio_id`) REFERENCES `activitat` (`posicion_id`);
 
 --
 -- Filtros para la tabla `professor`
 --
 ALTER TABLE `professor`
-  ADD CONSTRAINT `professor_ibfk_1` FOREIGN KEY (`actividad_id`) REFERENCES `activitat` (`actividad_id`),
-  ADD CONSTRAINT `professor_ibfk_2` FOREIGN KEY (`grup_id`) REFERENCES `grup` (`grup_id`);
+  ADD CONSTRAINT `professor_ibfk_1` FOREIGN KEY (`actividad_id`) REFERENCES `activitat` (`actividad_id`) ON UPDATE CASCADE ON DELETE CASCADE,
+  ADD CONSTRAINT `professor_ibfk_2` FOREIGN KEY (`grup_id`) REFERENCES `grup` (`grup_id`) ON UPDATE CASCADE ON DELETE CASCADE;
 COMMIT;
-
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
