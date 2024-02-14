@@ -4,14 +4,14 @@ USE projecte2;
 /*INSERIR GRUPS*/
 INSERT INTO grup (grup_id, nom, foto, puntuacio)
 VALUES 
-(1, "Barça", "", 0),
-(2, "Garbaxo", "", 0),
-(3, "DAW 2", "", 0),
-(4, "Grup 4", "", 0),
-(5, "Noc", "", 0),
-(6, "InfoTeam", "", 0),
-(7, "Computación", "", 0),
-(8, "Ya", "", 0);
+(1, "Grup-1", "", 0),
+(2, "Grup-2", "", 0),
+(3, "Grup-3", "", 0),
+(4, "Grup-4", "", 0),
+(5, "Grup-5", "", 0),
+(6, "Grup-6", "", 0),
+(7, "Grup-7", "", 0),
+(8, "Grup-8", "", 0);
 
 
 /*INSERIR POSICIONS*/
