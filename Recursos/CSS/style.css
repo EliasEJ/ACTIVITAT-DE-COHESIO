@@ -11,10 +11,44 @@
     margin-left: 3%;
 }
 
+.marginRight {
+    margin-right: 3%;
+}
+
 .marginTop {
     margin-top: 3%;
 }
 
 .contacte{
     text-align: center;
+}
+
+.idiomas {
+    text-align: right;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    overflow-x: hidden;
+
+}
+
+.content {
+    flex: 1 0 auto;
+}
+
+.blog-footer {
+    flex-shrink: 0;
+}
+
+.tbodyDiv{
+    max-height: clamp(30em,10vh,250px);
+    overflow: auto;
+    overflow-x: hidden;
+}
+
+.hola {
+    flex-shrink: 1;
 }
