@@ -77,8 +77,8 @@ function mostrarAdministrarActivitat()
             $html .= "<label><b>Descripció</b></label><br>";
             $html .= "<textarea id='descripcio' name='descripcioAct' cols='40' rows='10'>" . $activitat['descripcio'] . "</textarea><br><br>";
             $html .= "<label><b>Grups principals:</b> Grup" . $activitat['grup1'] . " VS Grup" . $activitat['grup2'] . "</label><br><br>";
-            $html .= "<input type='submit' id='saveActivitat' value='Salvar'></input>";
-            $html .= "<form><input type='submit' id='cancelActivitat' value='Cancelar'></input><form>";
+            $html .= "<input type='submit' id='saveActivitat' value='Salvar' class='btn btn-primary'></input>";
+            $html .= "<form><input type='submit' id='cancelActivitat' value='Cancelar' class='btn btn-primary'></input><form>";
             $html .= "</form>";
             $html .= "</div>";
         }
