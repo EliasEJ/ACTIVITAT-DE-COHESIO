@@ -50,10 +50,7 @@ function obtenirGrups(){
 function obtenirGrupsProfessor($idProfessor){
     try{
         $con = connect();
-        $statement = $con->prepare("SELECT g.*
-        FROM grup g
-        JOIN professor p ON g.grup_id = p.grup_id
-        WHERE p.professor_id = :professorId");
+        $statement = $con->prepare("SELECT * FROM grup WHERE id_professor_encarregat = :professorId");
         $statement->execute(
             array(
                 ':professorId' => $idProfessor

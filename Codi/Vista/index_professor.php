@@ -21,9 +21,9 @@
             <div class="col-12">
                 <nav class="navbar navbar-dark">
                     <div class="col-3">
-                    <a href="../index.php">
-                        <img src="../../Recursos/IMG/logo-sapalomera.png" alt="logo sapalomera" width="300px" class="imgHeader">
-                    </a>
+                        <a href="../index.php">
+                            <img src="../../Recursos/IMG/logo-sapalomera.png" alt="logo sapalomera" width="300px" class="imgHeader">
+                        </a>
                     </div>
                     <div class="col-9 ">
                         <button class="btn btnLogin"><svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="50" height="50" viewBox="0 0 48 48">
@@ -42,7 +42,7 @@
                 </nav>
             </div>
         </div>
-    
+
 
         <div class="container marginTop">
             <div class="row">
@@ -84,8 +84,8 @@
 
                             <div class="col">
                                 <div class="accordion accordion-flush" id="accordionActivitatsPadre">
-                                <h3>Activitats</h3>    
-                                <?php mostrarActivitats(); ?>
+                                    <h3>Activitats</h3>
+                                    <?php mostrarActivitats(); ?>
                                 </div>
                             </div>
                         </div>
@@ -93,9 +93,13 @@
                     <div class="tab-pane fade" id="taulaGrups">
                         <div class="row">
                             <div class="col">
-                            <h3>Grups</h3>
-                            <br>
-
+                                <h3>Grups</h3>
+                                <br>
+                                
+                                    
+                                    <?php mostrarGrupsProfessor(); ?>
+                                    
+                                
                             </div>
                             <div class="col">
                                 <h3>Alumnes</h3>
@@ -108,11 +112,11 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                    <?php mostrarGrups(); ?>
+                                        <?php mostrarSeleccioGrupsAlumnes(); ?>
                                     </tbody>
                                 </table>
 
-                                
+
                             </div>
 
                         </div>
@@ -129,7 +133,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                               <?php mostrarClassificació() ?>
+                                <?php mostrarClassificació() ?>
                             </tbody>
                         </table>
                     </div>

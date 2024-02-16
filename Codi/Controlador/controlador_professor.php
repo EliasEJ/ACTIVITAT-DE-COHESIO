@@ -51,7 +51,7 @@ function mostrarActivitats()
             $html .= "<p><b>On es jugará?</b> Posició número: " . $act['posicion_id'] . "</p>";
             $html .= "<p><b>Grups principals:</b> Grup" . $act['grup1'] . " VS Grup" . $act['grup2'] . "</p>";
             $html .= "<p><b> Professor encarregat: </b>" . $professor['nom'] . " " . $professor['cognom'] . "</p>";
-            $html .= "<button id='deleteAct'><a href='../Controlador/eliminar_activitat.php?idAct=" . $act['actividad_id'] . "  '>Eliminar Activitat</a></button>";
+            $html .= "<button class='btn btn-primary' id='deleteAct'><a style='color:white' href='../Controlador/administrar_activitat.php?accio=delete&idAct=" . $act['actividad_id'] . "  '>Eliminar Activitat</a></button>";
             $html .= "</div>";
             $html .= "</div>";
             $html .= "</div>";
@@ -67,12 +67,12 @@ function mostrarAdministrarActivitat()
 {
 
     try {
-        $idProfessor = 2;
+        $idProfessor = 1;
         $activitat = obtenirActivitatUnic($idProfessor)->fetch();
         $html = "";
         if ($activitat != null) {
             $html .= "<div class='col'>";
-            $html .= "<form action='../Controlador/salvar_activitat.php' method='POST'>";
+            $html .= "<form action='../Controlador/administrar_activitat.php' method='POST'>";
             $html .= "<h3>La teva activitat</h3><br>";
             $html .= "<label><b>Identificador activitat</b></label><br>";
             $html .= "<label >Activitat </label><input type='number' name='idAct' value='" . $activitat['actividad_id'] . "' readonly></input><br><br>";
@@ -81,10 +81,10 @@ function mostrarAdministrarActivitat()
             $html .= "<label><b>Descripció</b></label><br>";
             $html .= "<textarea id='descripcio' name='descripcioAct' cols='40' rows='10'>" . $activitat['descripcio'] . "</textarea><br><br>";
             $html .= "<label><b>Grups principals:</b> Grup" . $activitat['grup1'] . " VS Grup" . $activitat['grup2'] . "</label><br><br>";
-            $html .= "<input type='submit' id='saveActivitat' value='Salvar'></input>";
+            $html .= "<input class='btn btn-primary' type='submit' id='saveActivitat' value='Salvar'></input>";
             $html .= "</form><br>";
-            $html .= "<form><input type='submit' id='cancelActivitat' value='Cancelar'></input></form><br>";
-            $html .= "<form action='../Controlador/crear_activitat.php' method='POST'><input type='submit' id='createActivitat' value='Crear Activitat'></input></form>";
+            $html .= "<button class='btn btn-primary admAct' type='submit' id='saveActivitat'><a href='../Vista/index_professor.php' style='color:white'>Cancelar </a></button><br>";
+            $html .= "<button class='btn btn-primary admAct' type='submit' id='saveActivitat'><a href='../Controlador/administrar_activitat.php?accio=crear' style='color:white'>Crear Activitat </a></button>";
             $html .= "</div>";
         }
 
@@ -97,7 +97,6 @@ function mostrarAdministrarActivitat()
 function mostrarClassificació()
 {
     try {
-        $idProfessor = 2;
         $grups = obtenirGrups()->fetchAll();
         $html = "";
         $posicion = 1;
@@ -118,7 +117,7 @@ function mostrarClassificació()
     }
 }
 
-function mostrarGrups()
+function mostrarSeleccioGrupsAlumnes()
 {
     try {
         $idProfessor = 1;
@@ -146,5 +145,35 @@ function mostrarGrups()
         echo "Error mostrarAdministrarActivitat: " . $e->getMessage();
     }
 }
+
+function mostrarGrupsProfessor(){
+    try{
+        $idProfessor = 1;
+        $grups = obtenirGrupsProfessor($idProfessor)->fetchAll();
+        $html = "";
+
+        foreach($grups as $gr){
+            $html .= "<table class='table table-striped'>";
+            $html .= "<tbody>";
+            $html .= "<tr>";
+            $html .= "<td>";
+            $html .= "<label>" . $gr['nom']. "</label>";
+            $html .= "</td>";
+            $html .= "<td>";
+            $html .= "<button class='btn btn-primary' id='deleteGrup'><a href='../Controlador/administrar_grup.php?accio='eliminar'&idGrup=" . $gr['grup_id'] . "  ' style='color:white;'>Eliminar</a></button>";
+            $html .= "</td>";
+           
+            $html .= "</tr>";
+            $html .= "</tbody>";
+            $html .= "</table>";
+
+        }
+        $html .= "<button class='btn btn-primary'><a href='../Controlador/administrar_grup.php?accio='crear'' style='color:white;'>Crear Grup</a></button>"; 
+        echo $html;
+    }catch(PDOException $e){
+        echo "Error mostrarGrupsProfessor:" . $e->getMessage();
+    }
+}
+
 
 ?>

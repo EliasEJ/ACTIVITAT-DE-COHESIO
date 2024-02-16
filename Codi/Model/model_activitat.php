@@ -33,7 +33,7 @@ function crearActividad($id, $nombre, $descripcion, $posicion_id, $professor_id,
             )
         );
     }catch(PDOException $e){
-        echo "Error actualizarActividad: " . $e->getMessage();
+        echo "Error crearActividad: " . $e->getMessage();
     }
 }
 
