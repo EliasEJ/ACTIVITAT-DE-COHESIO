@@ -118,6 +118,7 @@ CREATE TABLE IF NOT EXISTS `grup` (
   `nom` varchar(50) NOT NULL,
   `foto` text NOT NULL,
   `puntuacio` int(11) NOT NULL,
+  `id_professor_encarregat` tinyint(1) NOT NULL, 
   PRIMARY KEY (`grup_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
