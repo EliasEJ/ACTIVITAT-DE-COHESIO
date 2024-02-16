@@ -6,7 +6,7 @@ require_once("../Model/model_activitat.php");
 
 if (isset($_GET['accio'])) {
     $accion = $_GET['accio'];
-    echo "get enviado";
+    //echo "get enviado";
     switch ($accion) {
         case 'delete':
             $idAct = $_GET['idAct'];
@@ -15,7 +15,7 @@ if (isset($_GET['accio'])) {
         
     }
 } else if($_SERVER["REQUEST_METHOD"] == "POST"){
-    echo "post enviado";
+    //echo "post enviado";
     guardarActividad();
 }else echo "nada";
 
@@ -27,9 +27,6 @@ function guardarActividad()
         $nameAct = $_POST['nomAct'];
         $descriptAct = $_POST['descripcioAct'];
 
-        echo $idAct;
-        echo $nameAct;
-        echo $descriptAct;
 
         actualizarActividad($idAct, $nameAct, $descriptAct);
     } catch (PDOException $e) {
@@ -48,5 +45,5 @@ function eliminarActividad($idActividad)
 
 ?>
 <script>
-    //location.replace("../Vista/index_professor.php") 
+    location.replace("../Vista/index_professor.php") 
 </script>

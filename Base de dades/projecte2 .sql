@@ -33,7 +33,7 @@ DROP TABLE IF EXISTS `activitat`;
 CREATE TABLE IF NOT EXISTS `activitat` (
   `actividad_id` int(11) NOT NULL AUTO_INCREMENT,
   `nom` varchar(50) NOT NULL,
-  `descripcio` varchar(255) NOT NULL,
+  `descripcio` varchar(600) NOT NULL,
   `posicion_id` int(11) NOT NULL,
   `professor_id` int(11) NOT NULL,
   `grup1` int(11) NOT NULL,
