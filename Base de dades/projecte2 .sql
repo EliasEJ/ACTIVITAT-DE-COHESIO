@@ -180,35 +180,35 @@ CREATE TABLE IF NOT EXISTS `professor` (
 -- Filtros para la tabla `activitat`
 --
 ALTER TABLE `activitat`
-  ADD CONSTRAINT `activitat_ibfk_2` FOREIGN KEY (`material_id`) REFERENCES `material` (`material_id`) ON UPDATE CASCADE ON DELETE CASCADE,
-  ADD CONSTRAINT `activitat_ibfk_3` FOREIGN KEY (`posicion_id`) REFERENCES `posicion` (`posicion_id`) ON UPDATE CASCADE ON DELETE CASCADE;
+  ADD CONSTRAINT `activitat_ibfk_2` FOREIGN KEY (`material_id`) REFERENCES `material` (`material_id`),
+  ADD CONSTRAINT `activitat_ibfk_3` FOREIGN KEY (`posicion_id`) REFERENCES `posicion` (`posicion_id`);
 
 
 --
 -- Filtros para la tabla `admin`
 --
 ALTER TABLE `admin`
-  ADD CONSTRAINT `admin_ibfk_1` FOREIGN KEY (`grup_id`) REFERENCES `grup` (`grup_id`) ON UPDATE CASCADE ON DELETE CASCADE;
+  ADD CONSTRAINT `admin_ibfk_1` FOREIGN KEY (`grup_id`) REFERENCES `grup` (`grup_id`) ;
 
 --
 -- Filtros para la tabla `enfrentaments`
 --
 ALTER TABLE `enfrentaments`
-  ADD CONSTRAINT `enfrentaments_ibfk_1` FOREIGN KEY (`actividad_id`) REFERENCES `activitat` (`actividad_id`) ON UPDATE CASCADE ON DELETE CASCADE;
+  ADD CONSTRAINT `enfrentaments_ibfk_1` FOREIGN KEY (`actividad_id`) REFERENCES `activitat` (`actividad_id`) ;
 
 --
 -- Filtros para la tabla `gr  up`
 --
 ALTER TABLE `alumne`
-  ADD CONSTRAINT `alumne_ibfk_1` FOREIGN KEY (`grup_id`) REFERENCES `grup` (`grup_id`) ON UPDATE CASCADE ON DELETE CASCADE;
+  ADD CONSTRAINT `alumne_ibfk_1` FOREIGN KEY (`grup_id`) REFERENCES `grup` (`grup_id`) ;
 
 
 --
 -- Filtros para la tabla `professor`
 --
 ALTER TABLE `professor`
-  ADD CONSTRAINT `professor_ibfk_1` FOREIGN KEY (`actividad_id`) REFERENCES `activitat` (`actividad_id`) ON UPDATE CASCADE ON DELETE CASCADE,
-  ADD CONSTRAINT `professor_ibfk_2` FOREIGN KEY (`grup_id`) REFERENCES `grup` (`grup_id`) ON UPDATE CASCADE ON DELETE CASCADE;
+  ADD CONSTRAINT `professor_ibfk_1` FOREIGN KEY (`actividad_id`) REFERENCES `activitat` (`actividad_id`) ,
+  ADD CONSTRAINT `professor_ibfk_2` FOREIGN KEY (`grup_id`) REFERENCES `grup` (`grup_id`) ;
 COMMIT;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

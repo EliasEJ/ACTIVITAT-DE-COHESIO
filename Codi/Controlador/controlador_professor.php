@@ -83,8 +83,8 @@ function mostrarAdministrarActivitat()
             $html .= "<label><b>Grups principals:</b> Grup" . $activitat['grup1'] . " VS Grup" . $activitat['grup2'] . "</label><br><br>";
             $html .= "<input class='btn btn-primary' type='submit' id='saveActivitat' value='Salvar'></input>";
             $html .= "</form><br>";
-            $html .= "<button class='btn btn-primary admAct' type='submit' id='saveActivitat'><a href='../Vista/index_professor.php' style='color:white'>Cancelar </a></button><br>";
-            $html .= "<button class='btn btn-primary admAct' type='submit' id='saveActivitat'><a href='../Controlador/administrar_activitat.php?accio=crear' style='color:white'>Crear Activitat </a></button>";
+            $html .= "<button class='btn btn-primary admAct' id='cancelActivitat'><a href='../Vista/index_professor.php' style='color:white'>Cancelar </a></button><br>";
+            $html .= "<button class='btn btn-primary admAct' id='createActivitat'><a href='../Controlador/administrar_activitat.php?accio=crear' style='color:white'>Crear Activitat </a></button>";
             $html .= "</div>";
         }
 
