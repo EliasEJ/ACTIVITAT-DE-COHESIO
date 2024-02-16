@@ -1,9 +1,9 @@
 <?php
-  require_once 'vendor/autoload.php';
+  require_once 'Recursos/vendor/autoload.php';
 
-  $clientID = '82832488003-ohurv2hbsqqvavuj10to35pgavj5qcc5.apps.googleusercontent.com';
-  $clientSecret = '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';
-  $redirectUri = 'http://localhost/Practiques/Pt05_AlexVazquez/Controlador/usuari_controlador.php';
+  $clientID = '284388371606-6du1403daqmins6ic96hpggtuqt3pbl3.apps.googleusercontent.com';
+  $clientSecret = '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';
+  $redirectUri = 'http://localhost/cohesio/ACTIVITAT-DE-COHESIO/Codi/Controlador/controlador.php';
 
   // create Client Request to access Google API
   $client = new Google_Client();
