@@ -161,6 +161,7 @@ CREATE TABLE IF NOT EXISTS `professor` (
   `nom` varchar(50) NOT NULL,
   `cognom` varchar(50) NOT NULL,
   `user` varchar(20) NOT NULL,
+  `correu` varchar(150) NOT NULL, 
   `actividad_id` int(11),
   `grup_id` int(11),
   `tutor` tinyint(1) NOT NULL,
