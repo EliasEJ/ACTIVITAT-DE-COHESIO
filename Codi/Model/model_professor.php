@@ -16,16 +16,6 @@ function obtenirAlumnat($idTutor){
     }
 }
 
-function obtenirActivitats(){
-    try{
-        $con = connect();
-        $statement = $con->prepare("SELECT * FROM activitat");
-        $statement->execute();
-        return $statement;
-    }catch(PDOException $e){
-        echo "Error obtenirActivitats: " . $e->getMessage();
-    }
-}
 
 function obtenirProfessorUnic($idProfessor){
     try{
@@ -42,20 +32,6 @@ function obtenirProfessorUnic($idProfessor){
     }
 }
 
-function obtenirActivitatUnic($idProfessorResp){
-    try{
-        $con = connect();
-        $statement = $con->prepare("SELECT * FROM activitat WHERE professor_id = :idProfessor");
-        $statement->execute(
-            array(
-                ':idProfessor' => $idProfessorResp
-            )
-        );
-        return $statement;
-    }catch(PDOException $e){
-        echo "Error obtenirActivitatUnic: " . $e->getMessage();
-    }
-}
 
 function obtenirGrups(){
     try{
@@ -70,3 +46,22 @@ function obtenirGrups(){
         echo "Error obtenirGrups: " . $e->getMessage();
     }
 }
+
+function obtenirGrupsProfessor($idProfessor){
+    try{
+        $con = connect();
+        $statement = $con->prepare("SELECT g.*
+        FROM grup g
+        JOIN professor p ON g.grup_id = p.grup_id
+        WHERE p.professor_id = :professorId");
+        $statement->execute(
+            array(
+                ':professorId' => $idProfessor
+            )
+        );
+        return $statement;
+    }catch(PDOException $e){
+        echo "Error obtenirGrupsProfessor: " . $e->getMessage();
+    }
+}
+
