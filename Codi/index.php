@@ -18,7 +18,7 @@
                     <img src="../Recursos/IMG/logo-sapalomera.png" alt="logo sapalomera" width="300px" class="imgHeader">
                 </div>
                 <div class="enlace">
-                  <?php require ('../autentificacion.php')?>
+                  <?php require ('../Recursos/autentificacion.php')?>
                   <a href="<?php echo $client->createAuthUrl() ?>">Iniciar sesión con Google</a>
                  </div>
               </nav>
