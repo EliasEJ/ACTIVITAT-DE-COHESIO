@@ -10,15 +10,13 @@
     }
     function isAlumne($email){
         $connexio = connect();
-        $sql = "SELECT correu FROM alumne";
+        $sql = "SELECT * FROM alumne WHERE correu = '$email'";
         $result = $connexio->query($sql);
         $result = $result->fetchAll(PDO::FETCH_ASSOC);
-        foreach ($result as $row) {
-            if($row['correu'] == $email){
-                return true;
-            }else{
-                return false;
-            }
+        if($result){
+            return true;
+        }else{
+            return false;
         }
         $connexio = null;
     }
