@@ -2,6 +2,7 @@
 require_once("../Vista/index_professor.php");
 include_once("../Model/model_professor.php");
 include_once("../Model/model_activitat.php");
+include_once("../Model/model.php");
 
 function mostrarAlumnat()
 {
