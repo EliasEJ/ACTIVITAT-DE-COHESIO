@@ -43,7 +43,7 @@
         <div class="col-lg-6 col-md-6 col-sm-12">
             <div class="col-12">
                 <h2 class="marginLeft">GRUPS</h2>
-                <div class="tbodyDiv marginLeft" >
+                <div class="tbodyDiv" >
                 <table class="table table-striped marginLeft">
                   <thead class="sticky-top bg-white">
                     <tr>

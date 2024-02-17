@@ -83,4 +83,58 @@
         }
     }
 
-?>
+    function obtenirNomAlumne($email){
+        try{
+            $con = connect();
+            $statement = $con->prepare("SELECT nom FROM alumne WHERE correu = :email");
+            $statement->execute(
+                array(
+                ':email' => $email
+                )
+            );
+            return $statement;
+        }catch(PDOException $e){
+            echo "Error obtenirNomAlumne: " . $e->getMessage();
+        }
+    }
+
+    function obtenirGrupAlumne($email){
+        try{
+            $con = connect();
+            $statement = $con->prepare("SELECT grup_id FROM alumne WHERE correu = :email");
+            $statement->execute(
+                array(
+                ':email' => $email
+                )
+            );
+            return $statement;
+        }catch(PDOException $e){
+            echo "Error obtenirGrupAlumne: " . $e->getMessage();
+        }
+    }
+
+    function obtenirInfoGrup($grupoId){
+        try{
+            $con = connect();
+            $statement = $con->prepare("SELECT alumne_id AS ID, nom AS NOM, cognom AS COGNOM, CONCAT(any, ' ', classe, ' ', curs) as CURS FROM alumne WHERE grup_id = :grupoId");
+            $statement->execute(
+                array(
+                ':grupoId' => $grupoId
+                )
+            );
+            return $statement;
+        }catch(PDOException $e){
+            echo "Error obtenirInfoGrup: " . $e->getMessage();
+        }
+    }
+
+    function obtenirIdGrups() {
+        try {
+            $con = connect();
+            $statement = $con->prepare("SELECT grup_id FROM grup");
+            $statement->execute();
+            return $statement;
+        } catch (PDOException $e) {
+            echo "Error obtenirGrups: " . $e->getMessage();
+        }
+    }

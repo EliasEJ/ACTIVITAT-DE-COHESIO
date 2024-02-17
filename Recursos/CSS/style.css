@@ -49,6 +49,24 @@ body {
     overflow-x: hidden;
 }
 
+.tbodyDivG{
+    max-height: clamp(27em,10vh,250px);
+    overflow: auto;
+    overflow-x: hidden;
+}
+
 .hola {
     flex-shrink: 1;
+}
+.grup {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.mrb {
+    text-align: right;
+}
+.mrb button {
+    margin-right: 20px; /* Ajusta este valor según tus necesidades */
 }
