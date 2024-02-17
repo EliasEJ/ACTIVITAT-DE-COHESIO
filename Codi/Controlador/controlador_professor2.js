@@ -1,4 +1,4 @@
-
+$("#deleteAct").click(confirmarAccion);
 $("#saveActivitat").click(confirmarAccion);
 
 function confirmarAccion() {

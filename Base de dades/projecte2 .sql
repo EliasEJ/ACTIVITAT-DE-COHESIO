@@ -33,7 +33,7 @@ DROP TABLE IF EXISTS `activitat`;
 CREATE TABLE IF NOT EXISTS `activitat` (
   `actividad_id` int(11) NOT NULL AUTO_INCREMENT,
   `nom` varchar(50) NOT NULL,
-  `descripcio` varchar(255) NOT NULL,
+  `descripcio` varchar(600) NOT NULL,
   `posicion_id` int(11) NOT NULL,
   `professor_id` int(11) NOT NULL,
   `grup1` int(11) NOT NULL,
@@ -118,6 +118,7 @@ CREATE TABLE IF NOT EXISTS `grup` (
   `nom` varchar(50) NOT NULL,
   `foto` text NOT NULL,
   `puntuacio` int(11) NOT NULL,
+  `id_professor_encarregat` tinyint(1) NOT NULL, 
   PRIMARY KEY (`grup_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -161,6 +162,7 @@ CREATE TABLE IF NOT EXISTS `professor` (
   `nom` varchar(50) NOT NULL,
   `cognom` varchar(50) NOT NULL,
   `user` varchar(20) NOT NULL,
+  `correu` varchar(150) NOT NULL, 
   `actividad_id` int(11),
   `grup_id` int(11),
   `tutor` tinyint(1) NOT NULL,
@@ -178,35 +180,35 @@ CREATE TABLE IF NOT EXISTS `professor` (
 -- Filtros para la tabla `activitat`
 --
 ALTER TABLE `activitat`
-  ADD CONSTRAINT `activitat_ibfk_2` FOREIGN KEY (`material_id`) REFERENCES `material` (`material_id`) ON UPDATE CASCADE ON DELETE CASCADE,
-  ADD CONSTRAINT `activitat_ibfk_3` FOREIGN KEY (`posicion_id`) REFERENCES `posicion` (`posicion_id`) ON UPDATE CASCADE ON DELETE CASCADE;
+  ADD CONSTRAINT `activitat_ibfk_2` FOREIGN KEY (`material_id`) REFERENCES `material` (`material_id`),
+  ADD CONSTRAINT `activitat_ibfk_3` FOREIGN KEY (`posicion_id`) REFERENCES `posicion` (`posicion_id`);
 
 
 --
 -- Filtros para la tabla `admin`
 --
 ALTER TABLE `admin`
-  ADD CONSTRAINT `admin_ibfk_1` FOREIGN KEY (`grup_id`) REFERENCES `grup` (`grup_id`) ON UPDATE CASCADE ON DELETE CASCADE;
+  ADD CONSTRAINT `admin_ibfk_1` FOREIGN KEY (`grup_id`) REFERENCES `grup` (`grup_id`) ;
 
 --
 -- Filtros para la tabla `enfrentaments`
 --
 ALTER TABLE `enfrentaments`
-  ADD CONSTRAINT `enfrentaments_ibfk_1` FOREIGN KEY (`actividad_id`) REFERENCES `activitat` (`actividad_id`) ON UPDATE CASCADE ON DELETE CASCADE;
+  ADD CONSTRAINT `enfrentaments_ibfk_1` FOREIGN KEY (`actividad_id`) REFERENCES `activitat` (`actividad_id`) ;
 
 --
 -- Filtros para la tabla `gr  up`
 --
 ALTER TABLE `alumne`
-  ADD CONSTRAINT `alumne_ibfk_1` FOREIGN KEY (`grup_id`) REFERENCES `grup` (`grup_id`) ON UPDATE CASCADE ON DELETE CASCADE;
+  ADD CONSTRAINT `alumne_ibfk_1` FOREIGN KEY (`grup_id`) REFERENCES `grup` (`grup_id`) ;
 
 
 --
 -- Filtros para la tabla `professor`
 --
 ALTER TABLE `professor`
-  ADD CONSTRAINT `professor_ibfk_1` FOREIGN KEY (`actividad_id`) REFERENCES `activitat` (`actividad_id`) ON UPDATE CASCADE ON DELETE CASCADE,
-  ADD CONSTRAINT `professor_ibfk_2` FOREIGN KEY (`grup_id`) REFERENCES `grup` (`grup_id`) ON UPDATE CASCADE ON DELETE CASCADE;
+  ADD CONSTRAINT `professor_ibfk_1` FOREIGN KEY (`actividad_id`) REFERENCES `activitat` (`actividad_id`) ,
+  ADD CONSTRAINT `professor_ibfk_2` FOREIGN KEY (`grup_id`) REFERENCES `grup` (`grup_id`) ;
 COMMIT;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

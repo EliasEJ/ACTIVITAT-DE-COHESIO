@@ -10,7 +10,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.2/js/bootstrap.bundle.min.js" integrity="sha512-72WD92hLs7T5FAXn3vkNZflWG6pglUDDpm87TeQmfSg8KnrymL2G30R7as4FmTwhgu9H7eSzDCX3mjitSecKnw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <link rel="stylesheet" href="../../Recursos/CSS/styleProfessor.css  ">
     <script type="module" src="../Controlador/controlador_professor2.js"> </script>
-
 </head>
 
 <?php include_once("../Controlador/controlador_professor.php"); ?>
@@ -21,9 +20,9 @@
             <div class="col-12">
                 <nav class="navbar navbar-dark">
                     <div class="col-3">
-                    <a href="../index.php">
-                        <img src="../../Recursos/IMG/logo-sapalomera.png" alt="logo sapalomera" width="300px" class="imgHeader">
-                    </a>
+                        <a href="../index.php">
+                            <img src="../../Recursos/IMG/logo-sapalomera.png" alt="logo sapalomera" width="300px" class="imgHeader">
+                        </a>
                     </div>
                     <div class="col-9 ">
                         <button class="btn btnLogin"><svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="50" height="50" viewBox="0 0 48 48">
@@ -42,7 +41,7 @@
                 </nav>
             </div>
         </div>
-    
+
 
         <div class="container marginTop">
             <div class="row">
@@ -84,13 +83,42 @@
 
                             <div class="col">
                                 <div class="accordion accordion-flush" id="accordionActivitatsPadre">
-                                <h3>Activitats</h3>    
-                                <?php mostrarActivitats(); ?>
+                                    <h3>Activitats</h3>
+                                    <?php mostrarActivitats(); ?>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="tab-pane fade" id="taulaGrups">
+                        <div class="row">
+                            <div class="col">
+                                <h3>Grups</h3>
+                                <br>
+                                
+                                    
+                                    <?php mostrarGrupsProfessor(); ?>
+                                    
+                                
+                            </div>
+                            <div class="col">
+                                <h3>Alumnes</h3>
+                                <br>
+                                <table class="table table-striped">
+                                    <thead class="sticky-top bg-white">
+                                        <tr>
+                                            <th>Alumne</th>
+                                            <th>Grup</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php mostrarSeleccioGrupsAlumnes(); ?>
+                                    </tbody>
+                                </table>
+
+
+                            </div>
+
+                        </div>
 
                     </div>
                     <div class="tab-pane fade" id="taulaClassificació">
@@ -104,7 +132,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                               <?php mostrarGrups() ?>
+                                <?php mostrarClassificació() ?>
                             </tbody>
                         </table>
                     </div>

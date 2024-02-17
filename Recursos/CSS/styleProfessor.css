@@ -31,3 +31,7 @@ body {
 .content {
     flex: 1 0 auto;
 }
+
+.admAct{
+    display: flex;
+}
