@@ -8,11 +8,21 @@ $email = $_SESSION['email'];
 require_once '../../Recursos/configuracio.php';
 require_once '../Model/model.php';
 if(isAdmin($email)){
-    include '../Vista/index_admin.php';
-}else if(isAlumne($email)){
-   include_once '../Vista/index_alumne.php';
-}else if(isProfessor($email)){
-    include_once '../Vista/index_professor.php';
+    ?>
+<script>
+        location.replace("../Vista/index_admin.php");
+</script>
+<?php
+}else if(isAlumne($email)){?>
+<script>
+        location.replace("../Vista/index_alumne.php");
+</script>
+<?php
+}else if(isProfessor($email)){?>
+<script>
+        location.replace("../Vista/index_professor.php");
+</script>
+<?php
 }else {?>
 <script>
     location.replace("../index.php");
