@@ -1,5 +1,5 @@
 <?php
-require_once '../Model/model.php';
+require_once '../Model/model_alumne.php';
 
 function obtenerNombreAlumno($email) {
     $nombre = obtenirNomAlumne($email);
