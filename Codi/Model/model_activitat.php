@@ -52,18 +52,6 @@ function obtenirActivitatUnic($idProfessorResp){
     }
 }
 
-
-function obtenirActivitats(){
-    try{
-        $con = connect();
-        $statement = $con->prepare("SELECT * FROM activitat");
-        $statement->execute();
-        return $statement;
-    }catch(PDOException $e){
-        echo "Error obtenirActivitats: " . $e->getMessage();
-    }
-}
-
 function eliminarActivitat($id){
     try{
         $con = connect();

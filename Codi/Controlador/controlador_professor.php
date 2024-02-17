@@ -2,7 +2,7 @@
 require_once("../Vista/index_professor.php");
 include_once("../Model/model_professor.php");
 include_once("../Model/model_activitat.php");
-include_once("controlador.php");
+//include_once("controlador.php");
 include_once("../Model/model.php");
 
 function mostrarAlumnat()
@@ -170,7 +170,7 @@ function mostrarGrupsProfessor(){
             $html .= "</table>";
 
         }
-        $html .= "<button class='btn btn-primary'><a href='../Controlador/administrar_grup.php?accio='crear'' style='color:white;'>Crear Grup</a></button>"; 
+        $html .= "<button class='btn btn-primary'><a href='../Controlador/administrar_grup.php?accio=crear' style='color:white;'>Crear Grup</a></button>"; 
         echo $html;
     }catch(PDOException $e){
         echo "Error mostrarGrupsProfessor:" . $e->getMessage();
