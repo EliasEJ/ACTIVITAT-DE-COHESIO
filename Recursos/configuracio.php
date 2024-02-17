@@ -14,6 +14,3 @@
   $client->setRedirectUri($redirectUri);
   $client->addScope("email");
   $client->addScope("profile");
-
- 
-?>

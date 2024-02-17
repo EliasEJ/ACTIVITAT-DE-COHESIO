@@ -12,7 +12,9 @@
     <script type="module" src="../Controlador/controlador_professor2.js"> </script>
 </head>
 
-<?php include_once("../Controlador/controlador_professor.php"); ?>
+<?php 
+session_start();
+include_once("../Controlador/controlador_professor.php"); ?>
 
 <body>
     <div class="content">
