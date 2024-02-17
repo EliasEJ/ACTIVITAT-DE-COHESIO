@@ -1,7 +1,7 @@
 <?php
 session_start();
 if(!isset($_SESSION['email'])){
-    require_once "../autentificacion.php";
+    require_once "../../Recursos/autentificacion.php";
     $_SESSION['email'] = $email;
 }
 $email = $_SESSION['email'];
