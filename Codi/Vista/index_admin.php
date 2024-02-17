@@ -107,7 +107,7 @@ include_once("../Controlador/controlador_professor.php");
                                 </tr>
                             </thead>
                             <tbody>
-                               <?php mostrarGrups() ?>
+                               <?php mostrarClassificació() ?>
                             </tbody>
                         </table>
                     </div>
