@@ -34,11 +34,11 @@ VALUES (1, "pilota de goma", 1),
 /*INSERIR ALUMNES*/
 INSERT INTO alumne(alumne_id, nom, cognom, correu, curs, any, classe, asistencia, grup_id, tutor)
 VALUES
-(1, "Martin", "Jaime", "m.jaime@sapalomera.cat", 'DAW', '2n', 'A', 1, 1, 7),
+(1, "Carlos", "Mainou", "c.mainou@sapalomera.cat", 'DAW', '2n', 'A', 1, 1, 7),
 (2, "Alejandro", "Vazquez", "a.vazquez2@sapalomera.cat", 'DAW', '2n', 'A', 1, 1, 7),
 (3, "El Yass", "El Jerari", "e.jerari@sapalomera.cat",  'ASIX', '2n', 'A', 1, 2, 2),
 (4, "Marc", "Gomez", "m.gomez@sapalomera.cat",  'ASIX', '2n', 'A', 0, 2, 2),
-(5, "Coral", "Jaime", "c.jaime@sapalomera.cat",  'SMX', '1r', 'A', 1, 3, 1),
+(5, "Maria", "Sola", "m.sola@sapalomera.cat",  'SMX', '1r', 'A', 1, 3, 1),
 (6, "Laura", "Perez", "l.perez@sapalomera.cat",  'SMX', '1r', 'A', 1, 3, 1),
 (7, "Santiago", "Peral", "s.peral@sapalomera.cat",  'SMX', '1r', 'B', 0, 4, 3),
 (8, "Mayank", "Alkalk", "m.alkalk@sapalomera.cat",  'SMX', '1r', 'B', 1, 4, 3),
@@ -102,7 +102,7 @@ VALUES
 /*INSERIR PROFESSORS*/
 INSERT INTO professor (professor_id, nom, cognom, user, correu, actividad_id,grup_id,tutor )
 VALUES
-(1,"Ainhoa","Zaldua","azaldua", "azaldua@sapalomera.cat",1,3,1),
+(1,"Martin","Jaime","mjaime", "m.jaime@sapalomera.cat",1,3,1),
 (2,"David","Bancells","dbancells","dbancells@sapalomera.cat",2,2,1),
 (3,"Robert","Ventura","rventura","rventura@sapalomera.cat",3,4,1),
 (4,"Pere","Pi","ppi","ppi@sapalomera.cat",4,5,1),
@@ -113,9 +113,13 @@ VALUES
 
 
 ALTER TABLE `activitat`
-ADD CONSTRAINT `activitat_ibfk_1` FOREIGN KEY (`professor_id`) REFERENCES `professor` (`professor_id`) ON UPDATE CASCADE ON DELETE CASCADE;
+ADD CONSTRAINT `activitat_ibfk_1` FOREIGN KEY (`professor_id`) REFERENCES `professor` (`professor_id`) ;
 
+ALTER TABLE `activitat`
+ADD CONSTRAINT `activitat_ibfk_4` FOREIGN KEY (`grup1`) REFERENCES `grup` (`grup_id`) ;
 
+ALTER TABLE `activitat`
+ADD CONSTRAINT `activitat_ibfk_5` FOREIGN KEY (`grup2`) REFERENCES `grup` (`grup_id`) ;
 
 INSERT INTO enfrentaments(enfrentament_id, actividad_id, nom ,resultat)
 VALUES

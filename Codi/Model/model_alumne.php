@@ -97,3 +97,35 @@ function obtenirInfoActivitat($activitatId){
         echo "Error obtenirInfoActivitat: " . $e->getMessage();
     }
 }
+
+// No se usa
+function obtenirActivitatAlumne($email){
+    try{
+        $con = connect();
+        $statement = $con->prepare("SELECT actividad_id FROM alumne WHERE correu = :email");
+        $statement->execute(
+            array(
+            ':email' => $email
+            )
+        );
+        return $statement;
+    }catch(PDOException $e){
+        echo "Error obtenirActivitatAlumne: " . $e->getMessage();
+    }
+}
+
+function actualizarAsistencia($email, $confirmacion) {
+    try {
+        $con = connect(); // Asegúrate de tener esta función o método definido
+        $statement = $con->prepare("UPDATE alumne SET asistencia = :confirmacion WHERE correu = :email");
+        $statement->execute(
+            array(
+                ':email' => $email,
+                ':confirmacion' => $confirmacion
+            )
+        );
+        return $statement;
+    } catch (PDOException $e) {
+        echo "Error actualizarAsistencia: " . $e->getMessage();
+    }
+}

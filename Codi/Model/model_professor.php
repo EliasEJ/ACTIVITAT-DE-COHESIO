@@ -16,6 +16,21 @@ function obtenirProfessorUnic($idProfessor){
     }
 }
 
+function obtenirProfessorUnicEmail($emailProfessor){
+    try{
+        $con = connect();
+        $statement = $con->prepare("SELECT * FROM professor WHERE correu = :emailProfessor");
+        $statement->execute(
+            array(
+                ':emailProfessor' => $emailProfessor
+            )
+        );
+        return $statement;
+    }catch(PDOException $e){
+        echo "Error obtenirProfessorUnic: " . $e->getMessage();
+    }
+}
+
 function obtenirGrupsProfessor($idProfessor){
     try{
         $con = connect();

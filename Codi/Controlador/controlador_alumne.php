@@ -1,6 +1,19 @@
 <?php
 require_once '../Model/model_alumne.php';
 
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['confirmacion'])) {
+    $confirmacion = ($_POST['confirmacion'] == 1) ? 1 : 0;
+    
+    // Obtener el email del usuario desde la sesión
+    $email = $_SESSION['email'];
+
+    // Utilizar la función del modelo para actualizar la asistencia
+    actualizarAsistencia($email, $confirmacion);
+
+    // Establecer una cookie para evitar mostrar el modal nuevamente
+    setcookie('asistencia_confirmada', 'true', time() + 3600 * 24 * 30); // Expira en 30 días
+}
+
 function obtenerNombreAlumno($email) {
     $nombre = obtenirNomAlumne($email);
     if ($nombre instanceof PDOStatement) {
@@ -203,3 +216,16 @@ function generarModalesActivitats($actividades) {
     }
     return $modales;
 }
+
+// Esta funcion no se usa en ningun lado pero se deja por si acaso se necesita para la siguiente entrega
+function obtenerActividadAlumno($email) {
+    $actividad = obtenirActivitatAlumne($email);
+    if ($actividad instanceof PDOStatement) {
+        $resultado = $actividad->fetch(PDO::FETCH_ASSOC);
+        if ($resultado) {
+            return $resultado['actividad_id'];
+        }
+    }
+    return null;
+}
+

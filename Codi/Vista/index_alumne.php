@@ -8,6 +8,8 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
     <link rel="stylesheet" href="../../Recursos/bootstrap-5.0.2/dist/css/bootstrap.min.css">
+    <!-- AJAX -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <link rel="stylesheet" href="../../Recursos/CSS/style.css">
     <script src="../Controlador/controlador_alumne.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.2/js/bootstrap.bundle.min.js" integrity="sha512-72WD92hLs7T5FAXn3vkNZflWG6pglUDDpm87TeQmfSg8KnrymL2G30R7as4FmTwhgu9H7eSzDCX3mjitSecKnw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
@@ -22,7 +24,17 @@
 <?php
 session_start();
 require_once '../Controlador/controlador_alumne.php';
+include '../../Recursos/autentificacion.php';
 $email = $_SESSION['email'];
+
+if (!isset($_COOKIE['asistencia_confirmada'])) {
+    // Mostrar el modal
+    echo "<script>
+            $(document).ready(function(){
+                $('#modalAsistencia').modal('show');
+            });
+          </script>";
+}
 ?>
 
 <div class="modal fade" id="modalAsistencia" tabindex="-1" aria-hidden="true">
@@ -42,6 +54,33 @@ $email = $_SESSION['email'];
   </div>
 </div>
 
+<script>
+    // Función para enviar la elección del usuario al servidor
+    function enviarAsistencia(confirmacion) {
+        $.ajax({
+            type: 'POST',
+            url: '../Controlador/guardar_asistencia.php', // Nueva URL para manejar la lógica de almacenar en la base de datos
+            data: { confirmacion: confirmacion },
+            success: function (response) {
+                // Puedes hacer algo con la respuesta del servidor si es necesario
+            }
+        });
+    }
+
+    // Asigna eventos a los botones del modal
+    $('#will-attend').click(function () {
+        enviarAsistencia(1);
+        $('#modalAsistencia').modal('hide');
+        console.log('asistiré');
+    });
+
+    $('#wont-attend').click(function () {
+        enviarAsistencia(0);
+        $('#modalAsistencia').modal('hide');
+        console.log('no asistiré');
+    });
+</script>
+
 
 <div class="row g-0">
     <div class="col-12">
@@ -55,6 +94,13 @@ $email = $_SESSION['email'];
             <div class="col-3 text-center">
                 <div class="btn-group">
                     <button type="button" class="btn dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                        <?php
+                            // Asegúrate de que la imagen del perfil del usuario está en la sesión y no es null
+                            if (isset($_SESSION['picture'])) {
+                                $picture = $_SESSION['picture'];
+                                echo "<img src='$picture' alt='Imagen de perfil del usuario' class='imgPerfil'>";
+                            }
+                        ?>
                         <?php
                         $email = $_SESSION['email'];
                         $nombre = obtenerNombreAlumno($email);
@@ -139,26 +185,23 @@ $email = $_SESSION['email'];
             <h2 class="marginLeft pb-1">ACTIVITATS</h2>
                 <div class="marginLeft grup border">
                     <div class="p-3">
-                        <?php
-                        $grup = obtenerGrupoAlumno($email);
-                        if ($grup) { echo 'GRUP ' . $grup; } ?>
+                    <!-- <?php //$activitat = obtenerActividadAlumno($email); if ($grup) { echo 'ACTIVITAT ' . $activitat; } ?> -->
+                    ACTIVITAT 1
                     </div>
 
 
-                    <button type="button" class="btn" data-toggle="modal" data-target="#infoGrupModal">
+                    <button type="button" class="btn" data-toggle="modal" data-target="#infoActivitatpModal">
                         <b>INFO</b>
                     </button>
 
-                    <div class="modal fade" id="infoGrupModal" tabindex="-1" role="dialog" aria-labelledby="infoGrupModalLabel" aria-hidden="true">
+                    <div class="modal fade" id="infoGrupModal" tabindex="-1" role="dialog" aria-labelledby="infoActivitatpModal" aria-hidden="true">
                         <div class="modal-dialog" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h5 class="modal-title" id="infoGrupModalLabel">Informació del Grup</h5>
+                                    <h5 class="modal-title" id="infoActivitatpModal">Informació de l'activitat</h5>
                                 </div>
                                 <div class="modal-body">
-                                    <?php $infoGrupo = obtenerInformacionGrupo($grup);
-                                    echo generarTabla($infoGrupo);
-                                    ?>
+                                    <!-- <?php //$infoGrupo = obtenerInformacionGrupo($grup); echo generarTabla($infoGrupo); ?> -->
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Tancar</button>

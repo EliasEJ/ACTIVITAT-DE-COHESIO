@@ -69,7 +69,7 @@
             echo "Error obtenirActivitats: " . $e->getMessage();
         }
     }
-    function obtenirGrups(){
+    function obtenirGrupsClasificacio(){
         try{
             $con = connect();
             $statement = $con->prepare("SELECT DISTINCT  a.curs, a.any, a.classe, g.nom, g.puntuacio
@@ -83,4 +83,63 @@
         }
     }
 
+    function obtenirGrups(){
+        try{
+            $con = connect();
+            $statement = $con->prepare("SELECT * FROM grup");
+            $statement->execute();
+            return $statement;
+        }catch(PDOException $e){
+            echo "Error obtenirGrups: " . $e->getMessage();
+        }
+    }
+
+    function crearGrup($grupId, $nom, $foto, $puntuacio, $idProfessor){
+        try{
+            $con = connect();
+            $statement = $con->prepare("INSERT INTO grup (grup_id, nom, foto, puntuacio, id_professor_encarregat)
+            VALUES (:grupId, :nom, :foto, :puntuacion, :idProfessor)");
+            $statement->execute(
+                array(
+                    ':grupId' => $grupId,
+                    ':nom' => $nom,
+                    ':foto' => $foto,
+                    ':puntuacion' => $puntuacio,
+                    ':idProfessor' => $idProfessor,
+                )
+            );
+        }catch(PDOException $e){
+            echo "Error crearGrup: " . $e->getMessage();
+        }
+    }
+
+    function eliminarGrup($idGrup){
+        try{
+            $con = connect();
+            $statement = $con->prepare("DELETE FROM grup WHERE grup_id = :idGrup");
+            $statement->execute(
+                array(
+                    ':idGrup' => $idGrup
+                )
+            );
+        }catch(PDOException $e){
+            echo "Error crearGrup: " . $e->getMessage();
+        }
+    }
+
+    function modificarGrupUsuari($idAlumne, $idGrup){
+        try{
+            $con = connect();
+            $statement = $con->prepare("UPDATE alumne SET grup_id = :idGrup  
+            WHERE alumne_id = :idAlumne");
+            $statement->execute(
+                array(
+                    ':idGrup' => $idGrup,
+                    ':idAlumne' => $idAlumne
+                )
+            );
+        }catch(PDOException $e){
+            echo "Error modificarGrupUsuari: " . $e->getMessage();
+        }
+    }
 ?>
