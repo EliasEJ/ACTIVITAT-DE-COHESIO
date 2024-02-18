@@ -2,13 +2,13 @@
 require_once("../Vista/index_professor.php");
 include_once("../Model/model_professor.php");
 include_once("../Model/model_activitat.php");
-include_once("controlador.php");
+//include_once("controlador.php");
 include_once("../Model/model.php");
 
 
 
 function obtenerIdProfessor(){
-
+    session_start();
     if(!isset($_SESSION['email'])){
         require_once "../../Recursos/autentificacion.php";
         $_SESSION['email'] = $email;
@@ -18,6 +18,12 @@ function obtenerIdProfessor(){
     $idProfe = $profe['professor_id'];
     return $idProfe;
 }
+
+function mostrarUsuari($idProfe){
+    
+
+}
+
 
 function mostrarAlumnat($idProfe)
 {
