@@ -86,7 +86,7 @@ function obtenirActivitatsA(){
 function obtenirInfoActivitat($activitatId){
     try{
         $con = connect();
-        $statement = $con->prepare("SELECT actividad_id AS ID, nom AS NOM, descripcio AS DESCRIPCIO FROM activitat WHERE actividad_id = :activitatId");
+        $statement = $con->prepare("SELECT nom AS NOM, descripcio AS DESCRIPCIO FROM activitat WHERE actividad_id = :activitatId");
         $statement->execute(
             array(
             ':activitatId' => $activitatId

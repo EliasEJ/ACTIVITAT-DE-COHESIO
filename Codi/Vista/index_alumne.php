@@ -53,7 +53,7 @@ $email = $_SESSION['email'];
             <div class="col-6 "></div>
             <div class="col-3 text-center">
                 <div class="btn-group">
-                    <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                    <button type="button" class="btn dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
                         <?php
                         $email = $_SESSION['email'];
                         $nombre = obtenerNombreAlumno($email);
@@ -61,13 +61,11 @@ $email = $_SESSION['email'];
                         ?>
                     </button>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="#">Action</a></li>
-                        <li><a class="dropdown-item" href="#">Another action</a></li>
-                        <li><a class="dropdown-item" href="#">Something else here</a></li>
+                        <li><a class="dropdown-item" href="#">Modificar assistència</a></li>
                         <li>
                             <hr class="dropdown-divider">
                         </li>
-                        <li><a class="dropdown-item" href="#">Separated link</a></li>
+                        <li><a class="dropdown-item " href="../Controlador/logout.php">Tancar sessió</a></li>
                     </ul>
                 </div>
             </div>
@@ -150,7 +148,6 @@ $email = $_SESSION['email'];
                         <b>INFO</b>
                     </button>
 
-                    <!-- Modal -->
                     <div class="modal fade" id="infoGrupModal" tabindex="-1" role="dialog" aria-labelledby="infoGrupModalLabel" aria-hidden="true">
                         <div class="modal-dialog" role="document">
                             <div class="modal-content">
@@ -179,17 +176,15 @@ $email = $_SESSION['email'];
                             </thead>
                             <tbody>
                                 <?php
-                                $activitats = obtenerActividades();
-                                if ($activitats) {echo generarBotonesActivitats($activitats);}
-                                ?>
+                                    $activitats = obtenerActividades();
+                                    if ($activitats) {echo generarBotonesActivitats($activitats);} ?>
                             </tbody>
                         </table>
                     </div>
                     <div>
                     <?php
                         $activitats = obtenerActividades();
-                        if ($activitats) { echo generarModalesActivitats($activitats); }
-                    ?>
+                        if ($activitats) { echo generarModalesActivitats($activitats); }?>
                     </div>
                 </div>
         </div>
@@ -223,8 +218,6 @@ $email = $_SESSION['email'];
     </div>
 </footer>
 
-<!-- jQuery first, then Popper.js, then Bootstrap JS -->
-<!-- <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script> -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
