@@ -22,6 +22,7 @@
 <?php
 session_start();
 require_once '../Controlador/controlador_alumne.php';
+include '../../Recursos/autentificacion.php';
 $email = $_SESSION['email'];
 ?>
 
@@ -55,6 +56,13 @@ $email = $_SESSION['email'];
             <div class="col-3 text-center">
                 <div class="btn-group">
                     <button type="button" class="btn dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                        <?php
+                            // Asegúrate de que la imagen del perfil del usuario está en la sesión y no es null
+                            if (isset($_SESSION['picture'])) {
+                                $picture = $_SESSION['picture'];
+                                echo "<img src='$picture' alt='Imagen de perfil del usuario' class='imgPerfil'>";
+                            }
+                        ?>
                         <?php
                         $email = $_SESSION['email'];
                         $nombre = obtenerNombreAlumno($email);
@@ -139,26 +147,23 @@ $email = $_SESSION['email'];
             <h2 class="marginLeft pb-1">ACTIVITATS</h2>
                 <div class="marginLeft grup border">
                     <div class="p-3">
-                        <?php
-                        $grup = obtenerGrupoAlumno($email);
-                        if ($grup) { echo 'GRUP ' . $grup; } ?>
+                    <!-- <?php //$activitat = obtenerActividadAlumno($email); if ($grup) { echo 'ACTIVITAT ' . $activitat; } ?> -->
+                    ACTIVITAT 1
                     </div>
 
 
-                    <button type="button" class="btn" data-toggle="modal" data-target="#infoGrupModal">
+                    <button type="button" class="btn" data-toggle="modal" data-target="#infoActivitatpModal">
                         <b>INFO</b>
                     </button>
 
-                    <div class="modal fade" id="infoGrupModal" tabindex="-1" role="dialog" aria-labelledby="infoGrupModalLabel" aria-hidden="true">
+                    <div class="modal fade" id="infoGrupModal" tabindex="-1" role="dialog" aria-labelledby="infoActivitatpModal" aria-hidden="true">
                         <div class="modal-dialog" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h5 class="modal-title" id="infoGrupModalLabel">Informació del Grup</h5>
+                                    <h5 class="modal-title" id="infoActivitatpModal">Informació de l'activitat</h5>
                                 </div>
                                 <div class="modal-body">
-                                    <?php $infoGrupo = obtenerInformacionGrupo($grup);
-                                    echo generarTabla($infoGrupo);
-                                    ?>
+                                    <!-- <?php //$infoGrupo = obtenerInformacionGrupo($grup); echo generarTabla($infoGrupo); ?> -->
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Tancar</button>

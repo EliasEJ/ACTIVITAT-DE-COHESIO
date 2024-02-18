@@ -203,3 +203,16 @@ function generarModalesActivitats($actividades) {
     }
     return $modales;
 }
+
+// Esta funcion no se usa en ningun lado pero se deja por si acaso se necesita para la siguiente entrega
+function obtenerActividadAlumno($email) {
+    $actividad = obtenirActivitatAlumne($email);
+    if ($actividad instanceof PDOStatement) {
+        $resultado = $actividad->fetch(PDO::FETCH_ASSOC);
+        if ($resultado) {
+            return $resultado['actividad_id'];
+        }
+    }
+    return null;
+}
+

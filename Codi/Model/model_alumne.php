@@ -97,3 +97,19 @@ function obtenirInfoActivitat($activitatId){
         echo "Error obtenirInfoActivitat: " . $e->getMessage();
     }
 }
+
+// No se usa
+function obtenirActivitatAlumne($email){
+    try{
+        $con = connect();
+        $statement = $con->prepare("SELECT actividad_id FROM alumne WHERE correu = :email");
+        $statement->execute(
+            array(
+            ':email' => $email
+            )
+        );
+        return $statement;
+    }catch(PDOException $e){
+        echo "Error obtenirActivitatAlumne: " . $e->getMessage();
+    }
+}
