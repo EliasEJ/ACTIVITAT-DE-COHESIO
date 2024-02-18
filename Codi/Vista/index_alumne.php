@@ -9,6 +9,7 @@
     <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
     <link rel="stylesheet" href="../../Recursos/bootstrap-5.0.2/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="../../Recursos/CSS/style.css">
+    <script src="../Controlador/controlador_alumne.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.2/js/bootstrap.bundle.min.js" integrity="sha512-72WD92hLs7T5FAXn3vkNZflWG6pglUDDpm87TeQmfSg8KnrymL2G30R7as4FmTwhgu9H7eSzDCX3mjitSecKnw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <style>
         .footer {
@@ -24,14 +25,14 @@ require_once '../Controlador/controlador_alumne.php';
 $email = $_SESSION['email'];
 ?>
 
-<div class="modal fade" id="attendanceModal" tabindex="-1" aria-hidden="true">
+<div class="modal fade" id="modalAsistencia" tabindex="-1" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title">Confirmación de Asistencia</h5>
+        <h5 class="modal-title">Confirmació d'Assistència</h5>
       </div>
       <div class="modal-body">
-        ¿Asistirás al evento?
+      Assistiràs a l'esdeveniment?
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-success" id="will-attend">Sí, asistiré</button>
@@ -61,7 +62,7 @@ $email = $_SESSION['email'];
                         ?>
                     </button>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="#">Modificar assistència</a></li>
+                        <li><a id="botonAsistencia" class="dropdown-item" href="#">Modificar assistència</a></li>
                         <li>
                             <hr class="dropdown-divider">
                         </li>
