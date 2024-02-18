@@ -75,7 +75,7 @@ require_once 'Controlador/controlador_anonim.php';
             </div>
         </div>
         <div class="col-lg-6 col-md-6 col-sm-12">
-            <div class="col-12">
+            <div class="col-11">
                 <h2 class="marginLeft pt-3">ACTIVITATS</h2>
                 <div id="sActivitats">
                     <div class="tbodyDivG border marginLeft">
