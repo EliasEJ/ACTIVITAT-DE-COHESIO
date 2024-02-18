@@ -8,7 +8,6 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
     <link rel="stylesheet" href="../../Recursos/bootstrap-5.0.2/dist/css/bootstrap.min.css">
-    <!-- AJAX -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <link rel="stylesheet" href="../../Recursos/CSS/style.css">
     <script src="../Controlador/controlador_alumne.js"></script>
@@ -28,7 +27,6 @@ include '../../Recursos/autentificacion.php';
 $email = $_SESSION['email'];
 
 if (!isset($_COOKIE['asistencia_confirmada'])) {
-    // Mostrar el modal
     echo "<script>
             $(document).ready(function(){
                 $('#modalAsistencia').modal('show');
@@ -47,27 +45,24 @@ if (!isset($_COOKIE['asistencia_confirmada'])) {
       Assistiràs a l'esdeveniment?
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-success" id="will-attend">Sí, asistiré</button>
-        <button type="button" class="btn btn-danger" id="wont-attend">No, no asistiré</button>
+        <button type="button" class="btn btn-success" id="will-attend">Sí, assistiré</button>
+        <button type="button" class="btn btn-danger" id="wont-attend">No, no assistiré</button>
       </div>
     </div>
   </div>
 </div>
 
 <script>
-    // Función para enviar la elección del usuario al servidor
     function enviarAsistencia(confirmacion) {
         $.ajax({
             type: 'POST',
-            url: '../Controlador/guardar_asistencia.php', // Nueva URL para manejar la lógica de almacenar en la base de datos
+            url: '../Controlador/guardar_asistencia.php', 
             data: { confirmacion: confirmacion },
             success: function (response) {
-                // Puedes hacer algo con la respuesta del servidor si es necesario
             }
         });
     }
 
-    // Asigna eventos a los botones del modal
     $('#will-attend').click(function () {
         enviarAsistencia(1);
         $('#modalAsistencia').modal('hide');
@@ -86,7 +81,7 @@ if (!isset($_COOKIE['asistencia_confirmada'])) {
     <div class="col-12">
         <nav class="navbar navbar-dark">
             <div class="col-3">
-                <a href="../index.php">
+                <a href="index_alumne.php">
                     <img src="../../Recursos/IMG/logo-sapalomera.png" alt="logo sapalomera" width="300px" class="imgHeader">
                 </a>
             </div>
@@ -95,7 +90,6 @@ if (!isset($_COOKIE['asistencia_confirmada'])) {
                 <div class="btn-group">
                     <button type="button" class="btn dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
                         <?php
-                            // Asegúrate de que la imagen del perfil del usuario está en la sesión y no es null
                             if (isset($_SESSION['picture'])) {
                                 $picture = $_SESSION['picture'];
                                 echo "<img src='$picture' alt='Imagen de perfil del usuario' class='imgPerfil'>";
