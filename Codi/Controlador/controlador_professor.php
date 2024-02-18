@@ -2,14 +2,15 @@
 require_once("../Vista/index_professor.php");
 include_once("../Model/model_professor.php");
 include_once("../Model/model_activitat.php");
-include_once("controlador.php");
+//include_once("controlador.php");
 include_once("../Model/model.php");
 
 
 
-function obtenerIdProfessor(){
-
-    if(!isset($_SESSION['email'])){
+function obtenerIdProfessor()
+{
+    session_start();
+    if (!isset($_SESSION['email'])) {
         require_once "../../Recursos/autentificacion.php";
         $_SESSION['email'] = $email;
     }
@@ -18,6 +19,63 @@ function obtenerIdProfessor(){
     $idProfe = $profe['professor_id'];
     return $idProfe;
 }
+
+function mostrarUsuari($idProfe)
+{
+    try {
+        $profe = obtenirProfessorUnic($idProfe)->fetch();
+        $html = "<div class='btn-group'>";
+        $html .= "<button type='button' class='btn dropdown-toggle' data-bs-toggle='dropdown' aria-expanded='false'>";
+        if (isset($_SESSION['picture'])) {
+            $picture = $_SESSION['picture'];
+            $html .= "<img src='$picture' alt='Imagen de perfil del usuario' class='imgPerfil'>";
+        }
+
+        //$email = $_SESSION['email'];
+        $nombre = $profe['nom'];
+        if ($nombre) {
+            $html .= $nombre;
+        }
+        $html .= "</button>";
+        $html .= "<ul class='dropdown-menu'>";
+        $html .= "<li><a class='dropdown-item ' href=''>Vista</a></li>";
+        $html .= "<li><a class='dropdown-item ' href='../Controlador/logout.php'>Tancar sessió</a></li>";
+        $html .= "</ul>";
+        $html .= "</div>";
+        echo $html;
+    } catch (PDOException $e) {
+        echo "Error mostrarUsuari: " . $e->getMessage();
+    }
+}
+
+/**
+ * <div class="btn-group">
+                            <button type="button" class="btn dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                                <?php
+                                // Asegúrate de que la imagen del perfil del usuario está en la sesión y no es null
+                                if (isset($_SESSION['picture'])) {
+                                    $picture = $_SESSION['picture'];
+                                    echo "<img src='$picture' alt='Imagen de perfil del usuario' class='imgPerfil'>";
+                                }
+                                ?>
+                                <?php
+                                $email = $_SESSION['email'];
+                                $nombre = ($email);
+                                if ($nombre) {
+                                    echo $nombre;
+                                }
+                                ?>
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li><a id="botonAsistencia" class="dropdown-item" href="#">Modificar assistència</a></li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <li><a class="dropdown-item " href="../Controlador/logout.php">Tancar sessió</a></li>
+                            </ul>
+                        </div>
+ */
+
 
 function mostrarAlumnat($idProfe)
 {
@@ -149,7 +207,7 @@ function mostrarSeleccioGrupsAlumnes()
                 $html .= "<td><select class='form-select form-select-sm' aria-label='.form-select-sm'>";
                 $html .= "<option selected>Cap grup</option>";
                 foreach ($grups as $gr) {
-                    $html .= "<option value='".$gr['grup_id']."'>" . $gr['nom'] . "</option>";
+                    $html .= "<option value='" . $gr['grup_id'] . "'>" . $gr['nom'] . "</option>";
                 }
                 $html .= "</select></td>";
                 $html .= "</tr>";
@@ -162,34 +220,31 @@ function mostrarSeleccioGrupsAlumnes()
     }
 }
 
-function mostrarGrupsProfessor(){
-    try{
+function mostrarGrupsProfessor()
+{
+    try {
         $idProfessor = 1;
         $grups = obtenirGrupsProfessor($idProfessor)->fetchAll();
         $html = "";
 
-        foreach($grups as $gr){
+        foreach ($grups as $gr) {
             $html .= "<table class='table table-striped'>";
             $html .= "<tbody>";
             $html .= "<tr>";
             $html .= "<td>";
-            $html .= "<label>" . $gr['nom']. "</label>";
+            $html .= "<label>" . $gr['nom'] . "</label>";
             $html .= "</td>";
             $html .= "<td>";
             $html .= "<button class='btn btn-primary' id='deleteGrup'><a href='../Controlador/administrar_grup.php?accio=eliminar&idGrup=" . $gr['grup_id'] . "  ' style='color:white;'>Eliminar</a></button>";
             $html .= "</td>";
-           
+
             $html .= "</tr>";
             $html .= "</tbody>";
             $html .= "</table>";
-
         }
-        $html .= "<button class='btn btn-primary'><a href='../Controlador/administrar_grup.php?accio=crear' style='color:white;'>Crear Grup</a></button>"; 
+        $html .= "<button class='btn btn-primary'><a href='../Controlador/administrar_grup.php?accio=crear' style='color:white;'>Crear Grup</a></button>";
         echo $html;
-    }catch(PDOException $e){
+    } catch (PDOException $e) {
         echo "Error mostrarGrupsProfessor:" . $e->getMessage();
     }
 }
-
-
-?>
