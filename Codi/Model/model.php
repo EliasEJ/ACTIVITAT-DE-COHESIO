@@ -126,4 +126,20 @@
             echo "Error crearGrup: " . $e->getMessage();
         }
     }
+
+    function modificarGrupUsuari($idAlumne, $idGrup){
+        try{
+            $con = connect();
+            $statement = $con->prepare("UPDATE alumne SET grup_id = :idGrup  
+            WHERE alumne_id = :idAlumne");
+            $statement->execute(
+                array(
+                    ':idGrup' => $idGrup,
+                    ':idAlumne' => $idAlumne
+                )
+            );
+        }catch(PDOException $e){
+            echo "Error modificarGrupUsuari: " . $e->getMessage();
+        }
+    }
 ?>

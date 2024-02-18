@@ -25,6 +25,13 @@ if(isset($_GET['accio'])){
 
         break;
     }
+}else if($_SERVER["REQUEST_METHOD"] == "POST"){
+    foreach ($_POST['alumne_id'] as $alumne_id) {
+        // Obtener el nuevo identificador de grupo seleccionado para este alumno
+        $nuevo_grup_id = $_POST['grup'][$alumne_id];
+        
+        modificarGrupUsuari($alumne_id, $nuevo_grup_id);
+    }
 }
 
 function comprobarGrupos($grupId, $idTutor){

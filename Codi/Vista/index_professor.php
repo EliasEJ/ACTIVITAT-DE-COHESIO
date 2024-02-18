@@ -30,7 +30,7 @@ $idProfessor = obtenerIdProfessor();
                             </a>
                     </div>
                     <div class="col-3 text-center">
-                       
+
                         <?php mostrarUsuari($idProfessor) ?>
                     </div>
                 </nav>
@@ -91,25 +91,28 @@ $idProfessor = obtenerIdProfessor();
                                 <br>
 
 
-                                <?php mostrarGrupsProfessor(); ?>
+                                <?php mostrarGrupsProfessor($idProfessor); ?>
 
 
                             </div>
                             <div class="col">
                                 <h3>Alumnes</h3>
                                 <br>
-                                <table class="table table-striped">
-                                    <thead class="sticky-top bg-white">
-                                        <tr>
-                                            <th>Alumne</th>
-                                            <th>Grup</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <?php mostrarSeleccioGrupsAlumnes(); ?>
-                                    </tbody>
-                                </table>
-
+                                <form action='../Controlador/administrar_grup.php' method='POST'>
+                                    <table class="table table-striped">
+                                        <thead class="sticky-top bg-white">
+                                            <tr>
+                                                <th>Alumne</th>
+                                                <th>Grup</th>
+                                                <th>Canviar grup</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <?php mostrarSeleccioGrupsAlumnes($idProfessor); ?>
+                                        </tbody>
+                                    </table>
+                                    <input type="submit" class="btn btn-primary" value="Salvar">
+                                </form>
 
                             </div>
 

@@ -48,35 +48,6 @@ function mostrarUsuari($idProfe)
     }
 }
 
-/**
- * <div class="btn-group">
-                            <button type="button" class="btn dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                                <?php
-                                // Asegúrate de que la imagen del perfil del usuario está en la sesión y no es null
-                                if (isset($_SESSION['picture'])) {
-                                    $picture = $_SESSION['picture'];
-                                    echo "<img src='$picture' alt='Imagen de perfil del usuario' class='imgPerfil'>";
-                                }
-                                ?>
-                                <?php
-                                $email = $_SESSION['email'];
-                                $nombre = ($email);
-                                if ($nombre) {
-                                    echo $nombre;
-                                }
-                                ?>
-                            </button>
-                            <ul class="dropdown-menu">
-                                <li><a id="botonAsistencia" class="dropdown-item" href="#">Modificar assistència</a></li>
-                                <li>
-                                    <hr class="dropdown-divider">
-                                </li>
-                                <li><a class="dropdown-item " href="../Controlador/logout.php">Tancar sessió</a></li>
-                            </ul>
-                        </div>
- */
-
-
 function mostrarAlumnat($idProfe)
 {
     try {
@@ -191,10 +162,10 @@ function mostrarClassificació()
     }
 }
 
-function mostrarSeleccioGrupsAlumnes()
+function mostrarSeleccioGrupsAlumnes($idProfe)
 {
     try {
-        $idProfessor = 1;
+        $idProfessor = $idProfe;
         $grups = obtenirGrupsProfessor($idProfessor)->fetchAll();
         $alumnes = obtenirAlumnat($idProfessor)->fetchAll();
         $html = "";
@@ -202,12 +173,14 @@ function mostrarSeleccioGrupsAlumnes()
         foreach ($alumnes as $al) {
             if ($al['asistencia'] == 1) {
                 $html .= "<tr>";
+                $html .= "<input type='hidden' name='alumne_id[]' value='".$al['alumne_id']."'>";
                 $html .= "<td>" . $al['cognom'] . ", " . $al['nom'] . "</td>";
-
-                $html .= "<td><select class='form-select form-select-sm' aria-label='.form-select-sm'>";
-                $html .= "<option selected>Cap grup</option>";
+                $html .= "<td>".$al['grup_id']."</td>";
+                $html .= "<td><select class='form-select form-select-sm' name='grup[".$al['alumne_id']."]' aria-label='.form-select-sm'>";
+                $html .= "<option value='0'>Cap grup</option>";
                 foreach ($grups as $gr) {
-                    $html .= "<option value='" . $gr['grup_id'] . "'>" . $gr['nom'] . "</option>";
+                    $selected = ($al['grup_id'] == $gr['grup_id']) ? "selected" : "";
+                    $html .= "<option value='" . $gr['grup_id'] . "' $selected>" . $gr['nom'] . "</option>";
                 }
                 $html .= "</select></td>";
                 $html .= "</tr>";
@@ -220,10 +193,10 @@ function mostrarSeleccioGrupsAlumnes()
     }
 }
 
-function mostrarGrupsProfessor()
+function mostrarGrupsProfessor($idProfessor)
 {
     try {
-        $idProfessor = 1;
+        $idProfessor = $idProfessor;
         $grups = obtenirGrupsProfessor($idProfessor)->fetchAll();
         $html = "";
 
