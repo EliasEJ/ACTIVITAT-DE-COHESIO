@@ -8,6 +8,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
     <link rel="stylesheet" href="../../Recursos/bootstrap-5.0.2/dist/css/bootstrap.min.css">
+    <!-- AJAX -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <link rel="stylesheet" href="../../Recursos/CSS/style.css">
     <script src="../Controlador/controlador_alumne.js"></script>
@@ -27,6 +28,7 @@ include '../../Recursos/autentificacion.php';
 $email = $_SESSION['email'];
 
 if (!isset($_COOKIE['asistencia_confirmada'])) {
+    // Mostrar el modal
     echo "<script>
             $(document).ready(function(){
                 $('#modalAsistencia').modal('show');
@@ -51,6 +53,34 @@ if (!isset($_COOKIE['asistencia_confirmada'])) {
     </div>
   </div>
 </div>
+
+<script>
+    // Función para enviar la elección del usuario al servidor
+    function enviarAsistencia(confirmacion) {
+        $.ajax({
+            type: 'POST',
+            url: '../Controlador/guardar_asistencia.php', // Nueva URL para manejar la lógica de almacenar en la base de datos
+            data: { confirmacion: confirmacion },
+            success: function (response) {
+                // Puedes hacer algo con la respuesta del servidor si es necesario
+            }
+        });
+    }
+
+    // Asigna eventos a los botones del modal
+    $('#will-attend').click(function () {
+        enviarAsistencia(1);
+        $('#modalAsistencia').modal('hide');
+        console.log('asistiré');
+    });
+
+    $('#wont-attend').click(function () {
+        enviarAsistencia(0);
+        $('#modalAsistencia').modal('hide');
+        console.log('no asistiré');
+    });
+</script>
+
 
 <div class="row g-0">
     <div class="col-12">
