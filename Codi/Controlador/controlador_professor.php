@@ -17,6 +17,7 @@ function obtenerIdProfessor()
     $email = $_SESSION['email'];
     $profe = obtenirProfessorUnicEmail($email)->fetch();
     $idProfe = $profe['professor_id'];
+    $_SESSION['idProfe'] = $idProfe;
     return $idProfe;
 }
 
@@ -32,7 +33,7 @@ function mostrarUsuari($idProfe)
         }
 
         //$email = $_SESSION['email'];
-        $nombre = $profe['nom'];
+        $nombre = $profe['user'];
         if ($nombre) {
             $html .= $nombre;
         }
@@ -53,7 +54,7 @@ function mostrarAlumnat($idProfe)
     try {
         $idProfessor = $idProfe;
         $alumnes = obtenirAlumnat($idProfessor)->fetchAll();
-
+        //Why I can't reach the function obtenirAlumnat() from model.php? could you fix it
         if ($alumnes != null) {
             $taulaBody = "";
             foreach ($alumnes as $al) {
