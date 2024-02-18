@@ -1,6 +1,6 @@
 <?php
 require_once("../Vista/index_professor.php");
-include_once("../Model/model_professor.php");
+require_once("../Model/model_professor.php");
 include_once("../Model/model_activitat.php");
 //include_once("controlador.php");
 include_once("../Model/model.php");
