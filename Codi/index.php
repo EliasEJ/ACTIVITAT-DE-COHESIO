@@ -4,11 +4,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ACTIVITAT DE COHESIÓ</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
     <link rel="stylesheet" href="../Recursos/bootstrap-5.0.2/dist/css/bootstrap.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.2/js/bootstrap.bundle.min.js" integrity="sha512-72WD92hLs7T5FAXn3vkNZflWG6pglUDDpm87TeQmfSg8KnrymL2G30R7as4FmTwhgu9H7eSzDCX3mjitSecKnw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <link rel="stylesheet" href="../Recursos/CSS/style.css  ">
-    
-</head>
+    <style>
+        .footer {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
+  </head>
+<?php
+require_once 'Controlador/controlador_anonim.php';
+?>
 <body>
   <div class="content">
     <div class="row">
@@ -38,63 +49,52 @@
               </nav>
         </div>
     </div>
-    
+
     <div class="row marginTop">
         <div class="col-lg-6 col-md-6 col-sm-12">
             <div class="col-12">
-                <h2 class="marginLeft">GRUPS</h2>
-                <div class="tbodyDiv" >
-                <table class="table table-striped marginLeft">
-                  <thead class="sticky-top bg-white">
-                    <tr>
-                      <th>Grups ID</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td>Grup 1</td>
-                    </tr>
-                    <tr>
-                      <td>Grup 2</td>
-                    </tr>
-                    <tr>
-                      <td>Grup 3</td>
-                    </tr>
-                    <tr>
-                      <td>Grup 4</td>
-                    </tr>
-                    <tr>
-                      <td>Grup 5</td>
-                    </tr>
-                    <tr>
-                      <td>Grup 6</td>
-                    </tr>
-                    <tr>
-                      <td>Grup 7</td>
-                    </tr>
-                    <tr>
-                      <td>Grup 8</td>
-                    </tr>
-                    <tr>
-                      <td>Grup 8</td>
-                    </tr>
-                    <tr>
-                      <td>Grup 8</td>
-                    </tr>
-                    <tr>
-                      <td>Grup 8</td>
-                    </tr>
-                    <tr>
-                      <td>Grup 8</td>
-                    </tr>
-                  </tbody>
-                  </table>
+            <h2 class="marginLeft pt-3">GRUPS</h2>
+            <div id="grups">
+                    <div class="tbodyDivG ">
+                        <table class="table table-striped marginLeft">
+                            <thead class="sticky-top bg-white">
+                            </thead>
+                            <tbody>
+                                <?php
+                                $grupos = obtenerGruposA();
+                                if ($grupos) {echo generarBotonesA($grupos);} ?>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    <?php
+                        $grupos = obtenerGruposA();
+                        if ($grupos) { echo generarModalesA($grupos); } ?>
+                    </div>
                 </div>
             </div>
         </div>
         <div class="col-lg-6 col-md-6 col-sm-12">
             <div class="col-12">
-                <h2 class="marginLeft">ACTIVITATS</h2>
+                <h2 class="marginLeft pt-3">ACTIVITATS</h2>
+                <div id="sActivitats">
+                    <div class="tbodyDivG border marginLeft">
+                        <table class="table table-striped">
+                            <thead class="sticky-top bg-white">
+                            </thead>
+                            <tbody>
+                                <?php
+                                    $activitats = obtenerActividades();
+                                    if ($activitats) {echo generarBotonesActivitats($activitats);} ?>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    <?php
+                        $activitats = obtenerActividades();
+                        if ($activitats) { echo generarModalesActivitats($activitats); }?>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -125,5 +125,8 @@
         </div>
       </div>
     </footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+
 </body>
 </html>

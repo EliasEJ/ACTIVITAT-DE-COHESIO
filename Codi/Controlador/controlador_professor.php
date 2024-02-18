@@ -2,7 +2,7 @@
 require_once("../Vista/index_professor.php");
 include_once("../Model/model_professor.php");
 include_once("../Model/model_activitat.php");
-include_once("controlador.php");
+//include_once("controlador.php");
 include_once("../Model/model.php");
 
 
@@ -17,6 +17,7 @@ function obtenerIdProfessor()
     $email = $_SESSION['email'];
     $profe = obtenirProfessorUnicEmail($email)->fetch();
     $idProfe = $profe['professor_id'];
+    $_SESSION['idProfe'] = $idProfe;
     return $idProfe;
 }
 
@@ -32,7 +33,7 @@ function mostrarUsuari($idProfe)
         }
 
         //$email = $_SESSION['email'];
-        $nombre = $profe['nom'];
+        $nombre = $profe['user'];
         if ($nombre) {
             $html .= $nombre;
         }
