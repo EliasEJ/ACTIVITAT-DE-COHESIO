@@ -1,13 +1,15 @@
 <?php
 require_once("../Vista/index_professor.php");
 require_once("../Model/model.php");
+require_once("../Model/model_professor.php");
 
 if(isset($_GET['accio'])){
     $accion = $_GET['accio'];
 
     switch($accion){
         case "eliminar":
-
+            $grupoId = $_GET['idGrup'];
+            //comprobarGrupos($grupoId);
         break;
         case "crear":
             $grupos = obtenirGrups()->fetchAll();
@@ -23,6 +25,10 @@ if(isset($_GET['accio'])){
 
         break;
     }
+}
+
+function comprobarGrupos($grupId, $idTutor){
+    $grupos = obtenirAlumnat($idTutor);
 }
 
 ?>

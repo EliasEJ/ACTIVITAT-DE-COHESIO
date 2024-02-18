@@ -112,4 +112,18 @@
             echo "Error crearGrup: " . $e->getMessage();
         }
     }
+
+    function eliminarGrup($idGrup){
+        try{
+            $con = connect();
+            $statement = $con->prepare("DELETE FROM grup WHERE grup_id = :idGrup");
+            $statement->execute(
+                array(
+                    ':idGrup' => $idGrup
+                )
+            );
+        }catch(PDOException $e){
+            echo "Error crearGrup: " . $e->getMessage();
+        }
+    }
 ?>

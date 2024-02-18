@@ -14,7 +14,10 @@
 
 <?php 
 session_start();
-include_once("../Controlador/controlador_professor.php"); ?>
+include_once("../Controlador/controlador_professor.php"); 
+$idProfessor = obtenerIdProfessor();
+?>
+
 
 <body>
     <div class="content">
@@ -73,7 +76,7 @@ include_once("../Controlador/controlador_professor.php"); ?>
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php mostrarAlumnat(); ?>
+                                <?php mostrarAlumnat($idProfessor); ?>
                             </tbody>
                         </table>
                     </div>
@@ -81,7 +84,7 @@ include_once("../Controlador/controlador_professor.php"); ?>
                         <div class="row">
 
 
-                            <?php mostrarAdministrarActivitat(); ?>
+                            <?php mostrarAdministrarActivitat($idProfessor); ?>
 
                             <div class="col">
                                 <div class="accordion accordion-flush" id="accordionActivitatsPadre">

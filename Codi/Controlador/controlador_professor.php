@@ -2,13 +2,27 @@
 require_once("../Vista/index_professor.php");
 include_once("../Model/model_professor.php");
 include_once("../Model/model_activitat.php");
-//include_once("controlador.php");
+include_once("controlador.php");
 include_once("../Model/model.php");
 
-function mostrarAlumnat()
+
+
+function obtenerIdProfessor(){
+
+    if(!isset($_SESSION['email'])){
+        require_once "../../Recursos/autentificacion.php";
+        $_SESSION['email'] = $email;
+    }
+    $email = $_SESSION['email'];
+    $profe = obtenirProfessorUnicEmail($email)->fetch();
+    $idProfe = $profe['professor_id'];
+    return $idProfe;
+}
+
+function mostrarAlumnat($idProfe)
 {
     try {
-        $idProfessor = 1;
+        $idProfessor = $idProfe;
         $alumnes = obtenirAlumnat($idProfessor)->fetchAll();
 
         if ($alumnes != null) {
@@ -65,11 +79,11 @@ function mostrarActivitats()
     }
 }
 
-function mostrarAdministrarActivitat()
+function mostrarAdministrarActivitat($idProfe)
 {
 
     try {
-        $idProfessor = 1;
+        $idProfessor = $idProfe;
         $activitat = obtenirActivitatUnic($idProfessor)->fetch();
         $html = "";
         if ($activitat != null) {
