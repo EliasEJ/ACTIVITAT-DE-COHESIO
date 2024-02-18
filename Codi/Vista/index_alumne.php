@@ -8,6 +8,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
     <link rel="stylesheet" href="../../Recursos/bootstrap-5.0.2/dist/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <link rel="stylesheet" href="../../Recursos/CSS/style.css">
     <script src="../Controlador/controlador_alumne.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.2/js/bootstrap.bundle.min.js" integrity="sha512-72WD92hLs7T5FAXn3vkNZflWG6pglUDDpm87TeQmfSg8KnrymL2G30R7as4FmTwhgu9H7eSzDCX3mjitSecKnw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
@@ -24,6 +25,14 @@ session_start();
 require_once '../Controlador/controlador_alumne.php';
 include '../../Recursos/autentificacion.php';
 $email = $_SESSION['email'];
+
+if (!isset($_COOKIE['asistencia_confirmada'])) {
+    echo "<script>
+            $(document).ready(function(){
+                $('#modalAsistencia').modal('show');
+            });
+          </script>";
+}
 ?>
 
 <div class="modal fade" id="modalAsistencia" tabindex="-1" aria-hidden="true">
@@ -42,7 +51,6 @@ $email = $_SESSION['email'];
     </div>
   </div>
 </div>
-
 
 <div class="row g-0">
     <div class="col-12">
