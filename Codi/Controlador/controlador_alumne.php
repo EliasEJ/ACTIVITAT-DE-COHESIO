@@ -119,3 +119,87 @@ function verificarAsistencia($email, $asistencia) {
     }
     return false;
 }
+function obtenerActividades() {
+    $actividades = obtenirActivitatsA();
+    if ($actividades instanceof PDOStatement) {
+        $resultado = $actividades->fetchAll(PDO::FETCH_ASSOC);
+        if ($resultado) {
+            return $resultado;
+        }
+    }
+    return null;
+}
+
+function generarBotonesActivitats($actividades) {
+    $botones = "";
+    foreach ($actividades as $actividad) {
+        $botones .= "<tr>";
+        $botones .= "<td>Activitat " . $actividad['actividad_id'] . "</td>";
+        $botones .= "<td class='mrb'>";
+        $botones .= '<button type="button" class="btn " data-toggle="modal" data-target="#infoActivitatModalID' . $actividad['actividad_id'] . '">
+                        <b>INFO</b>
+                      </button>';
+        $botones .= "</td>";
+        $botones .= "</tr>";
+    }
+    return $botones;
+}
+
+function generarTablaActividad($infoActividad) {
+    $tabla = "";
+    if ($infoActividad) {
+        $tabla .= "<table class='table'>";
+        $tabla .= "<thead>";
+        $tabla .= "<tr>";
+        foreach ($infoActividad[0] as $key => $value) {
+            $tabla .= "<th>$key</th>";
+        }
+        $tabla .= "</tr>";
+        $tabla .= "</thead>";
+        $tabla .= "<tbody>";
+        foreach ($infoActividad as $actividad) {
+            $tabla .= "<tr>";
+            foreach ($actividad as $value) {
+                $tabla .= "<td>$value</td>";
+            }
+            $tabla .= "</tr>";
+        }
+        $tabla .= "</tbody>";
+        $tabla .= "</table>";
+    }
+    return $tabla;
+}
+
+function obtenerInfoActividad($actividadId) {
+    $infoActividad = obtenirInfoActivitat($actividadId);
+    if ($infoActividad instanceof PDOStatement) {
+        $resultado = $infoActividad->fetchAll(PDO::FETCH_ASSOC);
+        if ($resultado) {
+            return $resultado;
+        }
+    }
+    return null;
+}
+function generarModalesActivitats($actividades) {
+    $modales = "";
+    foreach ($actividades as $actividad) {
+        $modalID = "infoActivitatModalID" . $actividad['actividad_id'];
+        $modales .= '<div class="modal fade" id="' . $modalID . '" tabindex="-1" role="dialog" aria-labelledby="' . $modalID . '" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="' . $modalID . '">Informació de l\'Activitat ' . $actividad['actividad_id'] . '</h5>
+                                </div>
+                                <div class="modal-body">';
+                                $infoActividad = obtenerInfoActividad($actividad['actividad_id']);
+                                $modales .= generarTablaActividad($infoActividad);
+                                $modales .= '</div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Tancar</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>';
+    }
+    return $modales;
+}

@@ -56,24 +56,6 @@ function obtenirIdGrups() {
     }
 }
 
-function crearGrup($grupId, $nom, $foto, $puntuacio, $idProfessor){
-    try{
-        $con = connect();
-        $statement = $con->prepare("INSERT INTO grup (grup_id, nom, foto, puntuacio, id_professor_encarregat)
-        VALUES (:grupId, :nom, :foto, :puntuacion, :idProfessor)");
-        $statement->execute(
-            array(
-                ':grupId' => $grupId,
-                ':nom' => $nom,
-                ':foto' => $foto,
-                ':puntuacion' => $puntuacio,
-                ':idProfessor' => $idProfessor,
-            )
-        );
-    }catch(PDOException $e){
-        echo "Error crearGrup: " . $e->getMessage();
-    }
-}
 function verificarAsistenciaAlumne($email, $asistencia) {
     try {
         $con = connect();
@@ -87,5 +69,31 @@ function verificarAsistenciaAlumne($email, $asistencia) {
         return $statement;
     } catch (PDOException $e) {
         echo "Error verificarAsistenciaAlumne: " . $e->getMessage();
+    }
+}
+
+function obtenirActivitatsA(){
+    try{
+        $con = connect();
+        $statement = $con->prepare("SELECT actividad_id FROM activitat");
+        $statement->execute();
+        return $statement;
+    }catch(PDOException $e){
+        echo "Error obtenirActivitats: " . $e->getMessage();
+    }
+}
+
+function obtenirInfoActivitat($activitatId){
+    try{
+        $con = connect();
+        $statement = $con->prepare("SELECT actividad_id AS ID, nom AS NOM, descripcio AS DESCRIPCIO FROM activitat WHERE actividad_id = :activitatId");
+        $statement->execute(
+            array(
+            ':activitatId' => $activitatId
+            )
+        );
+        return $statement;
+    }catch(PDOException $e){
+        echo "Error obtenirInfoActivitat: " . $e->getMessage();
     }
 }

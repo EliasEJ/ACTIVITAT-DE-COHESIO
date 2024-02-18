@@ -21,55 +21,26 @@
 <?php
 session_start();
 require_once '../Controlador/controlador_alumne.php';
-
 $email = $_SESSION['email'];
-$asistencia = verificarAsistencia($email, false);
-
-if ($asistencia) {
-    echo '<script type="text/javascript">$(document).ready(function() {$("#asistenciaModal").modal("show");});</script>';
-}
 ?>
 
-<div class="modal fade" id="asistenciaModal" tabindex="-1" role="dialog" aria-labelledby="asistenciaModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="asistenciaModalLabel">Confirmació d' assistència</h5>
-            </div>
-            <div class="modal-body">
-            <h5>Assistiràs a l'esdeveniment ?</h5>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-success" id="confirmarAsistencia">Sí, assistiré</button>
-                <button type="button" class="btn btn-danger" id="negarAsistencia">No, no assistiré</button>
-            </div>
-        </div>
+<div class="modal fade" id="attendanceModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Confirmación de Asistencia</h5>
+      </div>
+      <div class="modal-body">
+        ¿Asistirás al evento?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-success" id="will-attend">Sí, asistiré</button>
+        <button type="button" class="btn btn-danger" id="wont-attend">No, no asistiré</button>
+      </div>
     </div>
+  </div>
 </div>
 
-<script>
-$("#confirmarAsistencia").click(function() {
-    $.ajax({
-        url: "../Controlador/controlador_alumne.php",
-        type: "POST",
-        data: { email: "<?php echo $email; ?>", asistencia: true },
-        success: function() {
-            $("#asistenciaModal").modal("hide");
-        }
-    });
-});
-
-$("#negarAsistencia").click(function() {
-    $.ajax({
-        url: "../Controlador/controlador_alumne.php",
-        type: "POST",
-        data: { email: "<?php echo $email; ?>", asistencia: false },
-        success: function() {
-            $("#asistenciaModal").modal("hide");
-        }
-    });
-});
-</script>
 
 <div class="row g-0">
     <div class="col-12">
@@ -140,8 +111,6 @@ $("#negarAsistencia").click(function() {
                             </div>
                         </div>
                     </div>
-
-
                 </div>
 
                 <h2 class="marginLeft pt-3">GRUPS</h2>
@@ -199,10 +168,30 @@ $("#negarAsistencia").click(function() {
                             </div>
                         </div>
                     </div>
-
-
                 </div>
                 
+
+                <h2 class="marginLeft pt-3">SEGÜENTS ACTIVITATS</h2>
+                <div id="sActivitats">
+                    <div class="tbodyDivG border marginLeft">
+                        <table class="table table-striped">
+                            <thead class="sticky-top bg-white">
+                            </thead>
+                            <tbody>
+                                <?php
+                                $activitats = obtenerActividades();
+                                if ($activitats) {echo generarBotonesActivitats($activitats);}
+                                ?>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    <?php
+                        $activitats = obtenerActividades();
+                        if ($activitats) { echo generarModalesActivitats($activitats); }
+                    ?>
+                    </div>
+                </div>
         </div>
     </div>
 </div>
