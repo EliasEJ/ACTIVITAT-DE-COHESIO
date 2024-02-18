@@ -9,6 +9,7 @@ include_once("../Model/model.php");
 
 function obtenerIdProfessor()
 {
+    require_once("../Model/model_professor.php");
     session_start();
     if (!isset($_SESSION['email'])) {
         require_once "../../Recursos/autentificacion.php";
@@ -113,6 +114,7 @@ function mostrarAdministrarActivitat($idProfe)
 {
 
     try {
+        require_once("../Model/model_activitat.php");
         $idProfessor = $idProfe;
         $activitat = obtenirActivitatUnic($idProfessor)->fetch();
         $html = "";
@@ -196,7 +198,9 @@ function mostrarSeleccioGrupsAlumnes($idProfe)
 
 function mostrarGrupsProfessor($idProfessor)
 {
+    
     try {
+
         $idProfessor = $idProfessor;
         $grups = obtenirGrupsProfessor($idProfessor)->fetchAll();
         $html = "";

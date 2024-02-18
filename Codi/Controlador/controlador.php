@@ -10,7 +10,7 @@ require_once '../Model/model.php';
 if(isAdmin($email)){
     ?>
 <script>
-        location.replace("../Controlador/controlador_admin.php");
+        location.replace("../Vista/index_admin.php");
 </script>
 <?php
 }else if(isAlumne($email)){?>
