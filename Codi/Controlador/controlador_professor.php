@@ -99,7 +99,7 @@ function mostrarAdministrarActivitat()
 function mostrarClassificació()
 {
     try {
-        $grups = obtenirGrups()->fetchAll();
+        $grups = obtenirGrupsClasificacio()->fetchAll();
         $html = "";
         $posicion = 1;
         foreach ($grups as $gr) {
@@ -162,7 +162,7 @@ function mostrarGrupsProfessor(){
             $html .= "<label>" . $gr['nom']. "</label>";
             $html .= "</td>";
             $html .= "<td>";
-            $html .= "<button class='btn btn-primary' id='deleteGrup'><a href='../Controlador/administrar_grup.php?accio='eliminar'&idGrup=" . $gr['grup_id'] . "  ' style='color:white;'>Eliminar</a></button>";
+            $html .= "<button class='btn btn-primary' id='deleteGrup'><a href='../Controlador/administrar_grup.php?accio=eliminar&idGrup=" . $gr['grup_id'] . "  ' style='color:white;'>Eliminar</a></button>";
             $html .= "</td>";
            
             $html .= "</tr>";

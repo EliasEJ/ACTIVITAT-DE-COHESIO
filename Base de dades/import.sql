@@ -38,7 +38,7 @@ VALUES
 (2, "Alejandro", "Vazquez", "a.vazquez2@sapalomera.cat", 'DAW', '2n', 'A', 1, 1, 7),
 (3, "El Yass", "El Jerari", "e.jerari@sapalomera.cat",  'ASIX', '2n', 'A', 1, 2, 2),
 (4, "Marc", "Gomez", "m.gomez@sapalomera.cat",  'ASIX', '2n', 'A', 0, 2, 2),
-(5, "Coral", "Jaime", "c.jaime@sapalomera.cat",  'SMX', '1r', 'A', 1, 3, 1),
+(5, "Maria", "Sola", "m.sola@sapalomera.cat",  'SMX', '1r', 'A', 1, 3, 1),
 (6, "Laura", "Perez", "l.perez@sapalomera.cat",  'SMX', '1r', 'A', 1, 3, 1),
 (7, "Santiago", "Peral", "s.peral@sapalomera.cat",  'SMX', '1r', 'B', 0, 4, 3),
 (8, "Mayank", "Alkalk", "m.alkalk@sapalomera.cat",  'SMX', '1r', 'B', 1, 4, 3),
