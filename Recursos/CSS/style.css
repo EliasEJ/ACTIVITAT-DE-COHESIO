@@ -70,3 +70,10 @@ body {
 .mrb button {
     margin-right: 20px; /* Ajusta este valor según tus necesidades */
 }
+
+.imgPerfil {
+    width: 50px;
+    border-radius: 50%;
+    margin-left: 3%;
+    margin-right: 3%;
+}
