@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ACTIVITAT DE COHESIÓ</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
     <link rel="stylesheet" href="../../Recursos/bootstrap-5.0.2/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="../../Recursos/CSS/style.css">
@@ -19,10 +20,57 @@
 </head>
 <?php
 session_start();
-$_SESSION['email'];
 require_once '../Controlador/controlador_alumne.php';
 
+$email = $_SESSION['email'];
+$asistencia = verificarAsistencia($email, false);
+
+if ($asistencia) {
+    echo '<script type="text/javascript">$(document).ready(function() {$("#asistenciaModal").modal("show");});</script>';
+}
 ?>
+
+<div class="modal fade" id="asistenciaModal" tabindex="-1" role="dialog" aria-labelledby="asistenciaModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="asistenciaModalLabel">Confirmació d' assistència</h5>
+            </div>
+            <div class="modal-body">
+            <h5>Assistiràs a l'esdeveniment ?</h5>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success" id="confirmarAsistencia">Sí, assistiré</button>
+                <button type="button" class="btn btn-danger" id="negarAsistencia">No, no assistiré</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+$("#confirmarAsistencia").click(function() {
+    $.ajax({
+        url: "../Controlador/controlador_alumne.php",
+        type: "POST",
+        data: { email: "<?php echo $email; ?>", asistencia: true },
+        success: function() {
+            $("#asistenciaModal").modal("hide");
+        }
+    });
+});
+
+$("#negarAsistencia").click(function() {
+    $.ajax({
+        url: "../Controlador/controlador_alumne.php",
+        type: "POST",
+        data: { email: "<?php echo $email; ?>", asistencia: false },
+        success: function() {
+            $("#asistenciaModal").modal("hide");
+        }
+    });
+});
+</script>
+
 <div class="row g-0">
     <div class="col-12">
         <nav class="navbar navbar-dark">
@@ -38,9 +86,7 @@ require_once '../Controlador/controlador_alumne.php';
                         <?php
                         $email = $_SESSION['email'];
                         $nombre = obtenerNombreAlumno($email);
-                        if ($nombre) {
-                            echo $nombre;
-                        }
+                        if ($nombre) {echo $nombre; }
                         ?>
                     </button>
                     <ul class="dropdown-menu">
@@ -61,7 +107,7 @@ require_once '../Controlador/controlador_alumne.php';
 <div class="marginTop">
     <div class="row g-0">
         <div class="col-lg-6 col-md-6 col-sm-12">
-            <div class="col-8">
+            <div class="col-10">
                 <h2 class="marginLeft pb-1">EL TEU GRUP</h2>
                 <div class="marginLeft grup border">
                     <div class="p-3">
@@ -103,9 +149,6 @@ require_once '../Controlador/controlador_alumne.php';
                     <div class="tbodyDivG ">
                         <table class="table table-striped marginLeft">
                             <thead class="sticky-top bg-white">
-                                <tr>
-                                    <th>Grups ID</th>
-                                </tr>
                             </thead>
                             <tbody>
                                 <?php
@@ -122,6 +165,44 @@ require_once '../Controlador/controlador_alumne.php';
                 </div>
             </div>
 
+        </div>
+        <div class="col-lg-6 col-md-6 col-sm-12">
+            <div class="col-10">
+            <h2 class="marginLeft pb-1">ACTIVITATS</h2>
+                <div class="marginLeft grup border">
+                    <div class="p-3">
+                        <?php
+                        $grup = obtenerGrupoAlumno($email);
+                        if ($grup) { echo 'GRUP ' . $grup; } ?>
+                    </div>
+
+
+                    <button type="button" class="btn" data-toggle="modal" data-target="#infoGrupModal">
+                        <b>INFO</b>
+                    </button>
+
+                    <!-- Modal -->
+                    <div class="modal fade" id="infoGrupModal" tabindex="-1" role="dialog" aria-labelledby="infoGrupModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="infoGrupModalLabel">Informació del Grup</h5>
+                                </div>
+                                <div class="modal-body">
+                                    <?php $infoGrupo = obtenerInformacionGrupo($grup);
+                                    echo generarTabla($infoGrupo);
+                                    ?>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Tancar</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+                
         </div>
     </div>
 </div>
@@ -154,7 +235,7 @@ require_once '../Controlador/controlador_alumne.php';
 </footer>
 
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<!-- <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script> -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 

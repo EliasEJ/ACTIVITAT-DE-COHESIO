@@ -74,3 +74,18 @@ function crearGrup($grupId, $nom, $foto, $puntuacio, $idProfessor){
         echo "Error crearGrup: " . $e->getMessage();
     }
 }
+function verificarAsistenciaAlumne($email, $asistencia) {
+    try {
+        $con = connect();
+        $statement = $con->prepare("UPDATE alumne SET asistencia = :asistencia WHERE correu = :email");
+        $statement->execute(
+            array(
+                ':email' => $email,
+                ':asistencia' => $asistencia
+            )
+        );
+        return $statement;
+    } catch (PDOException $e) {
+        echo "Error verificarAsistenciaAlumne: " . $e->getMessage();
+    }
+}

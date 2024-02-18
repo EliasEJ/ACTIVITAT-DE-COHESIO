@@ -108,3 +108,14 @@ function generarModales($grupos) {
     }
     return $modales;
 }
+
+function verificarAsistencia($email, $asistencia) {
+    $consulta = verificarAsistenciaAlumne($email, $asistencia);
+    if ($consulta instanceof PDOStatement) {
+        $resultado = $consulta->fetch(PDO::FETCH_ASSOC);
+        if ($resultado) {
+            return true;
+        }
+    }
+    return false;
+}
