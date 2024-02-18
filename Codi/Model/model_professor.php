@@ -30,4 +30,3 @@ function obtenirGrupsProfessor($idProfessor){
         echo "Error obtenirGrupsProfessor: " . $e->getMessage();
     }
 }
-
