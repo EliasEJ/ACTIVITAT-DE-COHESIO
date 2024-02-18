@@ -12,9 +12,9 @@
     <script type="module" src="../Controlador/controlador_professor2.js"> </script>
 </head>
 
-<?php 
+<?php
 
-include_once("../Controlador/controlador_professor.php"); 
+include_once("../Controlador/controlador_professor.php");
 $idProfessor = obtenerIdProfessor();
 ?>
 
@@ -27,10 +27,11 @@ $idProfessor = obtenerIdProfessor();
                     <div class="col-3">
                         <a">
                             <img src="../../Recursos/IMG/logo-sapalomera.png" alt="logo sapalomera" width="300px" class="imgHeader">
-                        </a>
+                            </a>
                     </div>
-                    <div class="col-9 ">
-                        
+                    <div class="col-3 text-center">
+                       
+                        <?php mostrarUsuari($idProfessor) ?>
                     </div>
                 </nav>
             </div>
@@ -88,11 +89,11 @@ $idProfessor = obtenerIdProfessor();
                             <div class="col">
                                 <h3>Grups</h3>
                                 <br>
-                                
-                                    
-                                    <?php mostrarGrupsProfessor(); ?>
-                                    
-                                
+
+
+                                <?php mostrarGrupsProfessor(); ?>
+
+
                             </div>
                             <div class="col">
                                 <h3>Alumnes</h3>
