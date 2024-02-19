@@ -24,6 +24,7 @@ function obtenerIdProfessor()
 function mostrarUsuari($idProfe)
 {
     try {
+        require_once("../Model/model.php");
         $profe = obtenirProfessorUnic($idProfe)->fetch();
         $html = "<div class='btn-group'>";
         $html .= "<button type='button' class='btn dropdown-toggle' data-bs-toggle='dropdown' aria-expanded='false'>";
@@ -32,14 +33,17 @@ function mostrarUsuari($idProfe)
             $html .= "<img src='$picture' alt='Imagen de perfil del usuario' class='imgPerfil'>";
         }
 
-        //$email = $_SESSION['email'];
+        $email = $_SESSION['email'];
         $nombre = $profe['user'];
         if ($nombre) {
             $html .= $nombre;
         }
         $html .= "</button>";
         $html .= "<ul class='dropdown-menu'>";
-        $html .= "<li><a class='dropdown-item ' href=''>Vista</a></li>";
+        $html .= "<li><a class='dropdown-item ' href='../Vista/index_alumne.php'>Vista Alumne</a></li>";
+        if(isAdmin($email)){
+            $html .= "<li><a class='dropdown-item ' href='../Vista/index_admin.php'>Vista Admin</a></li>";
+        }
         $html .= "<li><a class='dropdown-item ' href='../Controlador/logout.php'>Tancar sessió</a></li>";
         $html .= "</ul>";
         $html .= "</div>";

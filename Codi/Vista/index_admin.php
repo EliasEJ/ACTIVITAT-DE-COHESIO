@@ -15,6 +15,7 @@
 <?php
 
 include_once("../Controlador/controlador_professor.php");
+include_once("../Controlador/controlador_admin.php");
 $idProfessor = obtenerIdProfessor();
 ?>
 
@@ -31,7 +32,7 @@ $idProfessor = obtenerIdProfessor();
                     </div>
                     <div class="col-3 text-center">
 
-                        <?php mostrarUsuari($idProfessor) ?>
+                        <?php mostrarUsuariAdmin($idProfessor) ?>
                     </div>
                 </nav>
             </div>
