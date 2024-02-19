@@ -72,14 +72,27 @@
     function obtenirGrupsClasificacio(){
         try{
             $con = connect();
-            $statement = $con->prepare("SELECT DISTINCT  a.curs, a.any, a.classe, g.nom, g.puntuacio
+            $statement = $con->prepare("SELECT DISTINCT a.curs, a.any, a.classe, g.nom, g.puntuacio
             FROM alumne a
             JOIN grup g ON a.grup_id = g.grup_id 
             ORDER BY g.puntuacio DESC");
             $statement->execute();
             return $statement;
         }catch(PDOException $e){
-            echo "Error obtenirGrups: " . $e->getMessage();
+            echo "Error obtenirGrupsClasificacio: " . $e->getMessage();
+        }
+    }
+
+    function obtenirGrupsClasse(){
+        try{
+            $con = connect();
+            $statement = $con->prepare("SELECT DISTINCT a.curs, a.any, a.classe, g.nom, g.puntuacio, g.grup_id
+            FROM alumne a
+            JOIN grup g ON a.grup_id = g.grup_id");
+            $statement->execute();
+            return $statement;
+        }catch(PDOException $e){
+            echo "Error obtenirGrupsClasse: " . $e->getMessage();
         }
     }
 
