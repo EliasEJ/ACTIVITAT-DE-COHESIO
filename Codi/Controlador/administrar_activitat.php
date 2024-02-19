@@ -45,5 +45,5 @@ function eliminarActividad($idActividad)
 
 ?>
 <script>
-    location.replace("../Vista/index_professor.php") 
+    //location.replace("../Vista/index_professor.php") 
 </script>

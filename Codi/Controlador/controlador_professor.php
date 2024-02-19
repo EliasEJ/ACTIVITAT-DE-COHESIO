@@ -219,7 +219,7 @@ function mostrarGrupsProfessor($idProfessor)
             $html .= "</tbody>";
             $html .= "</table>";
         }
-        $html .= "<button class='btn btn-primary'><a href='../Controlador/administrar_grup.php?accio='crear'' style='color:white;'>Crear Grup</a></button>"; 
+        $html .= "<button class='btn btn-primary'><a href='../Controlador/administrar_grup.php?accio=crear' style='color:white;'>Crear Grup</a></button>"; 
         echo $html;
     } catch (PDOException $e) {
         echo "Error mostrarGrupsProfessor:" . $e->getMessage();
