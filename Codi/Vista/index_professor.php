@@ -86,20 +86,9 @@ $idProfessor = obtenerIdProfessor();
                     </div>
                     <div class="tab-pane fade" id="taulaGrups">
                         <div class="row">
-                            <div class="col">
-                                <h3>Grups</h3>
-                                <br>
-
-
-                                <?php mostrarGrupsProfessor($idProfessor); ?>
-
-
-                            </div>
-                            <div class="col">
-                                <h3>Alumnes</h3>
-                                <br>
-                                            <?php mostrarSeleccioGrupsAlumnes($idProfessor); ?>
-                            </div>
+                            
+                            <?php mostrarGruposTutorProfe($idProfessor) ?>
+                            
 
                         </div>
 
