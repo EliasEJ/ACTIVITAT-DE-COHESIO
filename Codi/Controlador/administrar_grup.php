@@ -12,8 +12,9 @@ if (isset($_GET['accio'])) {
 
 
             if (comprobarGrupos($grupoId,  $_SESSION['idProfe'])) {
+                
                 eliminarGrup($grupoId);
-            } else {
+            }else{
 ?>
                 <script>
                     alert("No és possible esborrar aquest grup: Encara hi ha alumnes que pertanyen a aquest grup.")
@@ -58,5 +59,5 @@ function comprobarGrupos($grupId, $idTutor)
 
 ?>
 <script>
-    location.replace("../Vista/index_professor.php") 
+    //location.replace("../Vista/index_professor.php") 
 </script>

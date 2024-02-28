@@ -15,7 +15,7 @@ function obtenerIdProfessor()
         $_SESSION['email'] = $email;
     }
     $email = $_SESSION['email'];
-    $profe = obtenirProfessorUnicEmail($email)->fetch();
+    $profe = obtenirProfessorUnicEmail($email)->fetch();   
     $idProfe = $profe['professor_id'];
     $_SESSION['idProfe'] = $idProfe;
     return $idProfe;
