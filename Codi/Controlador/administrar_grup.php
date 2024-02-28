@@ -28,13 +28,13 @@ if (isset($_GET['accio'])) {
             $nombre = "Grup-" . $id;
             $imagen = "";
             $puntuacion = 0;
-            $profeId = 1; //Cambiar id al de sesión.
+            $profeId =  $_SESSION['idProfe']; 
 
             crearGrup($id, $nombre, $imagen, $puntuacion, $profeId);
             break;
         default:
 
-            break;
+        break;
     }
 } else if ($_SERVER["REQUEST_METHOD"] == "POST") {
     foreach ($_POST['alumne_id'] as $alumne_id) {
@@ -59,5 +59,5 @@ function comprobarGrupos($grupId, $idTutor)
 
 ?>
 <script>
-    //location.replace("../Vista/index_professor.php") 
+    location.replace("../Vista/index_professor.php") 
 </script>

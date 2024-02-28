@@ -75,6 +75,7 @@ function obtenirActivitats()
         echo "Error obtenirActivitats: " . $e->getMessage();
     }
 }
+
 function obtenirGrupsClasificacio()
 {
     try {
@@ -141,13 +142,14 @@ function eliminarGrup($idGrup)
     try {
         $con = connect();
         dropConstraintsGrupId();
+        setNullGrupId($idGrup);
         $statement = $con->prepare("DELETE FROM grup WHERE grup_id = :idGrup");
         $statement->execute(
             array(
                 ':idGrup' => $idGrup
             )
         );
-        setNullGrupId($idGrup);
+        //reordenarGrupo();
         addConstraintsGrupId();
     } catch (PDOException $e) {
         echo "Error crearGrup: " . $e->getMessage();
@@ -157,13 +159,21 @@ function eliminarGrup($idGrup)
 function dropConstraintsGrupId(){
     try{
         $con = connect();
-        $statement = $con->prepare("ALTER TABLE alumne DROP CONSTRAINT `alumne_ibfk_1`
-        ALTER TABLE professor DROP CONSTRAINT `professor_ibfk_2`
-        ALTER TABLE `admin` DROP CONSTRAINT `admin_ibfk_1`
-        ALTER TABLE `activitat` DROP CONSTRAINT `activitat_ibfk_4`
-        ALTER TABLE `activitat` DROP CONSTRAINT `activitat_ibfk_5`
-        ");
+        $statement = $con->prepare("ALTER TABLE alumne DROP FOREIGN KEY `alumne_ibfk_1`");
         $statement->execute();
+
+        $statement = $con->prepare("ALTER TABLE professor DROP FOREIGN KEY `professor_ibfk_2`");
+        $statement->execute();
+
+        $statement = $con->prepare("ALTER TABLE `admin` DROP FOREIGN KEY `admin_ibfk_1`");
+        $statement->execute();
+
+        $statement = $con->prepare("ALTER TABLE `activitat` DROP FOREIGN KEY `activitat_ibfk_4`");
+        $statement->execute();
+
+        $statement = $con->prepare("ALTER TABLE `activitat` DROP FOREIGN KEY `activitat_ibfk_5`");
+        $statement->execute();
+
     }catch (PDOException $e) {
         echo "Error dropConstraintsGrupId: " . $e->getMessage();
     }
@@ -173,14 +183,21 @@ function dropConstraintsGrupId(){
 function addConstraintsGrupId(){
     try{
         $con = connect();
-        $statement = $con->prepare("ALTER TABLE alumne ADD CONSTRAINT `alumne_ibfk_1` FOREIGN KEY (`grup_id`) REFERENCES `grup` (`grup_id`)
-        ALTER TABLE professor ADD CONSTRAINT `professor_ibfk_2` FOREIGN KEY (`grup_id`) REFERENCES `grup` (`grup_id`)
-        ALTER TABLE `admin`ADD CONSTRAINT `admin_ibfk_1` FOREIGN KEY (`grup_id`) REFERENCES `grup` (`grup_id`)
-        ALTER TABLE `activitat`
-        ADD CONSTRAINT `activitat_ibfk_4` FOREIGN KEY (`grup1`) REFERENCES `grup` (`grup_id`), 
-        ADD CONSTRAINT `activitat_ibfk_5` FOREIGN KEY (`grup2`) REFERENCES `grup` (`grup_id`) 
-        ");
+        $statement = $con->prepare("ALTER TABLE alumne ADD CONSTRAINT `alumne_ibfk_1` FOREIGN KEY (`grup_id`) REFERENCES `grup` (`grup_id`)");
         $statement->execute();
+
+        $statement = $con->prepare("ALTER TABLE professor ADD CONSTRAINT `professor_ibfk_2` FOREIGN KEY (`grup_id`) REFERENCES `grup` (`grup_id`)");
+        $statement->execute();
+
+        $statement = $con->prepare("ALTER TABLE `admin`ADD CONSTRAINT `admin_ibfk_1` FOREIGN KEY (`grup_id`) REFERENCES `grup` (`grup_id`)");
+        $statement->execute();
+
+        $statement = $con->prepare("ALTER TABLE activitat ADD CONSTRAINT `activitat_ibfk_4` FOREIGN KEY (`grup1`) REFERENCES `grup` (`grup_id`)");
+        $statement->execute();
+
+        $statement = $con->prepare("ALTER TABLE activitat ADD CONSTRAINT `activitat_ibfk_5` FOREIGN KEY (`grup2`) REFERENCES `grup` (`grup_id`)");
+        $statement->execute();      
+        
     }catch (PDOException $e) {
         echo "Error addConstraintsGrupId: " . $e->getMessage();
     }
@@ -192,29 +209,34 @@ function setNullGrupId($idGrup){
         $con = connect();
         $statement = $con->prepare("UPDATE alumne
         SET grup_id = NULL
-        WHERE grup_id = :idGrup
+        WHERE grup_id = :idGrup");
+        $statement->execute(array(':idGrup' => $idGrup));
 
-        UPDATE professor
+
+        $statement = $con->prepare("UPDATE professor
         SET grup_id = NULL
-        WHERE grup_id = :idGrup
+        WHERE grup_id = :idGrup");
+        $statement->execute(array(':idGrup' => $idGrup));
 
-        UPDATE `admin`
+        
+        $statement = $con->prepare("UPDATE `admin`
         SET grup_id = NULL
-        WHERE grup_id = :idGrup
+        WHERE grup_id = :idGrup");
+        $statement->execute(array(':idGrup' => $idGrup));
 
-        UPDATE `activitat`
+        
+        $statement = $con->prepare("UPDATE `activitat`
         SET grup1 = NULL
-        WHERE grup1 = :idGrup
+        WHERE grup1 = :idGrup");
+        $statement->execute(array(':idGrup' => $idGrup));
 
-        UPDATE `activitat`
+        
+        $statement = $con->prepare("UPDATE `activitat`
         SET grup2 = NULL
-        WHERE grup2 = :idGrup
-        ");
-        $statement->execute(
-            array(
-                ':idGrup' => $idGrup
-            )
-        );
+        WHERE grup2 = :idGrup");
+        $statement->execute(array(':idGrup' => $idGrup));
+        
+        
     } catch (PDOException $e) {
         echo "Error setNullGrupId: " . $e->getMessage();
     }
@@ -234,5 +256,20 @@ function modificarGrupUsuari($idAlumne, $idGrup)
         );
     } catch (PDOException $e) {
         echo "Error modificarGrupUsuari: " . $e->getMessage();
+    }
+}
+
+function reordenarGrupo(){
+    try {
+        $connexio = connect();
+        $statement = $connexio->prepare("ALTER TABLE grup DROP grup_id");
+        $statement->execute();
+        $statement = $connexio->prepare("ALTER TABLE grup AUTO_INCREMENT = 1");
+        $statement->execute();
+        $statement = $connexio->prepare("ALTER TABLE grup ADD grup_id int NOT NULL AUTO_INCREMENT PRIMARY KEY FIRST");
+        $statement->execute();
+    } catch (PDOException $e) { 
+        // mostrarem els errors
+        echo "Error: reordenarGrupo " . $e->getMessage();
     }
 }
