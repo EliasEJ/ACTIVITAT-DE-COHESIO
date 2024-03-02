@@ -99,7 +99,7 @@ CREATE TABLE IF NOT EXISTS `alumne` (
 DROP TABLE IF EXISTS `enfrentaments`;
 CREATE TABLE IF NOT EXISTS `enfrentaments` (
   `enfrentament_id` int(11) NOT NULL AUTO_INCREMENT,
-  `actividad_id` int(11) NOT NULL,
+  `actividad_id` int(11),
   `nom` varchar(50) NOT NULL,
   `resultat` varchar(20) NOT NULL,
   PRIMARY KEY (`enfrentament_id`),

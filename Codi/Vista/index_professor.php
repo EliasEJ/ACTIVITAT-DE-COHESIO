@@ -69,6 +69,7 @@ $idProfessor = obtenerIdProfessor();
                                 <?php mostrarAlumnat($idProfessor); ?>
                             </tbody>
                         </table>
+                        <button></button>
                     </div>
                     <div class="tab-pane fade" id="taulaActivitats">
                         <div class="row">

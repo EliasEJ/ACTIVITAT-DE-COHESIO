@@ -2,7 +2,7 @@
 
 require_once("../Vista/index_professor.php");
 require_once("../Model/model_activitat.php");
-
+require_once("../Model/model.php");
 
 if (isset($_GET['accio'])) {
     $accion = $_GET['accio'];
@@ -12,17 +12,23 @@ if (isset($_GET['accio'])) {
             $idAct = $_GET['idAct'];
             eliminarActividad($idAct);
             break;
-        
+        case 'crear':
+            /** 
+            $actividades = obtenirActivitats()->fetchAll();
+            $newId = count($actividades) +1;
+            crearActividad($newId,"","","",$_SESSION['idProfe'],NULL,NULL,"");
+             */
+            break;
     }
-} else if($_SERVER["REQUEST_METHOD"] == "POST"){
+} else if ($_SERVER["REQUEST_METHOD"] == "POST") {
     //echo "post enviado";
     guardarActividad();
-}else echo "nada";
+} else echo "nada";
 
 function guardarActividad()
 {
     try {
-        
+
         $idAct = $_POST['idAct'];
         $nameAct = $_POST['nomAct'];
         $descriptAct = $_POST['descripcioAct'];
@@ -45,5 +51,5 @@ function eliminarActividad($idActividad)
 
 ?>
 <script>
-    location.replace("../Vista/index_professor.php") 
+    location.replace("../Vista/index_professor.php")
 </script>
