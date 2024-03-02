@@ -24,7 +24,17 @@ if (isset($_GET['accio'])) {
             break;
         case "crear":
             $grupos = obtenirGrups()->fetchAll();
-            $id = count($grupos) + 1;
+            $fakeId = 1;
+
+            foreach($grupos as $gr){
+                if($gr['grup_id'] === $fakeId){
+                    $fakeId++;
+                }else if($gr['grup_id'] != $fakeId){
+                    
+                    break;
+                }
+            }
+            $id = $fakeId;
             $nombre = "Grup-" . $id;
             $imagen = "";
             $puntuacion = 0;
