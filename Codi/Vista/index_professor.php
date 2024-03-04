@@ -9,9 +9,9 @@
     <link rel="stylesheet" href="../../Recursos/bootstrap-5.0.2/dist/css/bootstrap.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.2/js/bootstrap.bundle.min.js" integrity="sha512-72WD92hLs7T5FAXn3vkNZflWG6pglUDDpm87TeQmfSg8KnrymL2G30R7as4FmTwhgu9H7eSzDCX3mjitSecKnw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <link rel="stylesheet" href="../../Recursos/CSS/styleProfessor.css  ">
-    <script type="module" src="../Controlador/controlador_professor2.js"> </script>
+    <script type="module" src="../Controlador/controlador_professor.js"> </script>
 </head>
-
+    
 <?php
 
 include_once("../Controlador/controlador_professor.php");
@@ -32,9 +32,13 @@ $idProfessor = obtenerIdProfessor();
                     <div class="col-3 text-center">
 
                         <?php mostrarUsuari($idProfessor) ?>
+
                     </div>
+
                 </nav>
+
             </div>
+
         </div>
 
 
@@ -69,7 +73,7 @@ $idProfessor = obtenerIdProfessor();
                                 <?php mostrarAlumnat($idProfessor); ?>
                             </tbody>
                         </table>
-                        <button></button>
+
                     </div>
                     <div class="tab-pane fade" id="taulaActivitats">
                         <div class="row">
@@ -87,9 +91,9 @@ $idProfessor = obtenerIdProfessor();
                     </div>
                     <div class="tab-pane fade" id="taulaGrups">
                         <div class="row">
-                            
+
                             <?php mostrarGruposTutorProfe($idProfessor) ?>
-                            
+
 
                         </div>
 
@@ -109,6 +113,30 @@ $idProfessor = obtenerIdProfessor();
                             </tbody>
                         </table>
                     </div>
+
+                    <!-- Button trigger modal -->
+                    <button type="button" id="añadirAlumn" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
+                        Afegir alumne
+                    </button>
+
+                    <!-- Modal -->
+                    <div class="modal fade" id="formAñadirAlumn" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+                                </div>
+                                <div class="modal-body">
+                                    ...
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" id="cerrarFormAñadirAlumn" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                    <button type="button" id="guardarAlumnoNuevo" class="btn btn-primary">Save changes</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </div>
@@ -140,6 +168,8 @@ $idProfessor = obtenerIdProfessor();
                 </div>
             </div>
         </footer>
+        
+
 </body>
 
 </html>
