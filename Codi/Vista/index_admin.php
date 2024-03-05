@@ -16,7 +16,6 @@
 
 include_once("../Controlador/controlador_professor.php");
 include_once("../Controlador/controlador_admin.php");
-$idProfessor = obtenerIdProfessor();
 ?>
 
 
