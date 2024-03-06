@@ -273,3 +273,14 @@ function reordenarGrupo(){
         echo "Error: reordenarGrupo " . $e->getMessage();
     }
 }
+
+function obtenerAlumnosTotal(){
+    try {
+        $con = connect();
+        $statement = $con->prepare("SELECT * FROM alumne");
+        $statement->execute();
+        return $statement;
+    } catch (PDOException $e) {
+        echo "Error obtenerAlumnosTotal: " . $e->getMessage();
+    }
+}

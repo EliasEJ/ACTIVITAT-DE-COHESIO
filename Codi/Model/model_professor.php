@@ -45,3 +45,30 @@ function obtenirGrupsProfessor($idProfessor){
         echo "Error obtenirGrupsProfessor: " . $e->getMessage();
     }
 }
+
+
+//TERMINAR
+function crearAlumno($idAlumn, $nomAlumn, $cognomAlumn, $correuAlumn, $curs, $any, $classe, $asistencia, $grupId  ,$idProfessor){
+    try{
+        $con = connect();
+        $statement = $con->prepare("INSERT INTO alumne(alumne_id, nom, cognom, correu, curs, any, classe, asistencia, grup_id, tutor)
+        VALUES (:alumne_id, :nomAlumn, :cognomsAlumn, :correuAlumn, :curs, :any, :classe, :asistencia, :grup_id, :tutor )");
+        $statement->execute(
+            array(
+                ':alumne_id' => $idAlumn,
+                ':nomAlumn' => $nomAlumn,
+                ':cognomsAlumn' => $cognomAlumn,
+                ':correuAlumn' => $correuAlumn,
+                ':curs' => $curs,
+                ':any' => $any,
+                ':classe' => $classe,
+                ':asistencia' => $asistencia,
+                ':grup_id' => $grupId,
+                ':tutor' => $idProfessor
+            )
+        );
+        return $statement;
+    }catch(PDOException $e){
+        echo "Error crearAlumno: " . $e->getMessage();
+    }
+}

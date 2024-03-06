@@ -281,3 +281,16 @@ function mostrarGruposTutorProfe($idProfessor)
 
     echo $html;
 }
+
+function seleccionGruposNuevoAlumno($idProfe){
+    $html = "";
+    $grups = obtenirGrupsProfessor($idProfe)->fetchAll();
+
+    $html .= "<select id='newAlumnGrupo' class='form-select form-select-sm' aria-label='.form-select-sm' name='grup'>";
+    foreach ($grups as $gr) {
+        $html .= "<option value='" . $gr['grup_id'] . "'>" . $gr['nom'] . "</option>";
+    }
+
+    $html .= "</select>";
+    echo $html;
+}
