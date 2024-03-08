@@ -129,3 +129,18 @@ function actualizarAsistencia($email, $confirmacion) {
         echo "Error actualizarAsistencia: " . $e->getMessage();
     }
 }
+
+function obtenirOrdreActivitatsA(){
+    try{
+        $con = connect();
+        $statement = $con->prepare("SELECT a.actividad_id, a.nom AS actividad_nombre, g.grup_id, ag.nom AS grup_nombre
+        FROM activitat AS a
+        JOIN 
+            grup AS g ON a.grup1 = g.grup_id OR a.grup2 = g.grup_id
+        ORDER BY g.grup_id;");
+        $statement->execute();
+        return $statement;
+    }catch(PDOException $e){
+        echo "Error obtenirOrdreActivitats: " . $e->getMessage();
+    }
+}
