@@ -12,8 +12,9 @@ if (isset($_GET['accio'])) {
 
 
             if (comprobarGrupos($grupoId,  $_SESSION['idProfe'])) {
+                
                 eliminarGrup($grupoId);
-            } else {
+            }else{
 ?>
                 <script>
                     alert("No és possible esborrar aquest grup: Encara hi ha alumnes que pertanyen a aquest grup.")
@@ -23,17 +24,27 @@ if (isset($_GET['accio'])) {
             break;
         case "crear":
             $grupos = obtenirGrups()->fetchAll();
-            $id = count($grupos) + 1;
+            $fakeId = 1;
+
+            foreach($grupos as $gr){
+                if($gr['grup_id'] === $fakeId){
+                    $fakeId++;
+                }else if($gr['grup_id'] != $fakeId){
+                    
+                    break;
+                }
+            }
+            $id = $fakeId;
             $nombre = "Grup-" . $id;
             $imagen = "";
             $puntuacion = 0;
-            $profeId = 1; //Cambiar id al de sesión.
+            $profeId =  $_SESSION['idProfe']; 
 
             crearGrup($id, $nombre, $imagen, $puntuacion, $profeId);
             break;
         default:
 
-            break;
+        break;
     }
 } else if ($_SERVER["REQUEST_METHOD"] == "POST") {
     foreach ($_POST['alumne_id'] as $alumne_id) {

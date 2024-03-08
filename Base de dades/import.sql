@@ -11,7 +11,7 @@ VALUES
 (5, "Grup-5", "", 0,4),
 (6, "Grup-6", "", 0,5),
 (7, "Grup-7", "", 0,6),
-(8, "Grup-8", "", 0,1);
+(8, "Grup-8", "", 0,9);
 
 
 /*INSERIR POSICIONS*/
@@ -34,7 +34,7 @@ VALUES (1, "pilota de goma", 1),
 /*INSERIR ALUMNES*/
 INSERT INTO alumne(alumne_id, nom, cognom, correu, curs, any, classe, asistencia, grup_id, tutor)
 VALUES
-(1, "Martin", "Jaime", "m.jaime@sapalomera.cat", 'DAW', '2n', 'A', 1, 1, 7),
+(1, "Adrian", "Juarez", "a.juarez@sapalomera.cat", 'DAW', '2n', 'A', 1, 1, 7),
 (2, "Alejandro", "Vazquez", "a.vazquez2@sapalomera.cat", 'DAW', '2n', 'A', 1, 1, 7),
 (3, "El Yass", "El Jerari", "e.jerari@sapalomera.cat",  'ASIX', '2n', 'A', 1, 2, 2),
 (4, "Marc", "Gomez", "m.gomez@sapalomera.cat",  'ASIX', '2n', 'A', 0, 2, 2),
@@ -48,8 +48,8 @@ VALUES
 (12, "Victor", "Peralez", "v.peralez@sapalomera.cat",  'SMX', '1r', 'C', 0, 6, 5),
 (13, "Marc", "Peral", "m.peral@sapalomera.cat",  'SMX', '2n', 'A', 1, 7, 6),
 (14, "Benit", "Martinez", "b.martinez@sapalomera.cat", 'SMX', '2n', 'A', 1, 7, 6),
-(15, "Lucas", "Pampillon", "l.pampillon@sapalomera.cat",  'ASIX', '1r', 'A', 1, 8,8),
-(16, "Eric", "Perico", "e.perico@sapalomera.cat", 'ASIX', '1r', 'A', 1, 8, 8);
+(15, "Lucas", "Pampillon", "l.pampillon@sapalomera.cat",  'ASIX', '1r', 'A', 1, 8,9),
+(16, "Eric", "Perico", "e.perico@sapalomera.cat", 'ASIX', '1r', 'A', 1, 8, 9);
 
 
 /* INSERIR ACTIVITATS*/
@@ -102,14 +102,15 @@ VALUES
 /*INSERIR PROFESSORS*/
 INSERT INTO professor (professor_id, nom, cognom, user, correu, actividad_id,grup_id,tutor )
 VALUES
-(1,"Ainhoa","Zaldua","azaldua", "azaldua@sapalomera.cat",1,3,1),
+(1,"Martin","Jaime","mjaime", "m.jaime@sapalomera.cat",1,3,1),
 (2,"David","Bancells","dbancells","dbancells@sapalomera.cat",2,2,1),
 (3,"Robert","Ventura","rventura","rventura@sapalomera.cat",3,4,1),
 (4,"Pere","Pi","ppi","ppi@sapalomera.cat",4,5,1),
 (5,"Josep","Catà","jcata", "jcata@sapalomera.cat",NULL,6,1),
 (6,"Ricard","Pla","rpla","rpla@sapalomera.cat",NULL,7,1),
 (7,"Xavi","Martin","xmartin","xmartin@sapalomera.cat",NULL,1,1),
-(8,"Pere","Sànchez","psanchez","psanchez@sapalomera.cat",NULL,NULL,NULL);
+(8,"Pere","Sànchez","psanchez","psanchez@sapalomera.cat",NULL,NULL,NULL),
+(9,"Ainhoa","Zaldua","azaldua", "azaldua@sapalomera.cat",NULL,8,1);
 
 
 ALTER TABLE `activitat`

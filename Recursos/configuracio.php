@@ -7,6 +7,7 @@
   $redirectUri = 'http://localhost/ACTIVITAT-DE-COHESIO/Codi/Controlador/controlador.php';
   //  $redirectUri = 'http://localhost/practiques/ACTIVITAT-DE-COHESIO/Codi/Controlador/controlador.php';
 
+
   // create Client Request to access Google API
   $client = new Google_Client();
   $client->setClientId($clientID);

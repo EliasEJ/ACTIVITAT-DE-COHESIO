@@ -42,3 +42,13 @@ body {
     margin-left: 3%;
     margin-right: 3%;
 }
+
+.right {
+	text-align: right;
+}
+
+label {
+	display: inline-block;
+	width: 5em;
+	margin: 0.3em;
+}

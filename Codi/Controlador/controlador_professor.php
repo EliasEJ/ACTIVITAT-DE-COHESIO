@@ -1,5 +1,4 @@
 <?php
-require_once("../Vista/index_professor.php");
 require_once("../Model/model_professor.php");
 include_once("../Model/model_activitat.php");
 //include_once("controlador.php");
@@ -16,7 +15,7 @@ function obtenerIdProfessor()
         $_SESSION['email'] = $email;
     }
     $email = $_SESSION['email'];
-    $profe = obtenirProfessorUnicEmail($email)->fetch();
+    $profe = obtenirProfessorUnicEmail($email)->fetch();   
     $idProfe = $profe['professor_id'];
     $_SESSION['idProfe'] = $idProfe;
     return $idProfe;
@@ -25,6 +24,7 @@ function obtenerIdProfessor()
 function mostrarUsuari($idProfe)
 {
     try {
+        require_once("../Model/model.php");
         $profe = obtenirProfessorUnic($idProfe)->fetch();
         $html = "<div class='btn-group'>";
         $html .= "<button type='button' class='btn dropdown-toggle' data-bs-toggle='dropdown' aria-expanded='false'>";
@@ -33,14 +33,17 @@ function mostrarUsuari($idProfe)
             $html .= "<img src='$picture' alt='Imagen de perfil del usuario' class='imgPerfil'>";
         }
 
-        //$email = $_SESSION['email'];
+        $email = $_SESSION['email'];
         $nombre = $profe['user'];
         if ($nombre) {
             $html .= $nombre;
         }
         $html .= "</button>";
         $html .= "<ul class='dropdown-menu'>";
-        $html .= "<li><a class='dropdown-item ' href=''>Vista</a></li>";
+        $html .= "<li><a class='dropdown-item ' href='../Vista/index_alumne.php'>Vista Alumne</a></li>";
+        if(isAdmin($email)){
+            $html .= "<li><a class='dropdown-item ' href='../Vista/index_admin.php'>Vista Admin</a></li>";
+        }
         $html .= "<li><a class='dropdown-item ' href='../Controlador/logout.php'>Tancar sessió</a></li>";
         $html .= "</ul>";
         $html .= "</div>";
@@ -165,46 +168,17 @@ function mostrarClassificació()
     }
 }
 
-function mostrarSeleccioGrupsAlumnes($idProfe)
-{
-    try {
-        $idProfessor = $idProfe;
-        $grups = obtenirGrupsProfessor($idProfessor)->fetchAll();
-        $alumnes = obtenirAlumnat($idProfessor)->fetchAll();
-        $html = "";
-
-        foreach ($alumnes as $al) {
-            if ($al['asistencia'] == 1) {
-                $html .= "<tr>";
-                $html .= "<input type='hidden' name='alumne_id[]' value='".$al['alumne_id']."'>";
-                $html .= "<td>" . $al['cognom'] . ", " . $al['nom'] . "</td>";
-                $html .= "<td>".$al['grup_id']."</td>";
-                $html .= "<td><select class='form-select form-select-sm' name='grup[".$al['alumne_id']."]' aria-label='.form-select-sm'>";
-                $html .= "<option value='0'>Cap grup</option>";
-                foreach ($grups as $gr) {
-                    $selected = ($al['grup_id'] == $gr['grup_id']) ? "selected" : "";
-                    $html .= "<option value='" . $gr['grup_id'] . "' $selected>" . $gr['nom'] . "</option>";
-                }
-                $html .= "</select></td>";
-                $html .= "</tr>";
-            }
-        }
-
-        echo $html;
-    } catch (PDOException $e) {
-        echo "Error mostrarAdministrarActivitat: " . $e->getMessage();
-    }
-}
-
 function mostrarGrupsProfessor($idProfessor)
 {
-    
+
     try {
 
         $idProfessor = $idProfessor;
-        $grups = obtenirGrupsProfessor($idProfessor)->fetchAll();
         $html = "";
 
+        $grups = obtenirGrupsProfessor($idProfessor)->fetchAll();
+
+        $html .= "<div class='col'><h3>Grups</h3><br>";
         foreach ($grups as $gr) {
             $html .= "<table class='table table-striped'>";
             $html .= "<tbody>";
@@ -220,9 +194,103 @@ function mostrarGrupsProfessor($idProfessor)
             $html .= "</tbody>";
             $html .= "</table>";
         }
-        $html .= "<button class='btn btn-primary'><a href='../Controlador/administrar_grup.php?accio='crear'' style='color:white;'>Crear Grup</a></button>"; 
-        echo $html;
+        $html .= "<button class='btn btn-primary'><a href='../Controlador/administrar_grup.php?accio=crear' style='color:white;'>Crear Grup</a></button>";
+        $html .= "</div>";
+        return $html;
     } catch (PDOException $e) {
         echo "Error mostrarGrupsProfessor:" . $e->getMessage();
     }
+}
+
+function mostrarSeleccioGrupsAlumnes($idProfe)
+{
+    try {
+        $idProfessor = $idProfe;
+
+        $html = "";
+
+        $grups = obtenirGrupsProfessor($idProfessor)->fetchAll();
+        $alumnes = obtenirAlumnat($idProfessor)->fetchAll();
+
+        $html .= "<div class='col'><h3>Alumnes</h3><br>";
+        $html .= "<form action='../Controlador/administrar_grup.php' method='POST'><table class='table table-striped'><thead class='sticky-top bg-white'><tr><th>Alumne</th><th>Grup</th><th>Canviar grup</th></tr></thead><tbody>";
+        foreach ($alumnes as $al) {
+            if ($al['asistencia'] == 1) {
+
+                $html .= "<tr>";
+                $html .= "<input type='hidden' name='alumne_id[]' value='" . $al['alumne_id'] . "'>";
+                $html .= "<td>" . $al['cognom'] . ", " . $al['nom'] . "</td>";
+                $html .= "<td>" . $al['grup_id'] . "</td>";
+                $html .= "<td><select class='form-select form-select-sm' name='grup[" . $al['alumne_id'] . "]' aria-label='.form-select-sm'>";
+                $html .= "<option value='0'>Cap grup</option>";
+                foreach ($grups as $gr) {
+                    $selected = ($al['grup_id'] == $gr['grup_id']) ? "selected" : "";
+                    $html .= "<option value='" . $gr['grup_id'] . "' $selected>" . $gr['nom'] . "</option>";
+                }
+                $html .= "</select></td>";
+                $html .= "</tr>";
+            }
+        }
+        $html .= "</tbody>";
+        $html .= "</table><input type='submit' class='btn btn-primary' value='Salvar'></form>";
+        $html .= "</div>";
+        return $html;
+    } catch (PDOException $e) {
+        echo "Error mostrarAdministrarActivitat: " . $e->getMessage();
+    }
+}
+
+function mostrarTodosGrupos()
+{
+    try {
+
+        $html = "";
+        $grupos = obtenirGrupsClasse();
+
+        $html .= "<div class='col'><h3>Grups</h3><br><table class='table table-striped'>";
+        $html .= "<thead class='sticky-top bg-white'><tr><th>Identificador</th><th>Nom grup</th><th>Classe</th></tr></thead>";
+        $html .= "<tbody>";
+        foreach ($grupos as $gr) {
+            $html .= "<tr>";
+            $html .= "<td>" . $gr['grup_id'] . "</td>";
+            $html .= "<td>" . $gr['nom'] . "</td>";
+            $html .= "<td>" . $gr['any'] . "-" . $gr['curs'] . " " . $gr['classe'] .  "</td>";
+            $html .= "</tr>";
+        }
+
+        $html .= "</tbody>";
+        $html .= "</table></div>";
+
+        return $html;
+    } catch (PDOException $e) {
+        echo "Error mostrarTodosGrupos: " . $e->getMessage();
+    }
+}
+
+function mostrarGruposTutorProfe($idProfessor)
+{
+
+    $profe = obtenirProfessorUnic($idProfessor)->fetch();
+    $html = "";
+    if ($profe['tutor'] == 1) {
+        $html .= mostrarGrupsProfessor($idProfessor);
+        $html .= mostrarSeleccioGrupsAlumnes($idProfessor);
+    } else if ($profe['tutor'] == 0) {
+        $html .= mostrarTodosGrupos();
+    }
+
+    echo $html;
+}
+
+function seleccionGruposNuevoAlumno($idProfe){
+    $html = "";
+    $grups = obtenirGrupsProfessor($idProfe)->fetchAll();
+
+    $html .= "<select id='newAlumnGrupo' class='form-select form-select-sm' aria-label='.form-select-sm' name='grup'>";
+    foreach ($grups as $gr) {
+        $html .= "<option value='" . $gr['grup_id'] . "'>" . $gr['nom'] . "</option>";
+    }
+
+    $html .= "</select>";
+    echo $html;
 }

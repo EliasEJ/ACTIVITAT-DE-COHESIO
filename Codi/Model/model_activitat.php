@@ -55,12 +55,15 @@ function obtenirActivitatUnic($idProfessorResp){
 function eliminarActivitat($id){
     try{
         $con = connect();
+        dropConstraintsActivitat();
+        setNullActivitatId($id);
         $statement = $con->prepare("DELETE FROM `activitat` WHERE actividad_id = :idAct");
         $statement->execute(
             array(
                 ':idAct' => $id
             )
         );
+        addConstraintsActivitatId();
         reordenarActividades();
     }catch(PDOException $e){
         echo "Error eliminarActivitat: " . $e->getMessage();
@@ -83,3 +86,52 @@ function reordenarActividades()
         echo "Error: " . $e->getMessage();
     }
 }
+
+function dropConstraintsActivitat(){
+    try{
+        $con = connect();
+
+        $statement = $con->prepare("ALTER TABLE enfrentaments DROP FOREIGN KEY `enfrentaments_ibfk_1`");
+        $statement->execute();
+
+        $statement = $con->prepare("ALTER TABLE professor DROP FOREIGN KEY `professor_ibfk_1`");
+        $statement->execute();
+
+    }catch (PDOException $e) {
+        echo "Error dropConstraintsActivitat: " . $e->getMessage();
+    }
+}
+
+function setNullActivitatId($activitatId){
+    try {
+        $con = connect();
+        $statement = $con->prepare("UPDATE enfrentaments
+        SET actividad_id = NULL
+        WHERE actividad_id = :idActividad");
+        $statement->execute(array(':idActividad' => $activitatId));
+
+        $statement = $con->prepare("UPDATE professor
+        SET actividad_id = NULL
+        WHERE actividad_id = :idActividad");
+        $statement->execute(array(':idActividad' => $activitatId));
+        
+    } catch (PDOException $e) {
+        echo "Error setNullActivitatId: " . $e->getMessage();
+    }
+}
+
+function addConstraintsActivitatId(){
+    try{
+        $con = connect();
+
+        $statement = $con->prepare("ALTER TABLE enfrentaments ADD CONSTRAINT `enfrentaments_ibfk_1` FOREIGN KEY (`actividad_id`) REFERENCES `activitat` (`actividad_id`)");
+        $statement->execute();
+
+        $statement = $con->prepare("ALTER TABLE professor ADD CONSTRAINT `professor_ibfk_1` FOREIGN KEY (`actividad_id`) REFERENCES `activitat` (`actividad_id`)");
+        $statement->execute();
+       
+    }catch (PDOException $e) {
+        echo "Error addConstraintsActivitatId: " . $e->getMessage();
+    }
+    
+} 

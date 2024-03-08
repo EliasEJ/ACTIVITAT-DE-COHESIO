@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="../../Recursos/bootstrap-5.0.2/dist/css/bootstrap.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.2/js/bootstrap.bundle.min.js" integrity="sha512-72WD92hLs7T5FAXn3vkNZflWG6pglUDDpm87TeQmfSg8KnrymL2G30R7as4FmTwhgu9H7eSzDCX3mjitSecKnw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <link rel="stylesheet" href="../../Recursos/CSS/styleProfessor.css  ">
-    <script type="module" src="../Controlador/controlador_professor2.js"> </script>
+    <script type="module" src="../Controlador/controlador_professor.js"> </script>
 </head>
 
 <?php
@@ -32,9 +32,13 @@ $idProfessor = obtenerIdProfessor();
                     <div class="col-3 text-center">
 
                         <?php mostrarUsuari($idProfessor) ?>
+
                     </div>
+
                 </nav>
+
             </div>
+
         </div>
 
 
@@ -69,6 +73,10 @@ $idProfessor = obtenerIdProfessor();
                                 <?php mostrarAlumnat($idProfessor); ?>
                             </tbody>
                         </table>
+                        <!-- Button trigger modal -->
+                        <button type="button" id="añadirAlumn" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
+                            Afegir alumne
+                        </button>
                     </div>
                     <div class="tab-pane fade" id="taulaActivitats">
                         <div class="row">
@@ -86,36 +94,7 @@ $idProfessor = obtenerIdProfessor();
                     </div>
                     <div class="tab-pane fade" id="taulaGrups">
                         <div class="row">
-                            <div class="col">
-                                <h3>Grups</h3>
-                                <br>
-
-
-                                <?php mostrarGrupsProfessor($idProfessor); ?>
-
-
-                            </div>
-                            <div class="col">
-                                <h3>Alumnes</h3>
-                                <br>
-                                <form action='../Controlador/administrar_grup.php' method='POST'>
-                                    <table class="table table-striped">
-                                        <thead class="sticky-top bg-white">
-                                            <tr>
-                                                <th>Alumne</th>
-                                                <th>Grup</th>
-                                                <th>Canviar grup</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <?php mostrarSeleccioGrupsAlumnes($idProfessor); ?>
-                                        </tbody>
-                                    </table>
-                                    <input type="submit" class="btn btn-primary" value="Salvar">
-                                </form>
-
-                            </div>
-
+                            <?php mostrarGruposTutorProfe($idProfessor) ?>
                         </div>
 
                     </div>
@@ -134,6 +113,41 @@ $idProfessor = obtenerIdProfessor();
                             </tbody>
                         </table>
                     </div>
+
+
+
+                    <!-- Modal -->
+                    <div class="modal fade" id="modalAñadirAlumn" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+                                </div>
+                                <div class="modal-body">
+                                    <form id="" action="../Controlador/administrar_alumnado.php" method="POST">
+                                        <label for="newAlumnNombre" class="right">Nom alumne: </label>
+                                        <input type="text" name="newAlumnNombre" id="newAlumnNombre"><br> <br>
+
+                                        <label for="newAlumnApellidos" class="right">Cognom/s alumne: </label>
+                                        <input type="text" name="newAlumnApellidos" id="newAlumnApellidos"><br><br>
+
+                                        <label for="newAlumnCorreu" class="right">Correu alumne: </label>
+                                        <input type="text" name="newAlumnCorreu" id="newAlumnCorreu"><br><br>
+
+                                        <label for="newAlumnGrupo" class="right">Grup</label>
+                                        <?php seleccionGruposNuevoAlumno($idProfessor) ?>
+                                        <br><br>
+                                        <input class="btn btn-primary" type="submit" value="Save changes">
+                                    </form>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" id="cerrarModalAñadirAlumn" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </div>
@@ -165,6 +179,8 @@ $idProfessor = obtenerIdProfessor();
                 </div>
             </div>
         </footer>
+
+
 </body>
 
 </html>

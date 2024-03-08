@@ -103,6 +103,18 @@ if (!isset($_COOKIE['asistencia_confirmada'])) {
                     </button>
                     <ul class="dropdown-menu">
                         <li><a id="botonAsistencia" class="dropdown-item" href="#">Modificar assistència</a></li>
+                        <?php
+                                    if(isProfessor($email)){
+                                    ?>
+                                    <li><a class='dropdown-item ' href='../Vista/index_professor.php'>Vista Professor</a></li>
+                                    <?php
+                                    }
+                                    if(isAdmin($email)){
+                                        ?>
+                                        <li><a class='dropdown-item ' href='../Vista/index_admin.php'>Vista Admin</a></li>
+                                        <?php
+                                    }
+                            ?>
                         <li>
                             <hr class="dropdown-divider">
                         </li>
@@ -118,12 +130,18 @@ if (!isset($_COOKIE['asistencia_confirmada'])) {
     <div class="row g-0">
         <div class="col-lg-6 col-md-6 col-sm-12">
             <div class="col-10">
+                <?php
+                if(isAlumne($email)){?>
                 <h2 class="marginLeft pb-1">EL TEU GRUP</h2>
+                <?php } ?>
                 <div class="marginLeft grup border">
                     <div class="p-3">
                         <?php
-                        $grup = obtenerGrupoAlumno($email);
-                        if ($grup) { echo 'GRUP ' . $grup; } ?>
+                        if(isAlumne($email)){
+                            $grup = obtenerGrupoAlumno($email);
+                            if ($grup) { echo 'GRUP ' . $grup; } 
+                        }
+                        ?>
                     </div>
 
 

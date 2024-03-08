@@ -36,8 +36,8 @@ CREATE TABLE IF NOT EXISTS `activitat` (
   `descripcio` varchar(600) NOT NULL,
   `posicion_id` int(11) NOT NULL,
   `professor_id` int(11) NOT NULL,
-  `grup1` int(11) NOT NULL,
-  `grup2` int(11) NOT NULL,
+  `grup1` int(11),
+  `grup2` int(11),
   `material_id` int(11) NOT NULL,
   PRIMARY KEY (`actividad_id`),
   UNIQUE KEY `fk_professor_id` (`professor_id`),
@@ -84,7 +84,7 @@ CREATE TABLE IF NOT EXISTS `alumne` (
   `any` enum('1r','2n') NOT NULL,
   `classe` enum('A','B','C','D') NOT NULL,
   `asistencia` tinyint(1) NOT NULL,
-  `grup_id` int(11) NOT NULL,
+  `grup_id` int(11),
   `tutor` tinyint(1) NOT NULL,
   PRIMARY KEY (`alumne_id`),
   KEY `fk_grup_id` (`grup_id`)
@@ -99,7 +99,7 @@ CREATE TABLE IF NOT EXISTS `alumne` (
 DROP TABLE IF EXISTS `enfrentaments`;
 CREATE TABLE IF NOT EXISTS `enfrentaments` (
   `enfrentament_id` int(11) NOT NULL AUTO_INCREMENT,
-  `actividad_id` int(11) NOT NULL,
+  `actividad_id` int(11),
   `nom` varchar(50) NOT NULL,
   `resultat` varchar(20) NOT NULL,
   PRIMARY KEY (`enfrentament_id`),
