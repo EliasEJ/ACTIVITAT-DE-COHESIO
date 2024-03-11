@@ -14,6 +14,12 @@ if (isset($_GET['accio'])) {
             if (comprobarGrupos($grupoId,  $_SESSION['idProfe'])) {
                 
                 eliminarGrup($grupoId);
+
+                ?>
+                <script>
+                    alert("Grup eliminat correctament.");
+                </script>
+<?php
             }else{
 ?>
                 <script>
@@ -41,6 +47,12 @@ if (isset($_GET['accio'])) {
             $profeId =  $_SESSION['idProfe']; 
 
             crearGrup($id, $nombre, $imagen, $puntuacion, $profeId);
+
+            ?>
+                <script>
+                    alert("Grup creat correctament.");
+                </script>
+<?php
             break;
         default:
 

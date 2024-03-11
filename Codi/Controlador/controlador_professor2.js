@@ -7,6 +7,9 @@ $(document).ready(function () {
     $("#saveActivitat").click(confirmarAccion);
 });
 
+$(document).ready(function () {
+    $(".deleteGrup").click(confirmarAccion);
+});
 
 
 function confirmarAccion() {
