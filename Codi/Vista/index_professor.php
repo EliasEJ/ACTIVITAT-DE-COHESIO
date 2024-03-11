@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="../../Recursos/CSS/styleProfessor.css  ">
     <script type="module" src="../Controlador/controlador_professor.js"> </script>
 </head>
-    
+
 <?php
 
 include_once("../Controlador/controlador_professor.php");
@@ -73,7 +73,15 @@ $idProfessor = obtenerIdProfessor();
                                 <?php mostrarAlumnat($idProfessor); ?>
                             </tbody>
                         </table>
+                        <!-- Button trigger modal -->
+                        <button type="button" id="añadirAlumn" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
+                            Afegir alumne
+                        </button>
+                        <form action="../Controlador/administrar_alumnado.php" method="post">
+                        <input type="submit" name="guardarAsistencia" class="btn btn-primary" value="Salvar"> 
+                        </form>
 
+                        
                     </div>
                     <div class="tab-pane fade" id="taulaActivitats">
                         <div class="row">
@@ -91,10 +99,7 @@ $idProfessor = obtenerIdProfessor();
                     </div>
                     <div class="tab-pane fade" id="taulaGrups">
                         <div class="row">
-
                             <?php mostrarGruposTutorProfe($idProfessor) ?>
-
-
                         </div>
 
                     </div>
@@ -114,24 +119,35 @@ $idProfessor = obtenerIdProfessor();
                         </table>
                     </div>
 
-                    <!-- Button trigger modal -->
-                    <button type="button" id="añadirAlumn" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
-                        Afegir alumne
-                    </button>
+
 
                     <!-- Modal -->
-                    <div class="modal fade" id="formAñadirAlumn" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                    <div class="modal fade" id="modalAñadirAlumn" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                         <div class="modal-dialog modal-dialog-centered" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
                                     <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
                                 </div>
                                 <div class="modal-body">
-                                    ...
+                                    <form id="" action="../Controlador/administrar_alumnado.php" method="POST">
+                                        <label for="newAlumnNombre" class="right">Nom alumne: </label>
+                                        <input type="text" name="newAlumnNombre" id="newAlumnNombre"><br> <br>
+
+                                        <label for="newAlumnApellidos" class="right">Cognom/s alumne: </label>
+                                        <input type="text" name="newAlumnApellidos" id="newAlumnApellidos"><br><br>
+
+                                        <label for="newAlumnCorreu" class="right">Correu alumne: </label>
+                                        <input type="text" name="newAlumnCorreu" id="newAlumnCorreu"><br><br>
+
+                                        <label for="newAlumnGrupo" class="right">Grup</label>
+                                        <?php seleccionGruposNuevoAlumno($idProfessor) ?>
+                                        <br><br>
+                                        <input class="btn btn-primary" type="submit" name="guardarAlumno" value="Save changes">
+                                    </form>
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button" id="cerrarFormAñadirAlumn" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                    <button type="button" id="guardarAlumnoNuevo" class="btn btn-primary">Save changes</button>
+                                    <button type="button" id="cerrarModalAñadirAlumn" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                    
                                 </div>
                             </div>
                         </div>
@@ -167,7 +183,7 @@ $idProfessor = obtenerIdProfessor();
                 </div>
             </div>
         </footer>
-        
+
 
 </body>
 

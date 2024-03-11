@@ -197,8 +197,7 @@ if (!isset($_COOKIE['asistencia_confirmada'])) {
             <h2 class="marginLeft pb-1">ACTIVITATS</h2>
                 <div class="marginLeft grup border">
                     <div class="p-3">
-                    <!-- <?php //$activitat = obtenerActividadAlumno($email); if ($grup) { echo 'ACTIVITAT ' . $activitat; } ?> -->
-                    ACTIVITAT 1
+
                     </div>
 
 
@@ -213,7 +212,7 @@ if (!isset($_COOKIE['asistencia_confirmada'])) {
                                     <h5 class="modal-title" id="infoActivitatpModal">Informació de l'activitat</h5>
                                 </div>
                                 <div class="modal-body">
-                                    <!-- <?php //$infoGrupo = obtenerInformacionGrupo($grup); echo generarTabla($infoGrupo); ?> -->
+                                    <?php $infoGrupo = obtenirOrdreActivitats(); echo generaraTablaOrdre($infoGrupo); ?>
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Tancar</button>

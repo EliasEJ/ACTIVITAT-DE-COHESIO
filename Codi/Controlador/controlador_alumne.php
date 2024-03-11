@@ -113,7 +113,7 @@ function generarModales($grupos) {
                                 $modales .= generarTabla($infoGrupo);
                                 $modales .= '</div>
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Tancar</button>
+                                    <button type="button" class="btn btn-danger" data-dismiss="modal">Tancar</button>
                                 </div>
                             </div>
                         </div>
@@ -193,6 +193,7 @@ function obtenerInfoActividad($actividadId) {
     }
     return null;
 }
+
 function generarModalesActivitats($actividades) {
     $modales = "";
     foreach ($actividades as $actividad) {
@@ -208,7 +209,7 @@ function generarModalesActivitats($actividades) {
                                 $modales .= generarTablaActividad($infoActividad);
                                 $modales .= '</div>
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Tancar</button>
+                                    <button type="button" class="btn btn-danger" data-dismiss="modal">Tancar</button>
                                 </div>
                             </div>
                         </div>
@@ -217,15 +218,38 @@ function generarModalesActivitats($actividades) {
     return $modales;
 }
 
-// Esta funcion no se usa en ningun lado pero se deja por si acaso se necesita para la siguiente entrega
-function obtenerActividadAlumno($email) {
-    $actividad = obtenirActivitatAlumne($email);
-    if ($actividad instanceof PDOStatement) {
-        $resultado = $actividad->fetch(PDO::FETCH_ASSOC);
+function obtenirOrdreActivitats() {
+    $ordre = obtenirOrdreActivitatsA();
+    if ($ordre instanceof PDOStatement) {
+        $resultado = $ordre->fetchAll(PDO::FETCH_ASSOC);
         if ($resultado) {
-            return $resultado['actividad_id'];
+            return $resultado;
         }
     }
     return null;
 }
 
+function generaraTablaOrdre($ordre) {
+    $tabla = "";
+    if ($ordre) {
+        $tabla .= "<table class='table'>";
+        $tabla .= "<thead>";
+        $tabla .= "<tr>";
+        foreach ($ordre[0] as $key => $value) {
+            $tabla .= "<th>$key</th>";
+        }
+        $tabla .= "</tr>";
+        $tabla .= "</thead>";
+        $tabla .= "<tbody>";
+        foreach ($ordre as $actividad) {
+            $tabla .= "<tr>";
+            foreach ($actividad as $value) {
+                $tabla .= "<td>$value</td>";
+            }
+            $tabla .= "</tr>";
+        }
+        $tabla .= "</tbody>";
+        $tabla .= "</table>";
+    }
+    return $tabla;
+}

@@ -32,24 +32,24 @@ VALUES (1, "pilota de goma", 1),
 
 
 /*INSERIR ALUMNES*/
-INSERT INTO alumne(alumne_id, nom, cognom, correu, curs, any, classe, asistencia, grup_id, tutor)
+INSERT INTO alumne(alumne_id, nom, cognom, correu, curs, any, classe, asistencia, asistencia_confirmada, grup_id, tutor)
 VALUES
-(1, "Adrian", "Juarez", "a.juarez@sapalomera.cat", 'DAW', '2n', 'A', 1, 1, 7),
-(2, "Alejandro", "Vazquez", "a.vazquez2@sapalomera.cat", 'DAW', '2n', 'A', 1, 1, 7),
-(3, "El Yass", "El Jerari", "e.jerari@sapalomera.cat",  'ASIX', '2n', 'A', 1, 2, 2),
-(4, "Marc", "Gomez", "m.gomez@sapalomera.cat",  'ASIX', '2n', 'A', 0, 2, 2),
-(5, "Maria", "Sola", "m.sola@sapalomera.cat",  'SMX', '1r', 'A', 1, 3, 1),
-(6, "Laura", "Perez", "l.perez@sapalomera.cat",  'SMX', '1r', 'A', 1, 3, 1),
-(7, "Santiago", "Peral", "s.peral@sapalomera.cat",  'SMX', '1r', 'B', 0, 4, 3),
-(8, "Mayank", "Alkalk", "m.alkalk@sapalomera.cat",  'SMX', '1r', 'B', 1, 4, 3),
-(9, "Alberto", "Cañon", "a.cañon@sapalomera.cat",  'SMX', '1r', 'B', 1, 5, 4),
-(10, "Sergi", "Agudo", "s.agudo@sapalomera.cat",  'SMX', '1r', 'B', 0, 5, 4),
-(11, "Angel", "Chulo", "a.chulo@sapalomera.cat",  'SMX', '1r', 'C', 0, 6, 5),
-(12, "Victor", "Peralez", "v.peralez@sapalomera.cat",  'SMX', '1r', 'C', 0, 6, 5),
-(13, "Marc", "Peral", "m.peral@sapalomera.cat",  'SMX', '2n', 'A', 1, 7, 6),
-(14, "Benit", "Martinez", "b.martinez@sapalomera.cat", 'SMX', '2n', 'A', 1, 7, 6),
-(15, "Lucas", "Pampillon", "l.pampillon@sapalomera.cat",  'ASIX', '1r', 'A', 1, 8,9),
-(16, "Eric", "Perico", "e.perico@sapalomera.cat", 'ASIX', '1r', 'A', 1, 8, 9);
+(1, "Adrian", "Juarez", "a.juarez@sapalomera.cat", 'DAW', '2n', 'A', 1, 0,1, 7),
+(2, "Alejandro", "Vazquez", "a.vazquez2@sapalomera.cat", 'DAW', '2n', 'A', 1,0, 1, 7),
+(3, "El Yass", "El Jerari", "e.jerari@sapalomera.cat",  'ASIX', '2n', 'A', 1,0, 2, 2),
+(4, "Marc", "Gomez", "m.gomez@sapalomera.cat",  'ASIX', '2n', 'A', 0,0, 2, 2),
+(5, "Maria", "Sola", "m.sola@sapalomera.cat",  'SMX', '1r', 'A', 1,0, 3, 1),
+(6, "Laura", "Perez", "l.perez@sapalomera.cat",  'SMX', '1r', 'A', 1, 0,3, 1),
+(7, "Santiago", "Peral", "s.peral@sapalomera.cat",  'SMX', '1r', 'B', 0, 0,4, 3),
+(8, "Mayank", "Alkalk", "m.alkalk@sapalomera.cat",  'SMX', '1r', 'B', 1, 0,4, 3),
+(9, "Alberto", "Cañon", "a.cañon@sapalomera.cat",  'SMX', '1r', 'B', 1,0, 5, 4),
+(10, "Sergi", "Agudo", "s.agudo@sapalomera.cat",  'SMX', '1r', 'B', 0,0, 5, 4),
+(11, "Angel", "Chulo", "a.chulo@sapalomera.cat",  'SMX', '1r', 'C', 0,0, 6, 5),
+(12, "Victor", "Peralez", "v.peralez@sapalomera.cat",  'SMX', '1r', 'C', 0, 0,6, 5),
+(13, "Marc", "Peral", "m.peral@sapalomera.cat",  'SMX', '2n', 'A', 1,0, 7, 6),
+(14, "Benit", "Martinez", "b.martinez@sapalomera.cat", 'SMX', '2n', 'A', 1, 0,7, 6),
+(15, "Lucas", "Pampillon", "l.pampillon@sapalomera.cat",  'ASIX', '1r', 'A', 1, 0,8,9),
+(16, "Eric", "Perico", "e.perico@sapalomera.cat", 'ASIX', '1r', 'A', 1, 0,8, 9);
 
 
 /* INSERIR ACTIVITATS*/

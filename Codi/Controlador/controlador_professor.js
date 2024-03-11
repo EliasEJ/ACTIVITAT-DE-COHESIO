@@ -12,9 +12,9 @@ function confirmarAccion() {
 }
 
 $("#añadirAlumn").click(function(){
-    $("#formAñadirAlumn").modal('show');
+    $("#modalAñadirAlumn").modal('show');
 })
 
-$("#cerrarFormAñadirAlumn").click(function(){
-    $("#formAñadirAlumn").modal('hide');
+$("#cerrarModalAñadirAlumn").click(function(){
+    $("#modalAñadirAlumn").modal('hide');
 })
