@@ -9,30 +9,7 @@
     <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
     <link rel="stylesheet" href="../Recursos/bootstrap-5.0.2/dist/css/bootstrap.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.2/js/bootstrap.bundle.min.js" integrity="sha512-72WD92hLs7T5FAXn3vkNZflWG6pglUDDpm87TeQmfSg8KnrymL2G30R7as4FmTwhgu9H7eSzDCX3mjitSecKnw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <link rel="stylesheet" href="../Recursos/CSS/style.css  ">
-    <style>
-        .footer {
-            position: fixed;
-            bottom: 0;
-            width: 100%;
-            background-color: #f5f5f5;
-        }
-        body {
-            font-size: 1rem;
-        }
-
-        @media (max-width: 768px) {
-            body {
-                font-size: 0.875rem;
-            }
-        }
-
-        @media (max-width: 576px) {
-            body {
-                font-size: 0.8rem;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="../Recursos/CSS/style.css">
 </head>
 <?php
 require_once 'Controlador/controlador_anonim.php';
@@ -123,7 +100,7 @@ require_once 'Controlador/controlador_anonim.php';
             </div>
         </div>
     </div>
-    <footer class="footer">
+    <footer class="blog-footer">
         <div class="row pt-4">
             <div class="col-4 col-md4 contacte">
                 <h4 class="marginLeft">UBICACIÓ</h4>
