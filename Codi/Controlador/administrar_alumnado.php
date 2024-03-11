@@ -40,6 +40,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 }
 ?>
+
 <script>
     //location.replace("../Vista/index_professor.php")
 </script>
