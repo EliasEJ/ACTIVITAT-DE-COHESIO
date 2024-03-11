@@ -12,13 +12,6 @@
     <link rel="stylesheet" href="../../Recursos/CSS/style.css">
     <script src="../Controlador/controlador_alumne.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.2/js/bootstrap.bundle.min.js" integrity="sha512-72WD92hLs7T5FAXn3vkNZflWG6pglUDDpm87TeQmfSg8KnrymL2G30R7as4FmTwhgu9H7eSzDCX3mjitSecKnw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <style>
-        .footer {
-            position: fixed;
-            bottom: 0;
-            width: 100%;
-        }
-    </style>
 </head>
 <?php
 session_start();
@@ -144,26 +137,34 @@ if (!isset($_COOKIE['asistencia_confirmada'])) {
                         ?>
                     </div>
 
-
-                    <!-- Botón para abrir el modal -->
                     <button type="button" class="btn" data-toggle="modal" data-target="#infoGrupModal">
                         <b>INFO</b>
                     </button>
 
-                    <!-- Modal -->
                     <div class="modal fade" id="infoGrupModal" tabindex="-1" role="dialog" aria-labelledby="infoGrupModalLabel" aria-hidden="true">
                         <div class="modal-dialog" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
                                     <h5 class="modal-title" id="infoGrupModalLabel">Informació del Grup</h5>
-                                </div>
+                                </div>                                
+
                                 <div class="modal-body">
+
+                                    <!-- Mostrar puntuacion del grupo -->
+                                    <?php
+                                    if(isAlumne($email)){
+                                        $grup = obtenerGrupoAlumno($email);
+                                        mostrarPuntuacion($grup);
+                                    }
+                                    ?>
+                                    
+
                                     <?php $infoGrupo = obtenerInformacionGrupo($grup);
                                     echo generarTabla($infoGrupo);
                                     ?>
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Tancar</button>
+                                    <button type="button" class="btn btn-danger" data-dismiss="modal">Tancar</button>
                                 </div>
                             </div>
                         </div>
@@ -197,7 +198,7 @@ if (!isset($_COOKIE['asistencia_confirmada'])) {
             <h2 class="marginLeft pb-1">ACTIVITATS</h2>
                 <div class="marginLeft grup border">
                     <div class="p-3">
-
+                        
                     </div>
 
 

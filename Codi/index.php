@@ -100,7 +100,7 @@ require_once 'Controlador/controlador_anonim.php';
             </div>
         </div>
     </div>
-    <footer class="blog-footer">
+    <footer class="footer">
         <div class="row pt-4">
             <div class="col-4 col-md4 contacte">
                 <h4 class="marginLeft">UBICACIÓ</h4>

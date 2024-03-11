@@ -144,3 +144,18 @@ function obtenirOrdreActivitatsA(){
         echo "Error obtenirOrdreActivitats: " . $e->getMessage();
     }
 }
+
+function obtenirPuntuacioGrup($grupId){
+    try{
+        $con = connect();
+        $statement = $con->prepare("SELECT puntuacio FROM grup WHERE grup_id = :grupId");
+        $statement->execute(
+            array(
+            ':grupId' => $grupId
+            )
+        );
+        return $statement;
+    }catch(PDOException $e){
+        echo "Error obtenirPuntuacioGrup: " . $e->getMessage();
+    }
+}
