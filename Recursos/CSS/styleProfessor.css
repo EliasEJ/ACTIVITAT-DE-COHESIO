@@ -52,3 +52,8 @@ label {
 	width: 5em;
 	margin: 0.3em;
 }
+
+a.boto{
+    color: white;
+    text-decoration: none;
+}

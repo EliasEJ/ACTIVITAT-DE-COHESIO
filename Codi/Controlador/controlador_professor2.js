@@ -1,5 +1,13 @@
-$("#deleteAct").click(confirmarAccion);
-$("#saveActivitat").click(confirmarAccion);
+
+$(document).ready(function () {
+    $(".deleteAct").click(confirmarAccion);
+});
+
+$(document).ready(function () {
+    $("#saveActivitat").click(confirmarAccion);
+});
+
+
 
 function confirmarAccion() {
     if (confirm('Deseas continuar?')) {
@@ -11,10 +19,10 @@ function confirmarAccion() {
     }
 }
 
-$("#añadirAlumn").click(function(){
+$("#añadirAlumn").click(function () {
     $("#modalAñadirAlumn").modal('show');
 })
 
-$("#cerrarModalAñadirAlumn").click(function(){
+$("#cerrarModalAñadirAlumn").click(function () {
     $("#modalAñadirAlumn").modal('hide');
 })
