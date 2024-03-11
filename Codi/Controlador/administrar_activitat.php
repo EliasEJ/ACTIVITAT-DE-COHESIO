@@ -11,6 +11,13 @@ if (isset($_GET['accio'])) {
         case 'delete':
             $idAct = $_GET['idAct'];
             eliminarActividad($idAct);
+            ?>
+            <script>
+                alert("Activitat eliminat correctament.");
+            </script>
+            <?php
+
+
             break;
         case 'crear':
             /** 

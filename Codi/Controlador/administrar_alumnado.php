@@ -21,6 +21,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $grupoId = $_POST['grup'];
     
         crearAlumno($newId, $alumnName, $alumnCognom, $alumnCorreu, $curso, $año, $clase, 1, 1, $grupoId, $profeId);
+        
+        ?>
+        <script>
+            alert("Alumne afegit correctament.")
+        </script>
+        <?php
+
     }else if(isset($_POST['guardarAsistencia'])){
         
         echo $_POST['asistAlumn'];
@@ -30,5 +37,5 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 }
 ?>
 <script>
-    //location.replace("../Vista/index_professor.php")
+    location.replace("../Vista/index_professor.php")
 </script>
