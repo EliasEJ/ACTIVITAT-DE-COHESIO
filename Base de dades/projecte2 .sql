@@ -84,6 +84,7 @@ CREATE TABLE IF NOT EXISTS `alumne` (
   `any` enum('1r','2n') NOT NULL,
   `classe` enum('A','B','C','D') NOT NULL,
   `asistencia` tinyint(1) NOT NULL,
+  `asistencia_confirmada` tinyint(1) NOT NULL,
   `grup_id` int(11),
   `tutor` tinyint(1) NOT NULL,
   PRIMARY KEY (`alumne_id`),

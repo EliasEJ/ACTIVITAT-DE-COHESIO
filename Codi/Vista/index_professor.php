@@ -77,6 +77,11 @@ $idProfessor = obtenerIdProfessor();
                         <button type="button" id="añadirAlumn" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
                             Afegir alumne
                         </button>
+                        <form action="../Controlador/administrar_alumnado.php" method="post">
+                        <input type="submit" name="guardarAsistencia" class="btn btn-primary" value="Salvar"> 
+                        </form>
+
+                        
                     </div>
                     <div class="tab-pane fade" id="taulaActivitats">
                         <div class="row">
@@ -137,7 +142,7 @@ $idProfessor = obtenerIdProfessor();
                                         <label for="newAlumnGrupo" class="right">Grup</label>
                                         <?php seleccionGruposNuevoAlumno($idProfessor) ?>
                                         <br><br>
-                                        <input class="btn btn-primary" type="submit" value="Save changes">
+                                        <input class="btn btn-primary" type="submit" name="guardarAlumno" value="Save changes">
                                     </form>
                                 </div>
                                 <div class="modal-footer">

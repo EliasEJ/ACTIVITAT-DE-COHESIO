@@ -66,7 +66,7 @@ function mostrarAlumnat($idProfe)
 
                 $taulaBody .= "<td>" . $al['cognom'] . ", " . $al['nom'] . "</td>";
                 $taulaBody .= "<td>" . "Grup " . $al['grup_id'] . "</td>";
-                $taulaBody .= "<td> <input type='checkbox' id='check " . $al['alumne_id'] . "'> </td>";
+                $taulaBody .= "<td> <input type='checkbox' name='asistAlumn[]' value='check-" . $al['alumne_id'] . "' id='check-" . $al['alumne_id'] . "'> </td>";
                 $taulaBody .= "<td>" . ($al['asistencia'] == 1 ? "Sí" : "No") . "</td>";
                 $taulaBody .= "</tr>";
             }

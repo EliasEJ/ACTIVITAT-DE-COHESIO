@@ -48,11 +48,11 @@ function obtenirGrupsProfessor($idProfessor){
 
 
 //TERMINAR
-function crearAlumno($idAlumn, $nomAlumn, $cognomAlumn, $correuAlumn, $curs, $any, $classe, $asistencia, $grupId  ,$idProfessor){
+function crearAlumno($idAlumn, $nomAlumn, $cognomAlumn, $correuAlumn, $curs, $any, $classe, $asistencia, $confirmarAsistencia, $grupId  ,$idProfessor){
     try{
         $con = connect();
-        $statement = $con->prepare("INSERT INTO alumne(alumne_id, nom, cognom, correu, curs, any, classe, asistencia, grup_id, tutor)
-        VALUES (:alumne_id, :nomAlumn, :cognomsAlumn, :correuAlumn, :curs, :any, :classe, :asistencia, :grup_id, :tutor )");
+        $statement = $con->prepare("INSERT INTO alumne(alumne_id, nom, cognom, correu, curs, any, classe, asistencia, asistencia_confirmada, grup_id, tutor)
+        VALUES (:alumne_id, :nomAlumn, :cognomsAlumn, :correuAlumn, :curs, :any, :classe, :asistencia, :confirm,:grup_id, :tutor )");
         $statement->execute(
             array(
                 ':alumne_id' => $idAlumn,
@@ -63,6 +63,7 @@ function crearAlumno($idAlumn, $nomAlumn, $cognomAlumn, $correuAlumn, $curs, $an
                 ':any' => $any,
                 ':classe' => $classe,
                 ':asistencia' => $asistencia,
+                ':confirm' => $confirmarAsistencia,
                 ':grup_id' => $grupId,
                 ':tutor' => $idProfessor
             )
