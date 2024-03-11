@@ -103,7 +103,7 @@ require_once 'Controlador/controlador_anonim.php';
       <div class="row">
         <div class="col-lg-4 col-md-4 col-sm-12 contacte">
           <h4 class="marginLeft">UBICACIÓ</h4>
-          <button class="btn btn-primary marginLeft">Mapa <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="36" height="36" viewBox="0 0 256 256" xml:space="preserve">
+          <a href="../Recursos/IMG/mapa.JPG" class="boto" target="_blank"><button class="btn btn-primary marginLeft">Mapa <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="36" height="36" viewBox="0 0 256 256" xml:space="preserve"></a>
 
             <defs>
             </defs>
