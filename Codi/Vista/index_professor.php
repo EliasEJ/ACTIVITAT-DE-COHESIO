@@ -85,8 +85,6 @@ $idProfessor = obtenerIdProfessor();
                     </div>
                     <div class="tab-pane fade" id="taulaActivitats">
                         <div class="row">
-
-
                             <?php mostrarAdministrarActivitat($idProfessor); ?>
 
                             <div class="col">
