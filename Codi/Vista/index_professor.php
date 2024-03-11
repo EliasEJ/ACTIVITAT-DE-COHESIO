@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="../../Recursos/bootstrap-5.0.2/dist/css/bootstrap.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.2/js/bootstrap.bundle.min.js" integrity="sha512-72WD92hLs7T5FAXn3vkNZflWG6pglUDDpm87TeQmfSg8KnrymL2G30R7as4FmTwhgu9H7eSzDCX3mjitSecKnw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <link rel="stylesheet" href="../../Recursos/CSS/styleProfessor.css  ">
-    <script type="module" src="../Controlador/controlador_professor2.js"> </script>
+    <script type="module" src="../Controlador/controlador_professor0.js"> </script>
 </head>
 
 <?php
@@ -77,16 +77,14 @@ $idProfessor = obtenerIdProfessor();
                         <button type="button" id="añadirAlumn" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
                             Afegir alumne
                         </button>
-                        <form action="../Controlador/administrar_alumnado.php" method="post">
-                        <input type="submit" name="guardarAsistencia" class="btn btn-primary" value="Salvar"> 
-                        </form>
+                       
+                        <input type="submit" name="guardarAsistencia" class="btn btn-primary" value="Salvar" id="salvarCheckAsistencia"> 
+                        
 
                         
                     </div>
                     <div class="tab-pane fade" id="taulaActivitats">
                         <div class="row">
-
-
                             <?php mostrarAdministrarActivitat($idProfessor); ?>
 
                             <div class="col">

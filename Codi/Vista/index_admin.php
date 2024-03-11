@@ -16,6 +16,7 @@
 
 include_once("../Controlador/controlador_professor.php");
 include_once("../Controlador/controlador_admin.php");
+$idProfessor = obtenerIdProfessor();
 ?>
 
 
@@ -31,10 +32,14 @@ include_once("../Controlador/controlador_admin.php");
                     </div>
                     <div class="col-3 text-center">
 
-                        <?php mostrarUsuariAdmin($idProfessor) ?>
+                        <?php mostrarUsuari($idProfessor) ?>
+
                     </div>
+
                 </nav>
+
             </div>
+
         </div>
 
 
@@ -69,11 +74,18 @@ include_once("../Controlador/controlador_admin.php");
                                 <?php mostrarAlumnat($idProfessor); ?>
                             </tbody>
                         </table>
+                        <!-- Button trigger modal -->
+                        <button type="button" id="añadirAlumn" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
+                            Afegir alumne
+                        </button>
+                        <form action="../Controlador/administrar_alumnado.php" method="post">
+                        <input type="submit" name="guardarAsistencia" class="btn btn-primary" value="Salvar"> 
+                        </form>
+
+                        
                     </div>
                     <div class="tab-pane fade" id="taulaActivitats">
                         <div class="row">
-
-
                             <?php mostrarAdministrarActivitat($idProfessor); ?>
 
                             <div class="col">
@@ -86,36 +98,7 @@ include_once("../Controlador/controlador_admin.php");
                     </div>
                     <div class="tab-pane fade" id="taulaGrups">
                         <div class="row">
-                            <div class="col">
-                                <h3>Grups</h3>
-                                <br>
-
-
-                                <?php mostrarGrupsProfessor($idProfessor); ?>
-
-
-                            </div>
-                            <div class="col">
-                                <h3>Alumnes</h3>
-                                <br>
-                                <form action='../Controlador/administrar_grup.php' method='POST'>
-                                    <table class="table table-striped">
-                                        <thead class="sticky-top bg-white">
-                                            <tr>
-                                                <th>Alumne</th>
-                                                <th>Grup</th>
-                                                <th>Canviar grup</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <?php mostrarSeleccioGrupsAlumnes($idProfessor); ?>
-                                        </tbody>
-                                    </table>
-                                    <input type="submit" class="btn btn-primary" value="Salvar">
-                                </form>
-
-                            </div>
-
+                            <?php mostrarGruposTutorProfe($idProfessor) ?>
                         </div>
 
                     </div>
@@ -134,6 +117,41 @@ include_once("../Controlador/controlador_admin.php");
                             </tbody>
                         </table>
                     </div>
+
+
+
+                    <!-- Modal -->
+                    <div class="modal fade" id="modalAñadirAlumn" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+                                </div>
+                                <div class="modal-body">
+                                    <form id="" action="../Controlador/administrar_alumnado.php" method="POST">
+                                        <label for="newAlumnNombre" class="right">Nom alumne: </label>
+                                        <input type="text" name="newAlumnNombre" id="newAlumnNombre"><br> <br>
+
+                                        <label for="newAlumnApellidos" class="right">Cognom/s alumne: </label>
+                                        <input type="text" name="newAlumnApellidos" id="newAlumnApellidos"><br><br>
+
+                                        <label for="newAlumnCorreu" class="right">Correu alumne: </label>
+                                        <input type="text" name="newAlumnCorreu" id="newAlumnCorreu"><br><br>
+
+                                        <label for="newAlumnGrupo" class="right">Grup</label>
+                                        <?php seleccionGruposNuevoAlumno($idProfessor) ?>
+                                        <br><br>
+                                        <input class="btn btn-primary" type="submit" name="guardarAlumno" value="Save changes">
+                                    </form>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" id="cerrarModalAñadirAlumn" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </div>
@@ -143,8 +161,7 @@ include_once("../Controlador/controlador_admin.php");
             <div class="row">
                 <div class="col-lg-4 col-md-4 col-sm-12 contacte">
                     <h4 class="marginLeft">UBICACIÓ</h4>
-                    <button class="btn btn-primary marginLeft">Mapa <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="36" height="36" viewBox="0 0 256 256" xml:space="preserve">
-
+                    <a href="../../Recursos/IMG/mapa.JPG" class="boto" target="_blank"><button class="btn btn-primary marginLeft">Mapa <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="36" height="36" viewBox="0 0 256 256" xml:space="preserve"></a>
                             <defs>
                             </defs>
                             <g style="stroke: none; stroke-width: 0; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: none; fill-rule: nonzero; opacity: 1;" transform="translate(1.4065934065934016 1.4065934065934016) scale(2.81 2.81)">
@@ -165,6 +182,8 @@ include_once("../Controlador/controlador_admin.php");
                 </div>
             </div>
         </footer>
+
+
 </body>
 
 </html>
