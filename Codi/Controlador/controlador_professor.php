@@ -187,7 +187,7 @@ function mostrarGrupsProfessor($idProfessor)
             $html .= "<label>" . $gr['nom'] . "</label>";
             $html .= "</td>";
             $html .= "<td>";
-            $html .= "<button class='btn btn-primary' id='deleteGrup'><a href='../Controlador/administrar_grup.php?accio=eliminar&idGrup=" . $gr['grup_id'] . "  ' style='color:white;'>Eliminar</a></button>";
+            $html .= "<button class='btn btn-primary deleteGrup'><a href='../Controlador/administrar_grup.php?accio=eliminar&idGrup=" . $gr['grup_id'] . "  ' style='color:white;'>Eliminar</a></button>";
             $html .= "</td>";
 
             $html .= "</tr>";
