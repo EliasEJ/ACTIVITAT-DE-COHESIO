@@ -68,7 +68,7 @@ body {
     text-align: right;
 }
 .mrb button {
-    margin-right: 20px; /* Ajusta este valor según tus necesidades */
+    margin-right: 20px;
 }
 
 .imgPerfil {
@@ -77,7 +77,43 @@ body {
     margin-left: 3%;
     margin-right: 3%;
 }
+
+body {
+    font-size: 1rem;
+}
+
+@media (max-width: 768px) {
+    body {
+        font-size: 0.875rem;
+    }
+}
+
+@media (max-width: 576px) {
+    body {
+        font-size: 0.8rem;
+    }
+}
+
+html {
+    position: relative;
+    min-height: 100%;
+}
+
+body {
+    margin-bottom: 5%;
+}
+
+.blog-footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    padding: 1rem 0;
+    text-align: center;
+    background-color: #f5f5f5;
+}
+
 a.boto{
     color: white;
     text-decoration: none;
 }
+
