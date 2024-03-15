@@ -135,3 +135,27 @@ function addConstraintsActivitatId(){
     }
     
 } 
+
+
+function obtenerMaterialActividad($actividad_id){
+    try{
+
+        $con = connect();
+
+        $statement = $con->prepare("SELECT m.*
+        FROM activitat a
+        JOIN material m ON a.material_id = m.material_id
+        WHERE a.actividad_id = :idActividad;");
+
+        $statement->execute(
+            array(
+                ':idActividad' => $actividad_id
+            )
+            );
+
+        return $statement;
+
+    }catch(PDOException $e){
+        echo "Error obtenerMaterialActividad: " . $e->getMessage();
+    }
+}
