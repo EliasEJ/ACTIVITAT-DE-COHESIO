@@ -27,20 +27,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             alert("Alumne afegit correctament.")
         </script>
     <?php
-
-    } else if (isset($_POST['datos'])) {
-       
-        $listaAsistencia = $_POST['datos'];
-        foreach ($listaAsistencia as $alumn) {
-            echo $alumn['id'] . ": " . $alumn['asistencia'];
+    }  
+    else if(isset($_POST['guardarAsistencia'])){
+        foreach ($_POST['asistAl_id'] as $alumne_id) {
+            // Obtener el nuevo identificador de grupo seleccionado para este alumno
+            $confAsis = $_POST['asist'][$alumne_id];
+            actualizarAsistencia($alumne_id, $confAsis);
+           
         }
     }
-    
 
 
 }
 ?>
 
 <script>
-    //location.replace("../Vista/index_professor.php")
+    location.replace("../Vista/index_professor.php")
 </script>

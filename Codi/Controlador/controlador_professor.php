@@ -63,10 +63,16 @@ function mostrarAlumnat($idProfe)
             $taulaBody = "";
             foreach ($alumnes as $al) {
                 $taulaBody .= "<tr>";
-
+                $taulaBody .= "<input type='hidden' name='asistAl_id[]' value='" . $al['alumne_id'] . "'>";
                 $taulaBody .= "<td>" . $al['cognom'] . ", " . $al['nom'] . "</td>";
                 $taulaBody .= "<td>" . "Grup " . $al['grup_id'] . "</td>";
-                $taulaBody .= "<td> <input type='checkbox' class='asistAlumn' value='check-" . $al['alumne_id'] . "' id='check-" . $al['alumne_id'] . "'></td>";
+                $taulaBody .= "<td> <select class='form-select form-select-sm' name='asist[" . $al['alumne_id'] . "]'  aria-label='.form-select-sm' style='width:100px'> ";
+                $taulaBody .= "<option value='0'>No</option> ";
+                if($al['asistencia_confirmada'] == '1'){
+                    $taulaBody .= "<option value='1' selected>Sí</option>;";
+                }else $taulaBody .= "<option value='1'>Sí</option>;";
+
+                $taulaBody .= "</select></td>";
                 $taulaBody .= "<td>" . ($al['asistencia'] == 1 ? "Sí" : "No") . "</td>";
                 $taulaBody .= "</tr>";
             }
