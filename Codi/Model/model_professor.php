@@ -96,3 +96,14 @@ function actualizarAsistencia($alumno_id, $asistencia)
         echo "Error actualizarAsistencia: " . $e->getMessage();
     }
 }
+
+function obtenirPosMapA(){
+    try{
+        $con = connect();
+        $statement = $con->prepare("SELECT posicion_id, nom FROM activitat");
+        $statement->execute();
+        return $statement;
+    }catch(PDOException $e){
+        echo "Error obtenirPosMap: " . $e->getMessage();
+    }
+}

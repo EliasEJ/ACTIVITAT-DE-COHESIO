@@ -309,3 +309,28 @@ function seleccionGruposNuevoAlumno($idProfe){
     $html .= "</select>";
     echo $html;
 }
+
+function generaraPosMap() {
+    $posMap = obtenirPosMapA();
+    if ($posMap instanceof PDOStatement) {
+        $resultado = $posMap->fetchAll(PDO::FETCH_ASSOC);
+        if ($resultado) {
+            return $resultado;
+        }
+    }
+    return null;
+}
+
+function mostrarPosMap($posMap) {
+    if ($posMap) {
+        $html = "<table class='table table-striped border'>";
+        $html .= "<tr><th>Posicio</th><th>Nom</th></tr>";
+        foreach ($posMap as $pos) {
+            $html .= "<tr><td>" . $pos['posicion_id'] . "</td><td>" . $pos['nom'] . "</td></tr>";
+        }
+        $html .= "</table>";
+        echo $html;
+    } else {
+        echo "<p style='color:red;'>No se pudo obtener la posición del grupo.</p>";
+    }
+}
