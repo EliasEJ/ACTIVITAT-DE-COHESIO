@@ -111,7 +111,7 @@ if (!isset($_COOKIE['asistencia_confirmada'])) {
                         <li>
                             <hr class="dropdown-divider">
                         </li>
-                        <li><a class="dropdown-item " href="../Controlador/logout.php">Tancar sessió</a></li>
+                        <li><a class="dropdown-item" href="../Controlador/logout.php">Tancar sessió</a></li>
                     </ul>
                 </div>
             </div>
@@ -150,7 +150,6 @@ if (!isset($_COOKIE['asistencia_confirmada'])) {
 
                                 <div class="modal-body">
 
-                                    <!-- Mostrar puntuacion del grupo -->
                                     <?php
                                     if(isAlumne($email)){
                                         $grup = obtenerGrupoAlumno($email);
@@ -251,15 +250,35 @@ if (!isset($_COOKIE['asistencia_confirmada'])) {
     <div class="row">
         <div class="col-lg-4 col-md-4 col-sm-12 contacte">
             <h4 class="marginLeft">UBICACIÓ</h4>
-            <button class="btn btn-primary marginLeft">Mapa <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="36" height="36" viewBox="0 0 256 256" xml:space="preserve">
-
+            <button class="btn btn-primary marginLeft" data-toggle="modal" data-target="#mapaModal">Mapa <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="36" height="36" viewBox="0 0 256 256" xml:space="preserve">
                     <defs>
                     </defs>
                     <g style="stroke: none; stroke-width: 0; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: none; fill-rule: nonzero; opacity: 1;" transform="translate(1.4065934065934016 1.4065934065934016) scale(2.81 2.81)">
                         <path d="M 45 0 c 15.103 0 27.389 12.287 27.389 27.389 C 72.389 46.616 46.147 66.607 45 90 c -1.147 -23.393 -27.389 -43.384 -27.389 -62.611 C 17.611 12.287 29.897 0 45 0 z" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: rgb(255,80,80); fill-rule: nonzero; opacity: 1;" transform=" matrix(1 0 0 1 0 0) " stroke-linecap="round" />
                         <circle cx="45.004999999999995" cy="26.575000000000003" r="9.205" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: rgb(191,0,3); fill-rule: nonzero; opacity: 1;" transform="  matrix(1 0 0 1 0 0) " />
                     </g>
-                </svg></button>
+                </svg>
+            </button>
+
+            <div class="modal fade" id="mapaModal" tabindex="-1" role="dialog" aria-labelledby="mapaModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-lg" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="mapaModalLabel">Mapa</h5>
+                        </div>
+                        <div class="modal-body">
+                            <?php 
+                            $posicio = generaraPosMap();
+                            mostrarPosMap($posicio);
+                            ?>
+                            <img src="../../Recursos/IMG/mapa.JPG" alt="Mapa" class="img-fluid">
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">Tancar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
         <div class="col-lg-4 col-md-4 col-sm-12 contacte">
             <h4 class="marginLeft">CONTACTE</h4>
