@@ -63,9 +63,16 @@ function mostrarAlumnat($idProfe)
             $taulaBody = "";
             foreach ($alumnes as $al) {
                 $taulaBody .= "<tr>";
+                $taulaBody .= "<input type='hidden' name='asistAl_id[]' value='" . $al['alumne_id'] . "'>";
                 $taulaBody .= "<td>" . $al['cognom'] . ", " . $al['nom'] . "</td>";
                 $taulaBody .= "<td>" . "Grup " . $al['grup_id'] . "</td>";
-                $taulaBody .= "<td> <input type='checkbox' name='asistAlumn[]' value='check-" . $al['alumne_id'] . "' id='check-" . $al['alumne_id'] . "'> </td>";
+                $taulaBody .= "<td> <select class='form-select form-select-sm' name='asist[" . $al['alumne_id'] . "]'  aria-label='.form-select-sm' style='width:100px'> ";
+                $taulaBody .= "<option value='0'>No</option> ";
+                if($al['asistencia_confirmada'] == '1'){
+                    $taulaBody .= "<option value='1' selected>Sí</option>;";
+                }else $taulaBody .= "<option value='1'>Sí</option>;";
+
+                $taulaBody .= "</select></td>";
                 $taulaBody .= "<td>" . ($al['asistencia'] == 1 ? "Sí" : "No") . "</td>";
                 $taulaBody .= "</tr>";
             }
@@ -84,6 +91,7 @@ function mostrarActivitats()
         $html = "";
 
         foreach ($activitats as $act) {
+            $material = obtenerMaterialActividad($act['actividad_id'])->fetch();
             $professor = obtenirProfessorUnic($act['professor_id'])->fetch();
 
             $html .= "<div class='accordion-item'>";
@@ -97,6 +105,9 @@ function mostrarActivitats()
             $html .= "<div class='accordion-body'>";
             $html .= "<h3>" . $act['nom'] . "</h3><br>";
             $html .= "<p><b>Descripció</b></p><p>" . $act['descripcio'] . "</p>";
+            $html .= "<p><b>Material: </b>" . $material['nom'] . "</p>";
+            $comprar =  $material['comprar'] == 1 ? "Si" : "No";
+            $html .= "<p><b>Comprar material? </b> ". $comprar ."</p>";
             $html .= "<p><b>On es jugará?</b> Posició número: " . $act['posicion_id'] . "</p>";
             $html .= "<p><b>Grups principals:</b> Grup" . $act['grup1'] . " VS Grup" . $act['grup2'] . "</p>";
             $html .= "<p><b> Professor encarregat: </b>" . $professor['nom'] . " " . $professor['cognom'] . "</p>";

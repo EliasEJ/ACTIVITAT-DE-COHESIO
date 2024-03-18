@@ -253,3 +253,24 @@ function generaraTablaOrdre($ordre) {
     }
     return $tabla;
 }
+
+function obtenirPuntuacion($grupId) {
+    $puntuacion = obtenirPuntuacioGrup($grupId);
+    if ($puntuacion instanceof PDOStatement) {
+        $resultado = $puntuacion->fetch(PDO::FETCH_ASSOC);
+        if ($resultado) {
+            return $resultado['puntuacio'];
+        }
+    }
+    return null;
+}
+
+function mostrarPuntuacion($grupId) {
+    $puntuacion = obtenirPuntuacion($grupId);
+    if ($puntuacion !== null) {
+        echo "<h2>Puntuació</h2>";
+        echo "<div class='mb-4'><p>Puntuació del grup $grupId: <b>$puntuacion punts</b></p></div>";
+    } else {
+        echo "<p style='color:red;'>No se pudo obtener la puntuación del grupo $grupId.</p>";
+    }
+}

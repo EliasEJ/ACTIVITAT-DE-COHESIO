@@ -29,3 +29,4 @@ $("#añadirAlumn").click(function () {
 $("#cerrarModalAñadirAlumn").click(function () {
     $("#modalAñadirAlumn").modal('hide');
 })
+

@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="../../Recursos/bootstrap-5.0.2/dist/css/bootstrap.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.2/js/bootstrap.bundle.min.js" integrity="sha512-72WD92hLs7T5FAXn3vkNZflWG6pglUDDpm87TeQmfSg8KnrymL2G30R7as4FmTwhgu9H7eSzDCX3mjitSecKnw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <link rel="stylesheet" href="../../Recursos/CSS/styleProfessor.css  ">
-    <script type="module" src="../Controlador/controlador_professor2.js"> </script>
+    <script type="module" src="../Controlador/controlador_professor1.js"> </script>
 </head>
 
 <?php
@@ -60,28 +60,30 @@ $idProfessor = obtenerIdProfessor();
                 </ul>
                 <div class="tab-content" id="contingutTab">
                     <div class="tab-pane fade show active" id="taulaAlumnat">
-                        <table class="table table-striped">
-                            <thead class="sticky-top bg-white">
-                                <tr>
-                                    <th>Cognoms, Nom</th>
-                                    <th>Grup</th>
-                                    <th>Asistencia</th>
-                                    <th>Confirmació</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php mostrarAlumnat($idProfessor); ?>
-                            </tbody>
-                        </table>
+                        <form action="../Controlador/administrar_alumnado.php" method="post">
+
+                            <table class="table table-striped">
+                                <thead class="sticky-top bg-white">
+                                    <tr>
+                                        <th>Cognoms, Nom</th>
+                                        <th>Grup</th>
+                                        <th>Asistencia Alumne</th>
+                                        <th>Confirmació Alumne</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php mostrarAlumnat($idProfessor); ?>
+                                </tbody>
+                            </table>
+
+                            <input type="submit" name="guardarAsistencia" class="btn btn-primary" value="Salvar" id="salvarCheckAsistencia">
+                        </form>
+                        <br>
                         <!-- Button trigger modal -->
                         <button type="button" id="añadirAlumn" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
                             Afegir alumne
                         </button>
-                        <form action="../Controlador/administrar_alumnado.php" method="post">
-                        <input type="submit" name="guardarAsistencia" class="btn btn-primary" value="Salvar"> 
-                        </form>
 
-                        
                     </div>
                     <div class="tab-pane fade" id="taulaActivitats">
                         <div class="row">
@@ -145,7 +147,7 @@ $idProfessor = obtenerIdProfessor();
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" id="cerrarModalAñadirAlumn" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                    
+
                                 </div>
                             </div>
                         </div>
@@ -161,13 +163,13 @@ $idProfessor = obtenerIdProfessor();
                 <div class="col-lg-4 col-md-4 col-sm-12 contacte">
                     <h4 class="marginLeft">UBICACIÓ</h4>
                     <a href="../../Recursos/IMG/mapa.JPG" class="boto" target="_blank"><button class="btn btn-primary marginLeft">Mapa <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="36" height="36" viewBox="0 0 256 256" xml:space="preserve"></a>
-                            <defs>
-                            </defs>
-                            <g style="stroke: none; stroke-width: 0; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: none; fill-rule: nonzero; opacity: 1;" transform="translate(1.4065934065934016 1.4065934065934016) scale(2.81 2.81)">
-                                <path d="M 45 0 c 15.103 0 27.389 12.287 27.389 27.389 C 72.389 46.616 46.147 66.607 45 90 c -1.147 -23.393 -27.389 -43.384 -27.389 -62.611 C 17.611 12.287 29.897 0 45 0 z" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: rgb(255,80,80); fill-rule: nonzero; opacity: 1;" transform=" matrix(1 0 0 1 0 0) " stroke-linecap="round" />
-                                <circle cx="45.004999999999995" cy="26.575000000000003" r="9.205" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: rgb(191,0,3); fill-rule: nonzero; opacity: 1;" transform="  matrix(1 0 0 1 0 0) " />
-                            </g>
-                        </svg></button>
+                    <defs>
+                    </defs>
+                    <g style="stroke: none; stroke-width: 0; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: none; fill-rule: nonzero; opacity: 1;" transform="translate(1.4065934065934016 1.4065934065934016) scale(2.81 2.81)">
+                        <path d="M 45 0 c 15.103 0 27.389 12.287 27.389 27.389 C 72.389 46.616 46.147 66.607 45 90 c -1.147 -23.393 -27.389 -43.384 -27.389 -62.611 C 17.611 12.287 29.897 0 45 0 z" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: rgb(255,80,80); fill-rule: nonzero; opacity: 1;" transform=" matrix(1 0 0 1 0 0) " stroke-linecap="round" />
+                        <circle cx="45.004999999999995" cy="26.575000000000003" r="9.205" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: rgb(191,0,3); fill-rule: nonzero; opacity: 1;" transform="  matrix(1 0 0 1 0 0) " />
+                    </g>
+                    </svg></button>
                 </div>
                 <div class="col-lg-4 col-md-4 col-sm-12 contacte">
                     <h4 class="marginLeft">CONTACTE</h4>
