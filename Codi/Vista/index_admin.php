@@ -10,8 +10,14 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.2/js/bootstrap.bundle.min.js" integrity="sha512-72WD92hLs7T5FAXn3vkNZflWG6pglUDDpm87TeQmfSg8KnrymL2G30R7as4FmTwhgu9H7eSzDCX3mjitSecKnw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <link rel="stylesheet" href="../../Recursos/CSS/styleProfessor.css  ">
     <script type="module" src="../Controlador/controlador_professor2.js"> </script>
+    <link rel="stylesheet" href="https://cdn.datatables.net/2.0.2/css/dataTables.dataTables.css" />
+    <script type="module" src="https://cdn.datatables.net/2.0.2/js/dataTables.js"></script>
 </head>
-
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('#myTable').DataTable();
+    });
+</script>
 <?php
 
 include_once("../Controlador/controlador_professor.php");
@@ -32,7 +38,7 @@ $idProfessor = obtenerIdProfessor();
                     </div>
                     <div class="col-3 text-center">
 
-                        <?php mostrarUsuari($idProfessor) ?>
+                        <?php mostrarUsuariAdmin($idProfessor) ?>
 
                     </div>
 
@@ -61,7 +67,7 @@ $idProfessor = obtenerIdProfessor();
                 </ul>
                 <div class="tab-content" id="contingutTab">
                     <div class="tab-pane fade show active" id="taulaAlumnat">
-                        <table class="table table-striped">
+                        <table class="table table-striped" id="myTable">
                             <thead class="sticky-top bg-white">
                                 <tr>
                                     <th>Cognoms, Nom</th>
@@ -71,7 +77,7 @@ $idProfessor = obtenerIdProfessor();
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php mostrarAlumnat($idProfessor); ?>
+                                <?php mostrarAlumnes(); ?>
                             </tbody>
                         </table>
                         <!-- Button trigger modal -->
@@ -98,7 +104,8 @@ $idProfessor = obtenerIdProfessor();
                     </div>
                     <div class="tab-pane fade" id="taulaGrups">
                         <div class="row">
-                            <?php mostrarGruposTutorProfe($idProfessor) ?>
+                            <?php mostrarGrupos(); ?>
+                            <button>Generar els grups</button>
                         </div>
 
                     </div>
@@ -182,7 +189,9 @@ $idProfessor = obtenerIdProfessor();
                 </div>
             </div>
         </footer>
-
+    <script>
+        let table = new DataTable('#myTable');
+    </script>
 
 </body>
 

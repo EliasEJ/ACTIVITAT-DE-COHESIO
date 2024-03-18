@@ -63,7 +63,6 @@ function mostrarAlumnat($idProfe)
             $taulaBody = "";
             foreach ($alumnes as $al) {
                 $taulaBody .= "<tr>";
-
                 $taulaBody .= "<td>" . $al['cognom'] . ", " . $al['nom'] . "</td>";
                 $taulaBody .= "<td>" . "Grup " . $al['grup_id'] . "</td>";
                 $taulaBody .= "<td> <input type='checkbox' name='asistAlumn[]' value='check-" . $al['alumne_id'] . "' id='check-" . $al['alumne_id'] . "'> </td>";
