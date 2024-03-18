@@ -295,3 +295,35 @@ function obtenerMaterial()
         echo "Error obtenerMaterial: " . $e->getMessage();
     }
 }
+
+function actualizarComprarMaterial($material_id, $comprado){
+    try {
+        $con = connect();
+        $statement = $con->prepare("UPDATE material 
+        SET comprar = :comprado
+        WHERE material_id = :material_id");
+        $statement->execute(
+            array(
+                ':comprado' => $comprado,
+                ':material_id' => $material_id
+            )
+        );
+    } catch (PDOException $e) {
+        echo "Error actualizarComprarMaterial: " . $e->getMessage();
+    }
+}
+
+function obtenerMaterialUnico($material_id){
+    try {
+        $con = connect();
+        $statement = $con->prepare("SELECT * FROM material WHERE material_id = :material_id");
+        $statement->execute(
+            array(
+                ':material_id' => $material_id
+            )
+        );
+        return $statement;
+    } catch (PDOException $e) {
+        echo "Error obtenerMaterialUnico: " . $e->getMessage();
+    }
+}

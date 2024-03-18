@@ -40,8 +40,10 @@ function guardarActividad()
         $nameAct = $_POST['nomAct'];
         $descriptAct = $_POST['descripcioAct'];
         $material_id = $_POST['materialActProf'];
+        $comprado = $_POST['comprarMaterial'];
         
         actualizarActividad($idAct, $nameAct, $descriptAct, $material_id);
+        actualizarComprarMaterial($material_id, $comprado);
         ?>
         <script>
             alert("La teva activitat ha sigut actualitzada correctament.");

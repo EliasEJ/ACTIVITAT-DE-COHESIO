@@ -129,6 +129,7 @@ function mostrarAdministrarActivitat($idProfe)
         $idProfessor = $idProfe;
         $activitat = obtenirActivitatUnic($idProfessor)->fetch();
         $material = obtenerMaterial()->fetchAll();
+        $materialUnic = obtenerMaterialUnico($activitat['material_id'])->fetch();
         $html = "";
         if ($activitat != null) {
             $html .= "<div class='col'>";
@@ -142,11 +143,19 @@ function mostrarAdministrarActivitat($idProfe)
             $html .= "<textarea id='descripcio' name='descripcioAct' cols='40' rows='10'>" . $activitat['descripcio'] . "</textarea><br>";
             $html .= "<label><b>Grups principals:</b> Grup" . $activitat['grup1'] . " VS Grup" . $activitat['grup2'] . "</label><br>";
             $html .= "<label for='selectMaterial'><b>Seleccionar Material</b></label>";
-            $html .= "<select class='form-select form-select-sm' name='materialActProf' aria-label='.form-select-sm' id='selectMaterial'>";
+            $html .= "<select class='form-select form-select-sm' name='materialActProf' aria-label='.form-select-sm'>";
             foreach ($material as $mat) {
                 $selected = ($activitat['material_id'] == $mat['material_id']) ? "selected" : "";
                 $html .= "<option value='".$mat['material_id'] ."' $selected >".$mat['nom']."</option>";
             }
+            $html .= "</select><br>";
+            $html .= "<label for='comprarMaterial'><b> Comprar material?</b></label>";
+            $html .= "<select class='form-select form-select-sm' name='comprarMaterial' aria-label='.form-select-sm' id='comprarMaterial'>";
+            $html .= "<option value='0'>No</option>";
+            if($materialUnic['comprar'] == 1){
+                $html .= "<option value='1' selected>Si</option>";
+            }else $html .= "<option value='1'>Si</option>";
+
             $html .= "</select><br>";
             $html .= "<input class='btn btn-success' type='submit' id='saveActivitat' value='Salvar'></input>";
             $html .= "</form><br>";
