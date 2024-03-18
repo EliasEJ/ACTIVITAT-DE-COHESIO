@@ -1,6 +1,6 @@
 <?php
-function mostrarUsuariAdmin($idProfe)
-{
+require_once("../Model/model_admin.php");
+function mostrarUsuariAdmin($idProfe){
     try {
         $profe = obtenirProfessorUnic($idProfe)->fetch();
         $html = "<div class='btn-group'>";
@@ -23,6 +23,27 @@ function mostrarUsuariAdmin($idProfe)
         echo $html;
     } catch (PDOException $e) {
         echo "Error mostrarUsuari: " . $e->getMessage();
+    }
+}
+
+function mostrarAlumnes(){
+    try{
+        $alumnes = obtenirAlumnes()->fetchAll();
+        $html = "<div class='container'>";
+        $html .= "<div class='row'>";
+        foreach ($alumnes as $alumne){
+            $html .= "<tr>";
+            $html .= "<td>" . $alumne['cognom'] . ", " . $alumne['nom'] . "</td>";
+            $html .= "<td>" . "Grup " . $alumne['grup_id'] . "</td>";
+            $html .= "<td> <input type='checkbox' name='asistAlumn[]' value='check-" . $alumne['alumne_id'] . "' id='check-" . $alumne['alumne_id'] . "'> </td>";
+            $html .= "<td>" . ($alumne['asistencia'] == 1 ? "Sí" : "No") . "</td>";
+            $html .= "</tr>";
+        }
+        $html .= "</div>";
+        $html .= "</div>";
+        echo $html;
+    }catch(PDOException $e){
+        echo "Error mostrarActivitatAdmin: " . $e->getMessage();
     }
 }
 ?>

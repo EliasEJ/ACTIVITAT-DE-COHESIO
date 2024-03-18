@@ -132,7 +132,7 @@ CREATE TABLE IF NOT EXISTS `grup` (
 DROP TABLE IF EXISTS `material`;
 CREATE TABLE IF NOT EXISTS `material` (
   `material_id` int(11) NOT NULL AUTO_INCREMENT,
-  `nom` varchar(11) NOT NULL,
+  `nom` varchar(150) NOT NULL,
   `comprar` tinyint(1) NOT NULL,
   PRIMARY KEY (`material_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
