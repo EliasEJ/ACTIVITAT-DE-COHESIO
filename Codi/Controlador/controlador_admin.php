@@ -46,4 +46,24 @@ function mostrarAlumnes(){
         echo "Error mostrarActivitatAdmin: " . $e->getMessage();
     }
 }
+function mostrarGrups(){
+    try{
+        $grups = mostrarGrupos()->fetchAll();
+        $html = "<div class='container'>";
+        $html .= "<div class='row'>";
+        foreach ($grups as $grup){
+            $html .= "<tr>";
+            $html .= "<td>" . $grup['grup_id'] . "</td>";
+            $html .= "<td>" . $grup['nom'] . "</td>";
+            $html .= "<td>" . $grup['tutor'] . "</td>";
+            $html .= "<td>" . $grup['curs'] . "</td>";
+            $html .= "</tr>";
+        }
+        $html .= "</div>";
+        $html .= "</div>";
+        echo $html;
+    }catch(PDOException $e){
+        echo "Error mostrarGrupos: " . $e->getMessage();
+    }
+}
 ?>
