@@ -113,7 +113,7 @@ function generarModalesA($grupos) {
                                 $modales .= generarTabla($infoGrupo);
                                 $modales .= '</div>
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Tancar</button>
+                                    <button type="button" class="btn btn-danger" data-dismiss="modal">Tancar</button>
                                 </div>
                             </div>
                         </div>
@@ -224,7 +224,7 @@ function generarModalesActivitats($actividades) {
                                 $modales .= generarTablaActividad($infoActividad);
                                 $modales .= '</div>
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Tancar</button>
+                                    <button type="button" class="btn btn-danger" data-dismiss="modal">Tancar</button>
                                 </div>
                             </div>
                         </div>

@@ -111,7 +111,7 @@ function mostrarActivitats()
             $html .= "<p><b>On es jugará?</b> Posició número: " . $act['posicion_id'] . "</p>";
             $html .= "<p><b>Grups principals:</b> Grup" . $act['grup1'] . " VS Grup" . $act['grup2'] . "</p>";
             $html .= "<p><b> Professor encarregat: </b>" . $professor['nom'] . " " . $professor['cognom'] . "</p>";
-            $html .= "<button class='btn btn-primary deleteAct' ><a style='color:white' href='../Controlador/administrar_activitat.php?accio=delete&idAct=" . $act['actividad_id'] . "  '>Eliminar Activitat</a></button>";
+            $html .= "<button class='btn btn-danger deleteAct' ><a style='color:white' href='../Controlador/administrar_activitat.php?accio=delete&idAct=" . $act['actividad_id'] . "  '>Eliminar Activitat</a></button>";
             $html .= "</div>";
             $html .= "</div>";
             $html .= "</div>";
@@ -142,10 +142,9 @@ function mostrarAdministrarActivitat($idProfe)
             $html .= "<label><b>Descripció</b></label><br>";
             $html .= "<textarea id='descripcio' name='descripcioAct' cols='40' rows='10'>" . $activitat['descripcio'] . "</textarea><br><br>";
             $html .= "<label><b>Grups principals:</b> Grup" . $activitat['grup1'] . " VS Grup" . $activitat['grup2'] . "</label><br><br>";
-            $html .= "<input class='btn btn-primary' type='submit' id='saveActivitat' value='Salvar'></input>";
+            $html .= "<input class='btn btn-success' type='submit' id='saveActivitat' value='Salvar'></input>";
             $html .= "</form><br>";
-            $html .= "<button class='btn btn-primary admAct' id='cancelActivitat'><a href='../Vista/index_professor.php' style='color:white'>Cancelar </a></button><br>";
-            $html .= "<button class='btn btn-primary admAct' id='createActivitat'><a href='../Controlador/administrar_activitat.php?accio=crear' style='color:white'>Crear Activitat </a></button>";
+            $html .= "<button class='btn btn-danger admAct' id='cancelActivitat'><a href='../Vista/index_professor.php' style='color:white'>Cancelar </a></button><br>";
             $html .= "</div>";
         }
 
@@ -197,7 +196,7 @@ function mostrarGrupsProfessor($idProfessor)
             $html .= "<label>" . $gr['nom'] . "</label>";
             $html .= "</td>";
             $html .= "<td>";
-            $html .= "<button class='btn btn-primary deleteGrup'><a href='../Controlador/administrar_grup.php?accio=eliminar&idGrup=" . $gr['grup_id'] . "  ' style='color:white;'>Eliminar</a></button>";
+            $html .= "<button class='btn btn-danger deleteGrup'><a href='../Controlador/administrar_grup.php?accio=eliminar&idGrup=" . $gr['grup_id'] . "  ' style='color:white;'>Eliminar</a></button>";
             $html .= "</td>";
 
             $html .= "</tr>";
@@ -242,7 +241,7 @@ function mostrarSeleccioGrupsAlumnes($idProfe)
             }
         }
         $html .= "</tbody>";
-        $html .= "</table><input type='submit' class='btn btn-primary' value='Salvar'></form>";
+        $html .= "</table><input type='submit' class='btn btn-success' value='Salvar'></form>";
         $html .= "</div>";
         return $html;
     } catch (PDOException $e) {
