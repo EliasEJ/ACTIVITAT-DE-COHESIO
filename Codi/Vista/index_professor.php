@@ -76,7 +76,7 @@ $idProfessor = obtenerIdProfessor();
                                 </tbody>
                             </table>
 
-                            <input type="submit" name="guardarAsistencia" class="btn btn-primary" value="Salvar" id="salvarCheckAsistencia">
+                            <input type="submit" name="guardarAsistencia" class="btn btn-success" value="Salvar" id="salvarCheckAsistencia">
                         </form>
                         <br>
                         <!-- Button trigger modal -->
@@ -142,7 +142,7 @@ $idProfessor = obtenerIdProfessor();
                                         <label for="newAlumnGrupo" class="right">Grup</label>
                                         <?php seleccionGruposNuevoAlumno($idProfessor) ?>
                                         <br><br>
-                                        <input class="btn btn-primary" type="submit" name="guardarAlumno" value="Save changes">
+                                        <input class="btn btn-success" type="submit" name="guardarAlumno" value="Salvar">
                                     </form>
                                 </div>
                                 <div class="modal-footer">
