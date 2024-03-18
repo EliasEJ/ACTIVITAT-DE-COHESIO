@@ -39,9 +39,14 @@ function guardarActividad()
         $idAct = $_POST['idAct'];
         $nameAct = $_POST['nomAct'];
         $descriptAct = $_POST['descripcioAct'];
-
-
-        actualizarActividad($idAct, $nameAct, $descriptAct);
+        $material_id = $_POST['materialActProf'];
+        
+        actualizarActividad($idAct, $nameAct, $descriptAct, $material_id);
+        ?>
+        <script>
+            alert("La teva activitat ha sigut actualitzada correctament.");
+        </script>
+        <?php
     } catch (PDOException $e) {
         echo "Error guardarActividad: " . $e->getMessage();
     }

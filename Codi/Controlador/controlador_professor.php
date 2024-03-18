@@ -1,7 +1,6 @@
 <?php
 require_once("../Model/model_professor.php");
 include_once("../Model/model_activitat.php");
-//include_once("controlador.php");
 include_once("../Model/model.php");
 
 
@@ -111,7 +110,6 @@ function mostrarActivitats()
             $html .= "<p><b>On es jugará?</b> Posició número: " . $act['posicion_id'] . "</p>";
             $html .= "<p><b>Grups principals:</b> Grup" . $act['grup1'] . " VS Grup" . $act['grup2'] . "</p>";
             $html .= "<p><b> Professor encarregat: </b>" . $professor['nom'] . " " . $professor['cognom'] . "</p>";
-            $html .= "<button class='btn btn-danger deleteAct' ><a style='color:white' href='../Controlador/administrar_activitat.php?accio=delete&idAct=" . $act['actividad_id'] . "  '>Eliminar Activitat</a></button>";
             $html .= "</div>";
             $html .= "</div>";
             $html .= "</div>";
@@ -130,18 +128,26 @@ function mostrarAdministrarActivitat($idProfe)
         require_once("../Model/model_activitat.php");
         $idProfessor = $idProfe;
         $activitat = obtenirActivitatUnic($idProfessor)->fetch();
+        $material = obtenerMaterial()->fetchAll();
         $html = "";
         if ($activitat != null) {
             $html .= "<div class='col'>";
             $html .= "<form action='../Controlador/administrar_activitat.php' method='POST'>";
             $html .= "<h3>La teva activitat</h3><br>";
             $html .= "<label><b>Identificador activitat</b></label><br>";
-            $html .= "<label >Activitat </label><input type='number' name='idAct' value='" . $activitat['actividad_id'] . "' readonly></input><br><br>";
+            $html .= "<label >Activitat </label><input type='number' name='idAct' value='" . $activitat['actividad_id'] . "' readonly></input><br>";
             $html .= "<label><b>Nom d'activitat</b></label><br>";
-            $html .= "<input name='nomAct' id='nomAct' type='text' value=" . $activitat['nom'] . "><br><br>";
+            $html .= "<input name='nomAct' id='nomAct' type='text' value=" . $activitat['nom'] . "><br>";
             $html .= "<label><b>Descripció</b></label><br>";
-            $html .= "<textarea id='descripcio' name='descripcioAct' cols='40' rows='10'>" . $activitat['descripcio'] . "</textarea><br><br>";
-            $html .= "<label><b>Grups principals:</b> Grup" . $activitat['grup1'] . " VS Grup" . $activitat['grup2'] . "</label><br><br>";
+            $html .= "<textarea id='descripcio' name='descripcioAct' cols='40' rows='10'>" . $activitat['descripcio'] . "</textarea><br>";
+            $html .= "<label><b>Grups principals:</b> Grup" . $activitat['grup1'] . " VS Grup" . $activitat['grup2'] . "</label><br>";
+            $html .= "<label for='selectMaterial'><b>Seleccionar Material</b></label>";
+            $html .= "<select class='form-select form-select-sm' name='materialActProf' aria-label='.form-select-sm' id='selectMaterial'>";
+            foreach ($material as $mat) {
+                $selected = ($activitat['material_id'] == $mat['material_id']) ? "selected" : "";
+                $html .= "<option value='".$mat['material_id'] ."' $selected >".$mat['nom']."</option>";
+            }
+            $html .= "</select><br>";
             $html .= "<input class='btn btn-success' type='submit' id='saveActivitat' value='Salvar'></input>";
             $html .= "</form><br>";
             $html .= "<button class='btn btn-danger admAct' id='cancelActivitat'><a href='../Vista/index_professor.php' style='color:white'>Cancelar </a></button><br>";

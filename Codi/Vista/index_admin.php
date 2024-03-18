@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="../../Recursos/bootstrap-5.0.2/dist/css/bootstrap.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.2/js/bootstrap.bundle.min.js" integrity="sha512-72WD92hLs7T5FAXn3vkNZflWG6pglUDDpm87TeQmfSg8KnrymL2G30R7as4FmTwhgu9H7eSzDCX3mjitSecKnw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <link rel="stylesheet" href="../../Recursos/CSS/styleProfessor.css  ">
-    <script type="module" src="../Controlador/controlador_professor2.js"> </script>
+    <script type="module" src="../Controlador/controlador_professor1.js"> </script>
     <link rel="stylesheet" href="https://cdn.datatables.net/2.0.2/css/dataTables.dataTables.css" />
     <script type="module" src="https://cdn.datatables.net/2.0.2/js/dataTables.js"></script>
 </head>
@@ -104,7 +104,18 @@ $idProfessor = obtenerIdProfessor();
                     </div>
                     <div class="tab-pane fade" id="taulaGrups">
                         <div class="row">
-                            <?php mostrarGrupos(); ?>
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Grup</th>
+                                        <th>Tutor</th>
+                                        <th>Curs</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php mostrarGrupos(); ?>
+                                </tbody>
+                            </table>
                             <button>Generar els grups</button>
                         </div>
 
@@ -162,7 +173,6 @@ $idProfessor = obtenerIdProfessor();
                 </div>
             </div>
         </div>
-
 
         <footer class="footer">
             <div class="row">
