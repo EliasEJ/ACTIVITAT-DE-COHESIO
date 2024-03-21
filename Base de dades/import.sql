@@ -98,7 +98,14 @@ VALUES (1, /** Activitat ID*/
 INSERT INTO admin (admin_id, nom, cognom, user, correu, actividad_id, grup_id, tutor)
 VALUES 
 (1, "Pere", "Sànchez", "psanchez","psanchez@sapalomera.cat", 0, 8, 1),
-(2,"Martin","Jaime","mjaime", "m.jaime@sapalomera.cat",1,3,1);
+(2,"Martin","Jaime","mjaime", "m.jaime@sapalomera.cat",1,3,1),
+(3,"Robert","Ventura","rventura","rventura@sapalomera.cat",3,4,1),
+(4,"Pere","Pi","ppi","ppi@sapalomera.cat",4,5,1),
+(5,"Josep","Catà","jcata", "jcata@sapalomera.cat",NULL,6,1),
+(6,"Ricard","Pla","rpla","rpla@sapalomera.cat",NULL,7,1),
+(7,"Xavi","Martin","xmartin","xmartin@sapalomera.cat",NULL,1,1),
+(8,"David","Bancells","dbancells","dbancells@sapalomera.cat",2,2,1),
+(9,"Ainhoa","Zaldua","azaldua", "azaldua@sapalomera.cat",NULL,8,1);
 
 /*INSERIR PROFESSORS*/
 INSERT INTO professor (professor_id, nom, cognom, user, correu, actividad_id,grup_id,tutor )
