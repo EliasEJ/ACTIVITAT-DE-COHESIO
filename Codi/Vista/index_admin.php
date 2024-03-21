@@ -102,7 +102,9 @@ $idProfessor = obtenerIdProfessor();
                                 <br><br>
                                 <div class="row">
                                     <div class="col">
-                                    <button class="btn btn-primary">Generar ordre d'activitats als grups</button>
+                                        <form action="../Controlador/controlador_admin.php" method="post">
+                                            <input type="submit" class="btn btn-primary" value="Generar ordre d'activitats als grups">
+                                        </form>
                                     </div>
                                 </div>
                             </div>

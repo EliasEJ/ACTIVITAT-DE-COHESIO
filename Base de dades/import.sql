@@ -123,36 +123,36 @@ ADD CONSTRAINT `activitat_ibfk_4` FOREIGN KEY (`grup1`) REFERENCES `grup` (`grup
 ALTER TABLE `activitat`
 ADD CONSTRAINT `activitat_ibfk_5` FOREIGN KEY (`grup2`) REFERENCES `grup` (`grup_id`) ;
 
-INSERT INTO enfrentaments(enfrentament_id, actividad_id, nom ,resultat)
-VALUES
-(1, 1, "G1vG8", ""),
-(2, 2, "G1vG7", ""),
-(3, 3, "G1vG6", ""),
-(4, 4, "G1vG5", ""),
-(5, 1, "G1vG4", ""),
-(6, 2, "G1vG3", ""),
-(7, 3, "G1vG2", ""),
-(8, 4, "G2vG3", ""),
-(9, 1, "G2vG4", ""),
-(10, 2, "G2vG5", ""),
-(11, 3, "G2vG6", ""),
-(12, 4, "G2vG7", ""),
-(13, 1, "G2vG8", ""),
-(14, 2, "G3vG4", ""),
-(15, 3, "G3vG5", ""),
-(16, 4, "G3vG6", ""),
-(17, 1, "G3vG7", ""),
-(18, 2, "G3vG8", ""),
-(19, 3, "G4vG5", ""),
-(20, 4, "G4vG6", ""),
-(21, 1, "G4vG7", ""),
-(22, 2, "G4vG8", ""),
-(23, 3, "G5vG6", ""),
-(24, 4, "G5vG7", ""),
-(25, 1, "G5vG8", ""),
-(26, 2, "G6vG7", ""),
-(27, 3, "G6vG8", ""),
-(28, 4, "G7vG8", "");
+-- INSERT INTO enfrentaments(enfrentament_id, actividad_id, nom ,resultat)
+-- VALUES
+-- (1, 1, "G1vG8", ""),
+-- (2, 2, "G1vG7", ""),
+-- (3, 3, "G1vG6", ""),
+-- (4, 4, "G1vG5", ""),
+-- (5, 1, "G1vG4", ""),
+-- (6, 2, "G1vG3", ""),
+-- (7, 3, "G1vG2", ""),
+-- (8, 4, "G2vG3", ""),
+-- (9, 1, "G2vG4", ""),
+-- (10, 2, "G2vG5", ""),
+-- (11, 3, "G2vG6", ""),
+-- (12, 4, "G2vG7", ""),
+-- (13, 1, "G2vG8", ""),
+-- (14, 2, "G3vG4", ""),
+-- (15, 3, "G3vG5", ""),
+-- (16, 4, "G3vG6", ""),
+-- (17, 1, "G3vG7", ""),
+-- (18, 2, "G3vG8", ""),
+-- (19, 3, "G4vG5", ""),
+-- (20, 4, "G4vG6", ""),
+-- (21, 1, "G4vG7", ""),
+-- (22, 2, "G4vG8", ""),
+-- (23, 3, "G5vG6", ""),
+-- (24, 4, "G5vG7", ""),
+-- (25, 1, "G5vG8", ""),
+-- (26, 2, "G6vG7", ""),
+-- (27, 3, "G6vG8", ""),
+-- (28, 4, "G7vG8", "");
 
 
 
