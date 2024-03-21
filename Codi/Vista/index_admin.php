@@ -99,7 +99,16 @@ $idProfessor = obtenerIdProfessor();
                                     <h3>Activitats</h3>
                                     <?php mostrarActivitats(); ?>
                                 </div>
+                                <br><br>
+                                <div class="row">
+                                    <div class="col">
+                                        <form action="../Controlador/controlador_admin.php" method="post">
+                                            <input type="submit" class="btn btn-primary" value="Generar ordre d'activitats als grups">
+                                        </form>
+                                    </div>
+                                </div>
                             </div>
+
                         </div>
                     </div>
                     <div class="tab-pane fade" id="taulaGrups">
