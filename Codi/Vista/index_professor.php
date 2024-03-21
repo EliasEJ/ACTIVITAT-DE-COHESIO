@@ -76,11 +76,10 @@ $idProfessor = obtenerIdProfessor();
                                 </tbody>
                             </table>
 
-                            <input type="submit" name="guardarAsistencia" class="btn btn-success" value="Salvar" id="salvarCheckAsistencia">
+                            <input type="submit" name="guardarAsistencia" class="btn btn-success w-100 mt-2" value="Guardar"> 
                         </form>
-                        <br>
                         <!-- Button trigger modal -->
-                        <button type="button" id="añadirAlumn" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
+                        <button type="button" id="añadirAlumn" class="btn btn-primary w-100 mt-2" data-toggle="modal" data-target="#exampleModalCenter">
                             Afegir alumne
                         </button>
 
@@ -126,28 +125,31 @@ $idProfessor = obtenerIdProfessor();
                         <div class="modal-dialog modal-dialog-centered" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+                                    <h5 class="modal-title" id="exampleModalLongTitle">Afegir alumne</h5>
                                 </div>
                                 <div class="modal-body">
                                     <form id="" action="../Controlador/administrar_alumnado.php" method="POST">
-                                        <label for="newAlumnNombre" class="right">Nom alumne: </label>
-                                        <input type="text" name="newAlumnNombre" id="newAlumnNombre"><br> <br>
-
-                                        <label for="newAlumnApellidos" class="right">Cognom/s alumne: </label>
-                                        <input type="text" name="newAlumnApellidos" id="newAlumnApellidos"><br><br>
-
-                                        <label for="newAlumnCorreu" class="right">Correu alumne: </label>
-                                        <input type="text" name="newAlumnCorreu" id="newAlumnCorreu"><br><br>
-
-                                        <label for="newAlumnGrupo" class="right">Grup</label>
-                                        <?php seleccionGruposNuevoAlumno($idProfessor) ?>
-                                        <br><br>
-                                        <input class="btn btn-success" type="submit" name="guardarAlumno" value="Salvar">
+                                        <div class="form-group">
+                                            <label for="newAlumnNombre" class="w-100">Nom alumne: </label>
+                                            <input type="text" class="form-control" name="newAlumnNombre" id="newAlumnNombre">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="newAlumnApellidos" class="w-100 mt-2">Cognom/s alumne: </label>
+                                            <input type="text" class="form-control" name="newAlumnApellidos" id="newAlumnApellidos">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="newAlumnCorreu" class="w-100 mt-2">Correu alumne: </label>
+                                            <input type="text" class="form-control" name="newAlumnCorreu" id="newAlumnCorreu">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="newAlumnGrupo" class="w-100 mt-2">Grup</label>
+                                            <?php seleccionGruposNuevoAlumno($idProfessor) ?>
+                                        </div>
                                     </form>
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button" id="cerrarModalAñadirAlumn" class="btn btn-secondary" data-dismiss="modal">Close</button>
-
+                                    <input class="btn btn-primary" type="submit" name="guardarAlumno" value="Guardar">
+                                    <button type="button" id="cerrarModalAñadirAlumn" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
                                 </div>
                             </div>
                         </div>

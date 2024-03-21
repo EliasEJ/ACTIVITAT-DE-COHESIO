@@ -192,12 +192,12 @@ function mostrarClassificació()
     }
 }
 
-function mostrarGrupsProfessor($idProfessor)
+function mostrarGrupsProfessor($idProf)
 {
 
     try {
 
-        $idProfessor = $idProfessor;
+        $idProfessor = $idProf;
         $html = "";
 
         $grups = obtenirGrupsProfessor($idProfessor)->fetchAll();
