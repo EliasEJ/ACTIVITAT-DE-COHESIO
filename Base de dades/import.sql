@@ -97,7 +97,8 @@ VALUES (1, /** Activitat ID*/
 /*INSERIR ADMIN*/
 INSERT INTO admin (admin_id, nom, cognom, user, correu, actividad_id, grup_id, tutor)
 VALUES 
-(1, "Pere", "Sànchez", "psanchez","psanchez@sapalomera.cat", 0, 8, 1);
+(1, "Pere", "Sànchez", "psanchez","psanchez@sapalomera.cat", 0, 8, 1),
+(2,"Martin","Jaime","mjaime", "m.jaime@sapalomera.cat",1,3,1);
 
 /*INSERIR PROFESSORS*/
 INSERT INTO professor (professor_id, nom, cognom, user, correu, actividad_id,grup_id,tutor )

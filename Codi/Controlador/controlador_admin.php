@@ -66,4 +66,6 @@ function mostrarGrups(){
         echo "Error mostrarGrupos: " . $e->getMessage();
     }
 }
+
+
 ?>
