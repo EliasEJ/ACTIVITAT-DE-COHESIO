@@ -156,8 +156,9 @@ function eliminarGrup($idGrup)
     }
 }
 
-function dropConstraintsGrupId(){
-    try{
+function dropConstraintsGrupId()
+{
+    try {
         $con = connect();
         $statement = $con->prepare("ALTER TABLE alumne DROP FOREIGN KEY `alumne_ibfk_1`");
         $statement->execute();
@@ -173,15 +174,14 @@ function dropConstraintsGrupId(){
 
         $statement = $con->prepare("ALTER TABLE `activitat` DROP FOREIGN KEY `activitat_ibfk_5`");
         $statement->execute();
-
-    }catch (PDOException $e) {
+    } catch (PDOException $e) {
         echo "Error dropConstraintsGrupId: " . $e->getMessage();
     }
-    
 }
 
-function addConstraintsGrupId(){
-    try{
+function addConstraintsGrupId()
+{
+    try {
         $con = connect();
         $statement = $con->prepare("ALTER TABLE alumne ADD CONSTRAINT `alumne_ibfk_1` FOREIGN KEY (`grup_id`) REFERENCES `grup` (`grup_id`)");
         $statement->execute();
@@ -196,15 +196,14 @@ function addConstraintsGrupId(){
         $statement->execute();
 
         $statement = $con->prepare("ALTER TABLE activitat ADD CONSTRAINT `activitat_ibfk_5` FOREIGN KEY (`grup2`) REFERENCES `grup` (`grup_id`)");
-        $statement->execute();      
-        
-    }catch (PDOException $e) {
+        $statement->execute();
+    } catch (PDOException $e) {
         echo "Error addConstraintsGrupId: " . $e->getMessage();
     }
-    
-} 
+}
 
-function setNullGrupId($idGrup){
+function setNullGrupId($idGrup)
+{
     try {
         $con = connect();
         $statement = $con->prepare("UPDATE alumne
@@ -218,25 +217,23 @@ function setNullGrupId($idGrup){
         WHERE grup_id = :idGrup");
         $statement->execute(array(':idGrup' => $idGrup));
 
-        
+
         $statement = $con->prepare("UPDATE `admin`
         SET grup_id = NULL
         WHERE grup_id = :idGrup");
         $statement->execute(array(':idGrup' => $idGrup));
 
-        
+
         $statement = $con->prepare("UPDATE `activitat`
         SET grup1 = NULL
         WHERE grup1 = :idGrup");
         $statement->execute(array(':idGrup' => $idGrup));
 
-        
+
         $statement = $con->prepare("UPDATE `activitat`
         SET grup2 = NULL
         WHERE grup2 = :idGrup");
         $statement->execute(array(':idGrup' => $idGrup));
-        
-        
     } catch (PDOException $e) {
         echo "Error setNullGrupId: " . $e->getMessage();
     }
@@ -259,7 +256,8 @@ function modificarGrupUsuari($idAlumne, $idGrup)
     }
 }
 
-function reordenarGrupo(){
+function reordenarGrupo()
+{
     try {
         $connexio = connect();
         $statement = $connexio->prepare("ALTER TABLE grup DROP grup_id");
@@ -268,13 +266,14 @@ function reordenarGrupo(){
         $statement->execute();
         $statement = $connexio->prepare("ALTER TABLE grup ADD grup_id int NOT NULL AUTO_INCREMENT PRIMARY KEY FIRST");
         $statement->execute();
-    } catch (PDOException $e) { 
+    } catch (PDOException $e) {
         // mostrarem els errors
         echo "Error: reordenarGrupo " . $e->getMessage();
     }
 }
 
-function obtenerAlumnosTotal(){
+function obtenerAlumnosTotal()
+{
     try {
         $con = connect();
         $statement = $con->prepare("SELECT * FROM alumne");
@@ -282,5 +281,49 @@ function obtenerAlumnosTotal(){
         return $statement;
     } catch (PDOException $e) {
         echo "Error obtenerAlumnosTotal: " . $e->getMessage();
+    }
+}
+
+function obtenerMaterial()
+{
+    try {
+        $con = connect();
+        $statement = $con->prepare("SELECT * FROM material");
+        $statement->execute();
+        return $statement;
+    } catch (PDOException $e) {
+        echo "Error obtenerMaterial: " . $e->getMessage();
+    }
+}
+
+function actualizarComprarMaterial($material_id, $comprado){
+    try {
+        $con = connect();
+        $statement = $con->prepare("UPDATE material 
+        SET comprar = :comprado
+        WHERE material_id = :material_id");
+        $statement->execute(
+            array(
+                ':comprado' => $comprado,
+                ':material_id' => $material_id
+            )
+        );
+    } catch (PDOException $e) {
+        echo "Error actualizarComprarMaterial: " . $e->getMessage();
+    }
+}
+
+function obtenerMaterialUnico($material_id){
+    try {
+        $con = connect();
+        $statement = $con->prepare("SELECT * FROM material WHERE material_id = :material_id");
+        $statement->execute(
+            array(
+                ':material_id' => $material_id
+            )
+        );
+        return $statement;
+    } catch (PDOException $e) {
+        echo "Error obtenerMaterialUnico: " . $e->getMessage();
     }
 }

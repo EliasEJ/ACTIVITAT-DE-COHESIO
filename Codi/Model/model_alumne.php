@@ -159,3 +159,14 @@ function obtenirPuntuacioGrup($grupId){
         echo "Error obtenirPuntuacioGrup: " . $e->getMessage();
     }
 }
+
+function obtenirPosMapA(){
+    try{
+        $con = connect();
+        $statement = $con->prepare("SELECT posicion_id, nom FROM activitat");
+        $statement->execute();
+        return $statement;
+    }catch(PDOException $e){
+        echo "Error obtenirPosMap: " . $e->getMessage();
+    }
+}

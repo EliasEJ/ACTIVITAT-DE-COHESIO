@@ -1,7 +1,6 @@
 <?php
 require_once("../Model/model_professor.php");
 include_once("../Model/model_activitat.php");
-//include_once("controlador.php");
 include_once("../Model/model.php");
 
 
@@ -111,7 +110,6 @@ function mostrarActivitats()
             $html .= "<p><b>On es jugará?</b> Posició número: " . $act['posicion_id'] . "</p>";
             $html .= "<p><b>Grups principals:</b> Grup" . $act['grup1'] . " VS Grup" . $act['grup2'] . "</p>";
             $html .= "<p><b> Professor encarregat: </b>" . $professor['nom'] . " " . $professor['cognom'] . "</p>";
-            $html .= "<button class='btn btn-danger deleteAct' ><a style='color:white' href='../Controlador/administrar_activitat.php?accio=delete&idAct=" . $act['actividad_id'] . "  '>Eliminar Activitat</a></button>";
             $html .= "</div>";
             $html .= "</div>";
             $html .= "</div>";
@@ -130,18 +128,35 @@ function mostrarAdministrarActivitat($idProfe)
         require_once("../Model/model_activitat.php");
         $idProfessor = $idProfe;
         $activitat = obtenirActivitatUnic($idProfessor)->fetch();
+        $material = obtenerMaterial()->fetchAll();
+        $materialUnic = obtenerMaterialUnico($activitat['material_id'])->fetch();
         $html = "";
         if ($activitat != null) {
             $html .= "<div class='col'>";
             $html .= "<form action='../Controlador/administrar_activitat.php' method='POST'>";
             $html .= "<h3>La teva activitat</h3><br>";
             $html .= "<label><b>Identificador activitat</b></label><br>";
-            $html .= "<label >Activitat </label><input type='number' name='idAct' value='" . $activitat['actividad_id'] . "' readonly></input><br><br>";
+            $html .= "<label >Activitat </label><input type='number' name='idAct' value='" . $activitat['actividad_id'] . "' readonly></input><br>";
             $html .= "<label><b>Nom d'activitat</b></label><br>";
-            $html .= "<input name='nomAct' id='nomAct' type='text' value=" . $activitat['nom'] . "><br><br>";
+            $html .= "<input name='nomAct' id='nomAct' type='text' value=" . $activitat['nom'] . "><br>";
             $html .= "<label><b>Descripció</b></label><br>";
-            $html .= "<textarea id='descripcio' name='descripcioAct' cols='40' rows='10'>" . $activitat['descripcio'] . "</textarea><br><br>";
-            $html .= "<label><b>Grups principals:</b> Grup" . $activitat['grup1'] . " VS Grup" . $activitat['grup2'] . "</label><br><br>";
+            $html .= "<textarea id='descripcio' name='descripcioAct' cols='40' rows='10'>" . $activitat['descripcio'] . "</textarea><br>";
+            $html .= "<label><b>Grups principals:</b> Grup" . $activitat['grup1'] . " VS Grup" . $activitat['grup2'] . "</label><br>";
+            $html .= "<label for='selectMaterial'><b>Seleccionar Material</b></label>";
+            $html .= "<select class='form-select form-select-sm' name='materialActProf' aria-label='.form-select-sm'>";
+            foreach ($material as $mat) {
+                $selected = ($activitat['material_id'] == $mat['material_id']) ? "selected" : "";
+                $html .= "<option value='".$mat['material_id'] ."' $selected >".$mat['nom']."</option>";
+            }
+            $html .= "</select><br>";
+            $html .= "<label for='comprarMaterial'><b> Comprar material?</b></label>";
+            $html .= "<select class='form-select form-select-sm' name='comprarMaterial' aria-label='.form-select-sm' id='comprarMaterial'>";
+            $html .= "<option value='0'>No</option>";
+            if($materialUnic['comprar'] == 1){
+                $html .= "<option value='1' selected>Si</option>";
+            }else $html .= "<option value='1'>Si</option>";
+
+            $html .= "</select><br>";
             $html .= "<input class='btn btn-success' type='submit' id='saveActivitat' value='Salvar'></input>";
             $html .= "</form><br>";
             $html .= "<button class='btn btn-danger admAct' id='cancelActivitat'><a href='../Vista/index_professor.php' style='color:white'>Cancelar </a></button><br>";
@@ -177,12 +192,12 @@ function mostrarClassificació()
     }
 }
 
-function mostrarGrupsProfessor($idProfessor)
+function mostrarGrupsProfessor($idProf)
 {
 
     try {
 
-        $idProfessor = $idProfessor;
+        $idProfessor = $idProf;
         $html = "";
 
         $grups = obtenirGrupsProfessor($idProfessor)->fetchAll();
@@ -302,4 +317,29 @@ function seleccionGruposNuevoAlumno($idProfe){
 
     $html .= "</select>";
     echo $html;
+}
+
+function generaraPosMap() {
+    $posMap = obtenirPosMapA();
+    if ($posMap instanceof PDOStatement) {
+        $resultado = $posMap->fetchAll(PDO::FETCH_ASSOC);
+        if ($resultado) {
+            return $resultado;
+        }
+    }
+    return null;
+}
+
+function mostrarPosMap($posMap) {
+    if ($posMap) {
+        $html = "<table class='table table-striped border'>";
+        $html .= "<tr><th>Posicio</th><th>Nom</th></tr>";
+        foreach ($posMap as $pos) {
+            $html .= "<tr><td>" . $pos['posicion_id'] . "</td><td>" . $pos['nom'] . "</td></tr>";
+        }
+        $html .= "</table>";
+        echo $html;
+    } else {
+        echo "<p style='color:red;'>No se pudo obtener la posición del grupo.</p>";
+    }
 }

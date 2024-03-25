@@ -1,6 +1,9 @@
 <?php
 require_once("../Model/model_admin.php");
-function mostrarUsuariAdmin($idProfe){
+require_once("../Model/model.php");
+
+function mostrarUsuariAdmin($idProfe)
+{
     try {
         $profe = obtenirProfessorUnic($idProfe)->fetch();
         $html = "<div class='btn-group'>";
@@ -26,12 +29,13 @@ function mostrarUsuariAdmin($idProfe){
     }
 }
 
-function mostrarAlumnes(){
-    try{
+function mostrarAlumnes()
+{
+    try {
         $alumnes = obtenirAlumnes()->fetchAll();
         $html = "<div class='container'>";
         $html .= "<div class='row'>";
-        foreach ($alumnes as $alumne){
+        foreach ($alumnes as $alumne) {
             $html .= "<tr>";
             $html .= "<td>" . $alumne['cognom'] . ", " . $alumne['nom'] . "</td>";
             $html .= "<td>" . "Grup " . $alumne['grup_id'] . "</td>";
@@ -42,41 +46,62 @@ function mostrarAlumnes(){
         $html .= "</div>";
         $html .= "</div>";
         echo $html;
-    }catch(PDOException $e){
+    } catch (PDOException $e) {
         echo "Error mostrarActivitatAdmin: " . $e->getMessage();
     }
 }
-function mostrarGrups(){
-    try{
-        $grups = obtenimGrups()->fetchAll();
-        $html = "";
-
+function mostrarGrups()
+{
+    try {
+        $grups = mostrarGrupos()->fetchAll();
+        $html = "<div class='container'>";
+        $html .= "<div class='row'>";
         foreach ($grups as $grup) {
-
-            $html .= "<div class='accordion-item'>";
-            $html .= "";
-            $html .= "<h2 class='accordion-header' id='accordionActividad" . $grup['actividad_id'] . "'>";
-            $html .= "<button class='accordion-button collapsed' data-bs-toggle='collapse' data-bs-target='#infoActividad" . $grup['actividad_id'] . "' aria-expanded='false'>";
-            $html .= "Activitat "  . $grup['nom'];
-            $html .= "</button>";
-            $html .= "</h2>";
-            $html .= "<div id='infoActividad" . $grup['actividad_id'] . "' class='accordion-collapse collapse' aria-labelledby='flush-headingOne' data-bs-parent='#accordionActivitatsPadre'>";
-            $html .= "<div class='accordion-body'>";
-            $html .= "<h3>" . $grup['nom'] . "</h3><br>";
-            $html .= "<p><b>Descripció</b></p><p>" . $grup['descripcio'] . "</p>";
-            $html .= "<p><b>Material: </b>" . $material['nom'] . "</p>";
-            $comprar =  $material['comprar'] == 1 ? "Si" : "No";
-            $html .= "<p><b>Comprar material? </b> ". $comprar ."</p>";
-            $html .= "<p><b>On es jugará?</b> Posició número: " . $grup['posicion_id'] . "</p>";
-            $html .= "<p><b>Grups principals:</b> Grup" . $grup['grup1'] . " VS Grup" . $grup['grup2'] . "</p>";
-            $html .= "<p><b> Professor encarregat: </b>" . $professor['nom'] . " " . $professor['cognom'] . "</p>";
-            $html .= "<button class='btn btn-danger deleteAct' ><a style='color:white' href='../Controlador/administrar_activitat.php?accio=delete&idAct=" . $grup['actividad_id'] . "  '>Eliminar Activitat</a></button>";
-            $html .= "</div>";
-            $html .= "</div>";
-            $html .= "</div>";
+            $html .= "<tr>";
+            $html .= "<td>" . $grup['grup_id'] . "</td>";
+            $html .= "<td>" . $grup['nom'] . "</td>";
+            $html .= "<td>" . $grup['tutor'] . "</td>";
+            $html .= "<td>" . $grup['curs'] . "</td>";
+            $html .= "</tr>";
         }
-    }catch(PDOException $e){
+        $html .= "</div>";
+        $html .= "</div>";
+        echo $html;
+    } catch (PDOException $e) {
         echo "Error mostrarGrupos: " . $e->getMessage();
     }
 }
+
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Paso 1: Obtener la lista de grupos y actividades disponibles
+    $grupos = obtenirGrups()->fetchAll();
+    $actividades = obtenirActivitats()->fetchAll();
+
+    // Paso 2: Generar todos los posibles enfrentamientos entre grupos para cada actividad
+    $enfrentamientos = [];
+    foreach ($actividades as $actividad) {
+        $enfrentamientos[$actividad['actividad_id']] = [];
+        foreach ($grupos as $grupo1) {
+            foreach ($grupos as $grupo2) {
+                if ($grupo1['grup_id'] != $grupo2['grup_id']) {
+                    $enfrentamientos[$actividad['actividad_id']][] = [$grupo1['grup_id'], $grupo2['grup_id']];
+                }
+            }
+        }
+    }
+
+    // Paso 3: Asignar un enfrentamiento diferente para cada actividad
+    foreach ($enfrentamientos as $actividad_id => &$enfrentamiento_actividad) {
+        shuffle($enfrentamiento_actividad); // Aleatorizar el orden de los enfrentamientos
+        $enfrentamientos[$actividad_id] = array_slice($enfrentamiento_actividad, 0, count($grupos)); // Limitar a un enfrentamiento por grupo
+    }
+
+    guardarEnfrentamientos($enfrentamientos);
 ?>
+    <script>
+        location.replace("../Vista/index_admin.php")
+    </script>
+<?php
+
+}

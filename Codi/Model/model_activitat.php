@@ -1,13 +1,14 @@
 <?php
-function actualizarActividad($id, $nombre, $descripcion){
+function actualizarActividad($id, $nombre, $descripcion, $material_id){
     try{
         $con = connect();
-        $statement = $con->prepare("UPDATE activitat SET nom = :nombreAct, descripcio = :descAct WHERE actividad_id = :idAct");
+        $statement = $con->prepare("UPDATE activitat SET nom = :nombreAct, descripcio = :descAct, material_id = :material_id WHERE actividad_id = :idAct");
         $statement->execute(
             array(
                 ':nombreAct' => $nombre,
                 ':descAct' => $descripcion,
-                ':idAct' => $id
+                ':idAct' => $id,
+                ':material_id' => $material_id
             )
         );
     }catch(PDOException $e){

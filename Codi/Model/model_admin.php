@@ -1,5 +1,22 @@
 <?php
 
+function guardarEnfrentamientos($enfrentamientos){
+    try {
+        $con = connect();
+        foreach ($enfrentamientos as $actividad_id => $enfrentamiento_actividad) {
+            foreach ($enfrentamiento_actividad as $enfrentamiento) {
+                $grupo1_id = $enfrentamiento[0];
+                $grupo2_id = $enfrentamiento[1];
+                $statement = $con->prepare("INSERT INTO enfrentaments (actividad_id, grupo1_id, grupo2_id) VALUES (?, ?, ?)");
+                $statement->execute([$actividad_id, $grupo1_id, $grupo2_id]);
+            }
+        }
+        echo "Enfrentamientos generados y guardados exitosamente.";
+    } catch (PDOException $e) {
+        echo "Error al generar y guardar enfrentamientos: " . $e->getMessage();
+    }
+}
+
 function obtenirNomAdmin ($email){
     try{
         $con = connect();

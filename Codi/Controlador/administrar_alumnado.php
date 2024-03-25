@@ -33,7 +33,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             // Obtener el nuevo identificador de grupo seleccionado para este alumno
             $confAsis = $_POST['asist'][$alumne_id];
             actualizarAsistencia($alumne_id, $confAsis);
-           
+            ?>
+            <script>
+                alert("Assistència dels alumnes canviats correctament.")
+            </script>
+        <?php
         }
     }
 
