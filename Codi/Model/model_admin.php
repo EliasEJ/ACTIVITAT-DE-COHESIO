@@ -22,7 +22,7 @@ function obtenirAlumnes(){
     }
 }
 
-function mostrarGrupos(){
+function obtenimGrups(){
     try{
         $con = connect();
         $statement = $con->prepare("SELECT * FROM grup");

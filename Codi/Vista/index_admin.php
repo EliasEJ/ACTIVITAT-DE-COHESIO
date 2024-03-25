@@ -113,7 +113,7 @@ $idProfessor = obtenerIdProfessor();
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <?php mostrarGrupos(); ?>
+                                    <?php mostrarGrups(); ?>
                                 </tbody>
                             </table>
                             <button>Generar els grups</button>
@@ -131,7 +131,7 @@ $idProfessor = obtenerIdProfessor();
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php mostrarClassificació() ?>
+                                <?php mostrarClassificació(); ?>
                             </tbody>
                         </table>
                     </div>
@@ -199,9 +199,6 @@ $idProfessor = obtenerIdProfessor();
                 </div>
             </div>
         </footer>
-    <script>
-        let table = new DataTable('#myTable');
-    </script>
 
 </body>
 
