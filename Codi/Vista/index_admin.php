@@ -143,6 +143,11 @@ $idProfessor = obtenerIdProfessor();
                                 <?php mostrarClassificació(); ?>
                             </tbody>
                         </table>
+
+                        <div>
+                            <button id="generarDiplomas">Generar diplomes</button>
+                        </div>
+
                     </div>
 
 
@@ -229,9 +234,9 @@ $idProfessor = obtenerIdProfessor();
                 </div>
             </div>
         </footer>
-    <script>
+    <!-- <script>
         let table = new DataTable('#myTable');
-    </script>
+    </script> -->
 
 </body>
 
