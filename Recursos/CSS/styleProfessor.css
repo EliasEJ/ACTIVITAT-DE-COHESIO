@@ -42,10 +42,6 @@ html {
     min-height: 100%;
 }
 
-body {
-    margin-bottom: 10%;
-}
-
 .blog-footer {
     position: absolute;
     bottom: 0;
@@ -84,14 +80,12 @@ a.boto{
     color: white;
     text-decoration: none;
 }
-body {
-    margin-bottom: 10%;
-}
 .footer {
-    position: absolute;
-    bottom: 0;
+    position: static;
+    margin-top: 40px;
+    bottom: 0px;
     width: 100%;
-    padding: 1rem 0;
+    padding-top: 1rem 0;
     text-align: center;
     background-color: #f5f5f5;
 }

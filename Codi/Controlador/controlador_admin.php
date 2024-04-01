@@ -39,7 +39,12 @@ function mostrarAlumnes()
             $html .= "<tr>";
             $html .= "<td>" . $alumne['cognom'] . ", " . $alumne['nom'] . "</td>";
             $html .= "<td>" . "Grup " . $alumne['grup_id'] . "</td>";
-            $html .= "<td> <input type='checkbox' name='asistAlumn[]' value='check-" . $alumne['alumne_id'] . "' id='check-" . $alumne['alumne_id'] . "'> </td>";
+            $html .= "<td> <select class='form-select form-select-sm' name='asist[" . $alumne['alumne_id'] . "]'  aria-label='.form-select-sm' style='width:100px'> ";
+            $html .= "<option value='0'>No</option> ";
+            if($alumne['asistencia_confirmada'] == '1'){
+                $html .= "<option value='1' selected>Sí</option>;";
+            }else $html .= "<option value='1'>Sí</option>;";
+
             $html .= "<td>" . ($alumne['asistencia'] == 1 ? "Sí" : "No") . "</td>";
             $html .= "</tr>";
         }
@@ -72,6 +77,37 @@ function mostrarGrups()
     }
 }
 
+function mostrarActivitatsAdmin()
+{
+    try {
+        $activitats = obtenirActivitats()->fetchAll();
+        $html = "";
+        foreach ($activitats as $act) {
+            $professor = obtenirProfessorUnic($act['professor_id'])->fetch();
+            $html .= "<div class='accordion-item'>";
+            $html .= "";
+            $html .= "<h2 class='accordion-header' id='accordionActividad" . $act['actividad_id'] . "'>";
+            $html .= "<button class='accordion-button collapsed' data-bs-toggle='collapse' data-bs-target='#infoActividad" . $act['actividad_id'] . "' aria-expanded='false'>";
+            $html .= "Activitat " . $act['actividad_id'] . " - " . $act['nom'];
+            $html .= "</button>";
+            $html .= "</h2>";
+            $html .= "<div id='infoActividad" . $act['actividad_id'] . "' class='accordion-collapse collapse' aria-labelledby='flush-headingOne' data-bs-parent='#accordionActivitatsPadre'>";
+            $html .= "<div class='accordion-body'>";
+            $html .= "<h3>" . $act['nom'] . "</h3><br>";
+            $html .= "<p><b>Descripció</b></p><p>" . $act['descripcio'] . "</p>";
+            $html .= "<p><b>On es jugará?</b> Posició número: " . $act['posicion_id'] . "</p>";
+            $html .= "<p><b>Grups principals:</b> Grup" . $act['grup1'] . " VS Grup" . $act['grup2'] . "</p>";
+            $html .= "<p><b> Professor encarregat: </b>" . $professor['nom'] . " " . $professor['cognom'] . "</p>";
+            $html .= "<button class='btn btn-primary deleteAct' ><a style='color:white' href='../Controlador/administrar_activitat.php?accio=delete&idAct=" . $act['actividad_id'] . "  '>Eliminar Activitat</a></button>";
+            $html .= "</div>";
+            $html .= "</div>";
+            $html .= "</div>";
+        }
+        echo $html;
+    } catch (PDOException $e) {
+        echo "Error mostrarActivitats: " . $e->getMessage();
+    }
+}
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Paso 1: Obtener la lista de grupos y actividades disponibles
@@ -105,3 +141,52 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <?php
 
 }
+
+function crearGrupsAutomaticament(){
+        $alumnes = obtenirAlumnes()->fetchAll(PDO::FETCH_ASSOC);
+
+        //Ordenem els alumnes per curs, classe i any, si no es fes aixo es crearian molts mes grups dels necesaris
+        usort($alumnes, function($a, $b) {
+            if ($a['curs'].$a['classe'].$a['any'] == $b['curs'].$b['classe'].$b['any']) {
+                return 0;
+            }
+            return ($a['curs'].$a['classe'].$a['any'] > $b['curs'].$b['classe'].$b['any']) ? 1 : -1;
+        });
+    
+        // Eliminem tots els grups existents
+        eliminarGrups();
+        $grupo = [];
+        $cursoActual = '';
+        $claseActual = '';
+        $anyActual = '';
+        $contador = 0;
+        foreach($alumnes as $alumno) {
+            // Si el curso o la clase cambia, o el grupo tiene 20 alumnos, guarda el grupo y crea uno nuevo
+            if ($alumno['curs'] != $cursoActual || $alumno['classe'] != $claseActual || $alumno['any'] != $anyActual || $contador > 19) {
+                $contador = 0;
+                if (!empty($grupo)) {
+                    guardarGrupo($grupo);
+                }
+                $alumoId = $alumno['alumne_id'];
+                $cursoActual = $alumno['curs'];
+                $claseActual = $alumno['classe'];
+                $anyActual = $alumno['any'];
+            }
+            $contador++;
+            // Añade el alumno al grupo
+            $grupo[] = $alumno;
+        }
+    
+        // Guarda el último grupo si no está vacío
+        if (!empty($grupo)) {
+            guardarGrupo($grupo);
+        }
+        assignarGrups($grupo);
+        //Com es una accio que nomes pot fer l'administrador li farem una redireccio a la url de l'index de l'administrador
+        ?>
+        <!-- <script>
+            location.replace("../Vista/index_admin.php")
+        </script> -->
+        <?php
+    }
+?>

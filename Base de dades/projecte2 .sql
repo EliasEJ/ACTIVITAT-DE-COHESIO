@@ -40,7 +40,7 @@ CREATE TABLE IF NOT EXISTS `activitat` (
   `grup2` int(11),
   `material_id` int(11) NOT NULL,
   PRIMARY KEY (`actividad_id`),
-  UNIQUE KEY `fk_professor_id` (`professor_id`),
+  KEY `fk_professor_id` (`professor_id`),
   KEY `fk_material_id` (`material_id`) USING BTREE,
   KEY `fk_posicion_id` (`posicion_id`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -198,10 +198,10 @@ ALTER TABLE `enfrentaments`
   ADD CONSTRAINT `enfrentaments_ibfk_1` FOREIGN KEY (`actividad_id`) REFERENCES `activitat` (`actividad_id`) ;
 
 --
--- Filtros para la tabla `gr  up`
+-- Filtros para la tabla `grup`
 --
-ALTER TABLE `alumne`
-  ADD CONSTRAINT `alumne_ibfk_1` FOREIGN KEY (`grup_id`) REFERENCES `grup` (`grup_id`) ;
+ALTER TABLE `alumne` 
+ADD CONSTRAINT `alumne_ibfk_1` FOREIGN KEY (`grup_id`) REFERENCES `grup` (`grup_id`);
 
 
 --
