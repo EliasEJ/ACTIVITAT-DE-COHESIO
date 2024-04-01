@@ -145,7 +145,7 @@ $idProfessor = obtenerIdProfessor();
                         </table>
 
                         <div>
-                            <button id="generarDiplomas">Generar diplomes</button>
+                            <button id="generarDiplomas" class="btn btn-warning w-100"><b>Generar diplomes</b></button>
                         </div>
 
                     </div>
@@ -222,18 +222,22 @@ $idProfessor = obtenerIdProfessor();
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-4 col-md-4 col-sm-12 contacte">
-                    <h4 class="marginLeft">CONTACTE</h4>
-                    <p class="marginLeft">Telèfon: <a href="tel:+34 972 350 909">972 350 909</a></p>
-                    <p class="marginLeft">Email: <a href="mailto:info@sapalomera.cat">info@sapalomera.cat</a></p>
-                </div>
-                <div class="col-lg-4 col-md-4 col-sm-12 contacte">
-                    <h4>IDIOMES</h4>
-                    <img width="54" alt="Flag of Catalonia" src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/ce/Flag_of_Catalonia.svg/64px-Flag_of_Catalonia.svg.png">
-                    <img width="54" alt="Flag of Spain" src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/Flag_of_Spain.svg/64px-Flag_of_Spain.svg.png">
-                </div>
             </div>
-        </footer>
+        </div>
+            <div class="col-4 col-md4 contacte">
+                <h4 class="marginLeft">CONTACTE</h4>
+                <p class="marginLeft">Telèfon: <a href="tel:+34 972 350 909">972 350 909</a></p>
+                <p class="marginLeft">Email: <a href="mailto:info@sapalomera.cat">info@sapalomera.cat</a></p>
+            </div>
+            <div class="col-4 col-md4 contacte">
+                <h4>IDIOMES</h4>
+                <img width="54" alt="Flag of Catalonia" src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/ce/Flag_of_Catalonia.svg/64px-Flag_of_Catalonia.svg.png">
+                <img width="54" alt="Flag of Spain" src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/Flag_of_Spain.svg/64px-Flag_of_Spain.svg.png">
+            </div>
+        </div>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+
     <!-- <script>
         let table = new DataTable('#myTable');
     </script> -->

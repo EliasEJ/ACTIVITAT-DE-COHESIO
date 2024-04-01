@@ -116,3 +116,7 @@ a.boto{
     color: white;
     text-decoration: none;
 }
+
+.modal {
+    z-index: 1050; /* Aumenta este número si es necesario */
+}

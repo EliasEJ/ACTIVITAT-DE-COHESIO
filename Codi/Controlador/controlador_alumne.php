@@ -289,7 +289,7 @@ function generaraPosMap() {
 function mostrarPosMap($posMap) {
     if ($posMap) {
         $html = "<table class='table table-striped border'>";
-        $html .= "<tr><th>Posicio</th><th>Nom</th></tr>";
+        $html .= "<tr><th>Posició</th><th>Nom</th></tr>";
         foreach ($posMap as $pos) {
             $html .= "<tr><td>" . $pos['posicion_id'] . "</td><td>" . $pos['nom'] . "</td></tr>";
         }
