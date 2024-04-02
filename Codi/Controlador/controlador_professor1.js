@@ -34,7 +34,6 @@ $("#crearActividad").click(function () {
     $("#modalCrearActividad").modal('show');
 });
 
-
 $("#cerrarModalAñadirAlumn").click(function () {
     $("#modalAñadirAlumn").modal('hide');
 })
