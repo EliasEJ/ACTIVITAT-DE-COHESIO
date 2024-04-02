@@ -1,5 +1,5 @@
 <?php
-require 'C:\xampp\htdocs\ACTIVITAT-DE-COHESIO\vendor\setasign\fpdf\fpdf.php';
+require '..\..\vendor\setasign\fpdf\fpdf.php';
 
 try {
     $db = new PDO('mysql:host=localhost;dbname=projecte2', 'root', '');
