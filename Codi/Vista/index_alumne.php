@@ -17,6 +17,7 @@
 session_start();
 require_once '../Controlador/controlador_alumne.php';
 include '../../Recursos/autentificacion.php';
+require_once '../Model/model_admin.php';
 $email = $_SESSION['email'];
 
 if (!isset($_COOKIE['asistencia_confirmada'])) {
@@ -27,7 +28,9 @@ if (!isset($_COOKIE['asistencia_confirmada'])) {
           </script>";
 }
 ?>
-
+<?php
+if(!acabat()){
+?>
 <div class="modal fade" id="modalAsistencia" tabindex="-1" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
@@ -284,6 +287,16 @@ if (!isset($_COOKIE['asistencia_confirmada'])) {
 </footer>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+
+<?php
+}else{
+?>
+<div>
+
+</div>
+<?php
+}
+?>
 </body>
 
 </html>

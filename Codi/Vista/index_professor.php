@@ -20,6 +20,9 @@ $idProfessor = obtenerIdProfessor();
 
 
 <body>
+<?php
+    if(!començar()){
+    ?>
     <div class="content">
         <div class="row g-0">
             <div class="col-12">
@@ -209,7 +212,15 @@ $idProfessor = obtenerIdProfessor();
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
-
+    <?php
+    }else{
+    ?>
+    <div>
+        <h1>Activitat: </h1>
+    </div>
+    <?php
+    }
+    ?>
 </body>
 
 </html>

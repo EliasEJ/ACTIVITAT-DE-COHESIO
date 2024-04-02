@@ -18,11 +18,13 @@
 
 include_once("../Controlador/controlador_professor.php");
 include_once("../Controlador/controlador_admin.php");
+require_once("../Model/model_admin.php");
 $idProfessor = obtenerIdProfessor();
 ?>
 
 
 <body>
+
     <div class="content">
         <div class="row g-0">
             <div class="col-12">
@@ -92,6 +94,24 @@ $idProfessor = obtenerIdProfessor();
                             <div class="col">
                                 <div class="accordion accordion-flush" id="accordionActivitatsPadre">
                                     <h3>Activitats</h3>
+                                    <?php
+                                        if(acabat() && començar()){
+                                            echo "
+                                            <form action='../Controlador/controlador_admin.php' method='post'>
+                                                <input type='hidden' name='action' value='comencarJoc'>
+                                                <input type='submit' id='començarJoc' class='btn btn-success w-100 mt-2' value='Començar joc'>
+                                            </form>";
+                                        }
+                                    ?>
+                                    <?php
+                                        if(començar()){
+                                            echo "
+                                            <form action='../Controlador/controlador_admin.php' method='post'>
+                                                <input type='hidden' name='action' value='acabarJoc'>
+                                                <input type='submit' id='acabarJoc' class='btn btn-success w-100 mt-2' value='Acabar Joc'>
+                                            </form>";
+                                        }
+                                    ?>
                                     <!-- Button trigger modal Crear activitat-->
                                     <button type="button" id="crearActividad" class="btn btn-primary w-100 mt-2">
                                         Crear activitat nova
@@ -342,7 +362,6 @@ $idProfessor = obtenerIdProfessor();
             let table2 = new DataTable('#myTable2');
         </script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
-
 </body>
 
 </html>

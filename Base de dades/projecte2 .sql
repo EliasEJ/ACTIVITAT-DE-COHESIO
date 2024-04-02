@@ -175,6 +175,20 @@ CREATE TABLE IF NOT EXISTS `professor` (
   KEY `fk_grup_id` (`grup_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `accions`
+--
+
+DROP TABLE IF EXISTS `accions`;
+CREATE TABLE IF NOT EXISTS `accions` (
+  `id` int(1) NOT NULL AUTO_INCREMENT,
+  `comencar` INT NOT NULL,
+  `final` INT NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
 --
 -- Restricciones para tablas volcadas
 --

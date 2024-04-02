@@ -83,33 +83,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 }
 
-function mostrarUsuariAdmin($idProfe)
-{
-    try {
-        $profe = obtenirProfessorUnic($idProfe)->fetch();
-        $html = "<div class='btn-group'>";
-        $html .= "<button type='button' class='btn dropdown-toggle' data-bs-toggle='dropdown' aria-expanded='false'>";
-        if (isset($_SESSION['picture'])) {
-            $picture = $_SESSION['picture'];
-            $html .= "<img src='$picture' alt='Imagen de perfil del usuario' class='imgPerfil'>";
-        }
-        $nombre = $profe['user'];
-        if ($nombre) {
-            $html .= $nombre;
-        }
-        $html .= "</button>";
-        $html .= "<ul class='dropdown-menu'>";
-        $html .= "<li><a class='dropdown-item ' href='../Vista/index_alumne.php'>Vista Alumne</a></li>";
-        $html .= "<li><a class='dropdown-item ' href='../Vista/index_professor.php'>Vista Professor</a></li>";
-        $html .= "<li><a class='dropdown-item ' href='../Controlador/logout.php'>Tancar sessió</a></li>";
-        $html .= "</ul>";
-        $html .= "</div>";
-        echo $html;
-    } catch (PDOException $e) {
-        echo "Error mostrarUsuari: " . $e->getMessage();
-    }
-}
-
 function mostrarAlumnes()
 {
     try {
@@ -351,7 +324,7 @@ function crearGrupsAutomaticament()
     $contador = 0;
     foreach ($alumnes as $alumno) {
         // Si el curso o la clase cambia, o el grupo tiene 20 alumnos, guarda el grupo y crea uno nuevo
-        if ($alumno['curs'] != $cursoActual || $alumno['classe'] != $claseActual || $alumno['any'] != $anyActual || $contador > 19) {
+        if ($alumno['curs'] != $cursoActual || $alumno['classe'] != $claseActual || $alumno['any'] != $anyActual) {
             $contador = 0;
             if (!empty($grupo)) {
                 guardarGrupo($grupo);
@@ -376,38 +349,37 @@ function crearGrupsAutomaticament()
     <!-- <script>
             location.replace("../Vista/index_admin.php")
         </script> -->
-<?php
-}
-function mostrarGrupsAdmin()
-{
-    try {
-        $html = "";
-
-        $grups = obtenimGrups()->fetchAll();
-
-        $html .= "<div class='col'><h3>Grups</h3><br>";
-        foreach ($grups as $gr) {
-            $html .= "<table class='table table-striped'";
-            $html .= "<tbody>";
-            $html .= "<tr>";
-            $html .= "<td>";
-            $html .= "<label>" . $gr['nom'] . "</label>";
-            $html .= "</td>";
-            $html .= "<td>";
-            $html .= "<button class='btn btn-danger deleteGrup'><a href='../Controlador/administrar_grup.php?accio=eliminar&idGrup=" . $gr['grup_id'] . "  ' style='color:white;'>Eliminar</a></button>";
-            $html .= "</td>";
-            $html .= "</tr>";
-            $html .= "</tbody>";
-            $html .= "</table>";
-        }
-        $html .= "<button class='btn btn-primary'><a href='../Controlador/administrar_grup.php?accio=crear' style='color:white;'>Crear Grup</a></button>";
-        $html .= "<button type='submit' name='generarGrups' class='btn btn-primary'><a href='?generarGrups=true' class='btn btn-primary'>Generar Grups</a></button>";
-        $html .= "</div>";
-        return $html;
-    } catch (PDOException $e) {
-        echo "Error mostrarGrupsProfessor:" . $e->getMessage();
+        <?php
     }
-}
+    function mostrarGrupsAdmin(){
+        try {
+            $html = "";
+    
+            $grups = obtenimGrups()->fetchAll();
+    
+            $html .= "<div class='col'><h3>Grups</h3><br>";
+            foreach ($grups as $gr) {
+                $html .= "<table class='table table-striped'";
+                $html .= "<tbody>";
+                $html .= "<tr>";
+                $html .= "<td>";
+                $html .= "<label>" . $gr['nom'] . "</label>";
+                $html .= "</td>";
+                $html .= "<td>";
+                $html .= "<button class='btn btn-danger deleteGrup'><a href='../Controlador/administrar_grup.php?accio=eliminar&idGrup=" . $gr['grup_id'] . "  ' style='color:white;'>Eliminar</a></button>";
+                $html .= "</td>";
+                $html .= "</tr>";
+                $html .= "</tbody>";
+                $html .= "</table>";
+            }
+            $html .= "<button class='btn btn-primary'><a href='../Controlador/administrar_grup.php?accio=crear' style='color:white;'>Crear Grup</a></button>";
+            $html .= "<button type='submit' name='generarGrups' class='btn btn-primary'><a href='?generarGrups=true' class='btn btn-primary'>Generar Grups</a></button>";
+            $html .= "</div>";
+            return $html;
+        } catch (PDOException $e) {
+            echo "Error mostrarGrupsProfessor:" . $e->getMessage();
+        }
+    }
 
 function seleccioAlumnesAdmin()
 {
@@ -452,6 +424,21 @@ function mostrarGruposAdministrador()
 
     echo $html;
 }
-?>
-<?php
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && $_POST['action'] === 'comencarJoc') {
+    comencarJoc();
+    ?>
+    <script>
+        location.replace("../Vista/index_admin.php")
+    </script>
+    <?php
+}
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && $_POST['action'] === 'acabarJoc') {
+    acabarJoc();
+    ?>
+    <script>
+        location.replace("../Vista/index_admin.php")
+    </script>
+    <?php
+}
 ?>
