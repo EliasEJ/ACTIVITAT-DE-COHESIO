@@ -73,7 +73,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             shuffle($enfrentamiento_actividad); // Aleatorizar el orden de los enfrentamientos
             $enfrentamientos[$actividad_id] = array_slice($enfrentamiento_actividad, 0, count($grupos)); // Limitar a un enfrentamiento por grupo
         }
-
+        eliminarEnfrentamientos();
         guardarEnfrentamientos($enfrentamientos);
     }
     ?>
