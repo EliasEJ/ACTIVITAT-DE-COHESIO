@@ -338,3 +338,14 @@ function obtenirProfessors(){
         echo "Error obtenirProfessors: " . $e->getMessage();
     }
 }
+
+function obtenerPosiciones(){
+    try{
+        $con = connect();
+        $statement = $con->prepare("SELECT * FROM posicion");
+        $statement->execute();
+        return $statement;
+    }catch(PDOException $e){
+        echo "Error obtenirProfessors: " . $e->getMessage();
+    }
+}

@@ -80,12 +80,15 @@ a.boto{
     color: white;
     text-decoration: none;
 }
+body {
+    margin-bottom: 10%;
+}
 .footer {
     position: static;
-    margin-top: 40px;
+    margin-top: 70px;
     bottom: 0px;
     width: 100%;
-    padding-top: 1rem 0;
+    padding: 1rem 0;
     text-align: center;
     background-color: #f5f5f5;
 }
@@ -97,4 +100,23 @@ table#myTable2{
     margin-left: 0px;
     margin-right: 0px;
     width: 700px !important; 
+}
+.file-upload {
+    position: relative;
+    display: inline-block;
+}
+
+.file-upload__input {
+    display: none;
+}
+
+.file-upload__label {
+    padding: 5px 10px;
+    color: white;
+    background-color: #4CAF50;
+    cursor: pointer;
+}
+
+.file-upload__label:hover {
+    background-color: #45a049;
 }
