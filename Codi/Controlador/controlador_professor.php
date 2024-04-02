@@ -2,13 +2,16 @@
 require_once("../Model/model_professor.php");
 include_once("../Model/model_activitat.php");
 include_once("../Model/model.php");
+include_once("../Controlador/controlador_admin.php");
 
 
 
 function obtenerIdProfessor()
 {
     require_once("../Model/model_professor.php");
-    session_start();
+    if(session_status() == PHP_SESSION_NONE){
+        session_start();
+    }
     if (!isset($_SESSION['email'])) {
         require_once "../../Recursos/autentificacion.php";
         $_SESSION['email'] = $email;
@@ -34,13 +37,21 @@ function mostrarUsuari($idProfe)
 
         $email = $_SESSION['email'];
         $nombre = $profe['user'];
+        $currentUrl = $_SERVER['REQUEST_URI'];
+        $url = explode("/", $currentUrl);
+        $situacio = end($url);
         if ($nombre) {
             $html .= $nombre;
         }
         $html .= "</button>";
         $html .= "<ul class='dropdown-menu'>";
-        $html .= "<li><a class='dropdown-item ' href='../Vista/index_alumne.php'>Vista Alumne</a></li>";
-        if(isAdmin($email)){
+        if($situacio != "index_alumne.php"){
+            $html .= "<li><a class='dropdown-item ' href='../Vista/index_alumne.php'>Vista Alumne</a></li>";
+        }
+        if((isProfessor($email) || isAdmin($email)) && $situacio != "index_professor.php"){
+            $html .= "<li><a class='dropdown-item ' href='../Vista/index_professor.php'>Vista Professor</a></li>";
+        }
+        if(isAdmin($email) && $situacio != "index_admin.php"){
             $html .= "<li><a class='dropdown-item ' href='../Vista/index_admin.php'>Vista Admin</a></li>";
         }
         $html .= "<li><a class='dropdown-item ' href='../Controlador/logout.php'>Tancar sessió</a></li>";
@@ -219,6 +230,7 @@ function mostrarGrupsProfessor($idProf)
             $html .= "</table>";
         }
         $html .= "<button class='btn btn-primary'><a href='../Controlador/administrar_grup.php?accio=crear' style='color:white;'>Crear Grup</a></button>";
+            $html .= "<button type='submit' name='generarGrups' class='btn btn-primary'><a href='?generarGrups=true' class='btn btn-primary'>Generar Grups</a></button>";
         $html .= "</div>";
         return $html;
     } catch (PDOException $e) {
@@ -343,3 +355,8 @@ function mostrarPosMap($posMap) {
         echo "<p style='color:red;'>No se pudo obtener la posición del grupo.</p>";
     }
 }
+    // Al principio de tu archivo
+    if (isset($_GET['generarGrups'])) {
+        crearGrupsAutomaticament();
+    }
+?>

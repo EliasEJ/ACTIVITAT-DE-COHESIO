@@ -327,3 +327,14 @@ function obtenerMaterialUnico($material_id){
         echo "Error obtenerMaterialUnico: " . $e->getMessage();
     }
 }
+
+function obtenirProfessors(){
+    try{
+        $con = connect();
+        $statement = $con->prepare("SELECT * FROM professor");
+        $statement->execute();
+        return $statement;
+    }catch(PDOException $e){
+        echo "Error obtenirProfessors: " . $e->getMessage();
+    }
+}

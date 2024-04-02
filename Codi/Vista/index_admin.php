@@ -10,14 +10,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.2/js/bootstrap.bundle.min.js" integrity="sha512-72WD92hLs7T5FAXn3vkNZflWG6pglUDDpm87TeQmfSg8KnrymL2G30R7as4FmTwhgu9H7eSzDCX3mjitSecKnw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <link rel="stylesheet" href="../../Recursos/CSS/styleProfessor.css  ">
     <script type="module" src="../Controlador/controlador_professor1.js"> </script>
-    <link rel="stylesheet" href="https://cdn.datatables.net/2.0.2/css/dataTables.dataTables.css" />
-    <script type="module" src="https://cdn.datatables.net/2.0.2/js/dataTables.js"></script>
 </head>
-<script type="text/javascript">
-    $(document).ready(function() {
-        $('#myTable').DataTable();
-    });
-</script>
+
 <?php
 
 include_once("../Controlador/controlador_professor.php");
@@ -37,8 +31,8 @@ $idProfessor = obtenerIdProfessor();
                             </a>
                     </div>
                     <div class="col-3 text-center">
-
-                        <?php mostrarUsuariAdmin($idProfessor) ?>
+                    
+                        <?php mostrarUsuari($idProfessor) ?>
 
                     </div>
 
@@ -50,7 +44,7 @@ $idProfessor = obtenerIdProfessor();
 
 
         <div class="container marginTop">
-            <div class="row g-0">
+            <div class="row">
                 <ul class="nav nav-tabs" id="tabProfessor">
                     <li class="nav-item">
                         <button class="nav-link active" id="tabAlumnat" data-bs-toggle="tab" data-bs-target="#taulaAlumnat">Alumnat</button>
@@ -67,65 +61,45 @@ $idProfessor = obtenerIdProfessor();
                 </ul>
                 <div class="tab-content" id="contingutTab">
                     <div class="tab-pane fade show active" id="taulaAlumnat">
-                        <table class="table table-striped" id="myTable">
-                            <thead class="sticky-top bg-white">
-                                <tr>
-                                    <th>Cognoms, Nom</th>
-                                    <th>Grup</th>
-                                    <th>Asistencia</th>
-                                    <th>Confirmació</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php mostrarAlumnes(); ?>
-                            </tbody>
-                        </table>
+                        <form action="../Controlador/administrar_alumnado.php" method="post">
+
+                            <table class="table table-striped">
+                                <thead class="sticky-top bg-white">
+                                    <tr>
+                                        <th>Cognoms, Nom</th>
+                                        <th>Grup</th>
+                                        <th>Asistencia Alumne</th>
+                                        <th>Confirmació Alumne</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php mostrarAlumnes(); ?>
+                                </tbody>
+                            </table>
+
+                            <input type="submit" name="guardarAsistencia" class="btn btn-success w-100 mt-2" value="Guardar"> 
+                        </form>
                         <!-- Button trigger modal -->
-                        <input type="submit" name="guardarAsistencia" class="btn btn-success w-100 mt-2" value="Guardar"> 
                         <button type="button" id="añadirAlumn" class="btn btn-primary w-100 mt-2" data-toggle="modal" data-target="#exampleModalCenter">
                             Afegir alumne
                         </button>
-                        <form action="../Controlador/administrar_alumnado.php" method="post">
-                        </form>
 
-                        
                     </div>
                     <div class="tab-pane fade" id="taulaActivitats">
                         <div class="row">
-                            <?php mostrarAdministrarActivitat($idProfessor); ?>
+                            <?php //mostrarAdministrarActivitat($idProfessor); ?>
 
                             <div class="col">
                                 <div class="accordion accordion-flush" id="accordionActivitatsPadre">
                                     <h3>Activitats</h3>
-                                    <?php mostrarActivitats(); ?>
-                                </div>
-                                <br><br>
-                                <div class="row">
-                                    <div class="col">
-                                        <form action="../Controlador/controlador_admin.php" method="post">
-                                            <input type="submit" class="btn btn-primary" value="Generar ordre d'activitats als grups">
-                                        </form>
-                                    </div>
+                                    <?php mostrarActivitatsAdmin(); ?>
                                 </div>
                             </div>
-
                         </div>
                     </div>
                     <div class="tab-pane fade" id="taulaGrups">
                         <div class="row">
-                            <table>
-                                <thead>
-                                    <tr>
-                                        <th>Grup</th>
-                                        <th>Tutor</th>
-                                        <th>Curs</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <?php mostrarGrups(); ?>
-                                </tbody>
-                            </table>
-                            <button>Generar els grups</button>
+                            <?php mostrarGruposTutorProfe($idProfessor) ?>
                         </div>
 
                     </div>
@@ -140,7 +114,7 @@ $idProfessor = obtenerIdProfessor();
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php mostrarClassificació(); ?>
+                                <?php mostrarClassificació() ?>
                             </tbody>
                         </table>
 
@@ -186,9 +160,11 @@ $idProfessor = obtenerIdProfessor();
                             </div>
                         </div>
                     </div>
+
                 </div>
             </div>
         </div>
+
 
         <footer class="footer">
         <div class="row pt-4 g-0">
@@ -236,11 +212,8 @@ $idProfessor = obtenerIdProfessor();
             </div>
         </div>
     </footer>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
 
-    <!-- <script>
-        let table = new DataTable('#myTable');
-    </script> -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
 
 </body>
 
