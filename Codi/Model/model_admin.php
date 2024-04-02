@@ -1,5 +1,35 @@
 <?php
 require_once("model.php");
+
+function obtenerProfesoresDisponibles(){
+
+    try{
+        $con = connect();
+        $statement = $con->prepare("SELECT * FROM professor WHERE actividad_id IS NULL");
+        $statement->execute();
+        return $statement;
+    }catch (PDOException $e){
+        echo "Error obtenerProfesoresDisponibles: " . $e->getMessage();
+    }
+
+}
+
+function obtenerGruposDisponibles(){
+
+    try{
+        $con = connect();
+        $statement = $con->prepare("SELECT g.*
+        FROM grup g
+        LEFT JOIN activitat a ON g.grup_id = a.grup1 OR g.grup_id = a.grup2
+        WHERE a.actividad_id IS NULL");
+        $statement->execute();
+        return $statement;
+    }catch (PDOException $e){
+        echo "Error obtenerGruposDisponibles: " . $e->getMessage();
+    }
+
+}
+
 function guardarEnfrentamientos($enfrentamientos){
     try {
         $con = connect();
@@ -53,6 +83,22 @@ function crearActivitat($nom, $idProfessor, $diferencia){
         echo "Error crearActivitat: " . $e->getMessage();
     }
 
+}
+
+function aplicarActividadProfesor($idProf, $idAct){
+    try{
+        $con = connect();
+        $statement = $con->prepare("UPDATE professor SET actividad_id = :actividad_id WHERE professor_id = :id_profesor");
+        $statement->execute(
+            array(
+                ':actividad_id' => $idProf,
+                ':id_profesor' => $idAct
+            )
+        );
+        
+    }catch(PDOException $e){
+        echo "Error mostrarGrupos: " . $e->getMessage();
+    }
 }
 
 function obtenimGrups(){
