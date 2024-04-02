@@ -83,10 +83,10 @@ function crearActivitat($nom, $idProfessor, $diferencia){
     try{
         $con = connect();
         if($diferencia != 0){
-        $statement = $con->prepare("INSERT INTO activitat (actividad_id,nom, posicion_id, professor_id, material_id) VALUES (?, ?, ?, ?)");
+        $statement = $con->prepare("INSERT INTO activitat (nom, posicion_id, professor_id, material_id) VALUES (?, ?, ?, ?)");
         $statement->execute([$nom, 1, $idProfessor, 1]);
         }else{
-        $statement = $con->prepare("UPDATE activitat (actividad_id,nom, posicion_id, professor_id, material_id) VALUES (?, ?, ?, ?)");
+        $statement = $con->prepare("UPDATE activitat (nom, posicion_id, professor_id, material_id) VALUES (?, ?, ?, ?)");
         $statement->execute([$nom, 1, $idProfessor, 1]);
         }
         
@@ -198,10 +198,10 @@ function assignarGrups($alumnes){
         $statement->execute([$id_professor_encarregat, $grup['grup_id']]);
         array_splice($professors, $posicio, 1);
     }
-    $diferencia = count($grups)/2 > count($activitats);
+    $diferencia = count($grups) > count($activitats);
     if($diferencia){
         ?><script>alert("Hi ha més grups que activitats , es crearan les activitats que faltan, les has d'omplir")</script><?php
-        for($i = count($activitats); $i < count($grups)/2; $i++){
+        for($i = count($activitats); $i < count($grups); $i++){
             $nom = 'Activitat ' . ($i + 1);
             crearActivitat($nom, $idProfessor, $diferencia);
         }

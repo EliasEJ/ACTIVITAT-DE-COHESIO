@@ -346,9 +346,9 @@ function crearGrupsAutomaticament()
     assignarGrups($grupo);
     //Com es una accio que nomes pot fer l'administrador li farem una redireccio a la url de l'index de l'administrador
 ?>
-    <script>
+    <!-- <script>
             location.replace("../Vista/index_admin.php")
-        </script>
+        </script> -->
         <?php
     }
     function mostrarGrupsAdmin(){
