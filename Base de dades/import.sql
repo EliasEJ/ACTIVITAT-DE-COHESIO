@@ -2,18 +2,18 @@ USE projecte2;
 
 
 /*INSERIR GRUPS*/
-INSERT INTO grup (grup_id, nom, foto, puntuacio,id_professor_encarregat)
+INSERT INTO grup (grup_id, nom, foto, puntuacio, id_professor_encarregat)
 VALUES 
-(1, "Grup-1", "", 0, 7),
-(2, "Grup-2", "", 0,2),
-(3, "Grup-3", "", 0,1),
-(4, "Grup-4", "", 0,3),
-(5, "Grup-5", "", 0,4),
-(6, "Grup-6", "", 0,5),
-(7, "Grup-7", "", 0,6),
-(8, "Grup-8", "", 0,9),
-(9, "Grup-9", "", 0,10),
-(10, "Grup-10", "", 0,10);
+(1, "Grup-1", "default.jpg", 0, 7),
+(2, "Grup-2", "default.jpg", 0, 2),
+(3, "Grup-3", "default.jpg", 0, 1),
+(4, "Grup-4", "default.jpg", 0, 3),
+(5, "Grup-5", "default.jpg", 0, 4),
+(6, "Grup-6", "default.jpg", 0, 5),
+(7, "Grup-7", "default.jpg", 0, 6),
+(8, "Grup-8", "default.jpg", 0, 9),
+(9, "Grup-9", "default.jpg", 0, 10),
+(10, "Grup-10", "default.jpg", 0, 10);
 
 
 

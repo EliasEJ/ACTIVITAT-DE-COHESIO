@@ -50,7 +50,9 @@ document.getElementById('generarDiplomas').addEventListener('click', function() 
         alert('Hubo un error al realizar la petición.');
     };
     xhr.send();
-});$("#cerrarModalCrearActividad").click(function () {
+});
+
+$("#cerrarModalCrearActividad").click(function () {
     $("#modalCrearActividad").modal('hide');
 });
 

@@ -28,7 +28,7 @@ try {
 
             $pdf = new FPDF('L');
             $pdf->AddPage();
-            $pdf->SetFont('Arial', 'B', 24);
+            $pdf->SetFont('Courier', 'B', 24);
 
             $pdf->SetFillColor(200, 220, 255);
             $pdf->SetTextColor(0, 0, 0); 
@@ -37,22 +37,18 @@ try {
             $pdf->SetTextColor(0, 0, 0); 
             $pdf->Cell(0, 10, utf8_decode('Moltes gràcies per participar!'), 0, 1, 'C');
 
-            $fotoPath = '../../Recursos/IMG/' . $row['foto'];
-            if (file_exists($fotoPath)) {
-                list($width, $height) = getimagesize($fotoPath);
-                $scale = 0.75; 
-                $width *= $scale;
-                $height *= $scale;
-                $x = ($pdf->GetPageWidth() - $width) / 2;
-                $y = ($pdf->GetPageHeight() - $height) / 2;
-                $pdf->Image($fotoPath, $x, $y, $width, $height);
-            } else {
-                echo "El archivo de imagen no existe: " . $fotoPath . "\n";
-            }
-
             $pdf->Cell(0, 10, utf8_decode('Puntuació total del grup: ' . $row['puntuacio']), 0, 1, 'C');
 
             $pdf->Cell(0, 10, utf8_decode('Posició global a la jornada de cohesió: ' . $posiciones[$row['nom']]), 0, 1, 'C');
+
+            $fotoPath = '../../Recursos/IMG/' . $row['foto'];
+            if (file_exists($fotoPath)) {
+                $x = ($pdf->GetPageWidth() - 200) / 2;
+                $y = ($pdf->GetPageHeight() - 100) / 2;
+                $pdf->Image($fotoPath, $x, $y, 200, 100);
+            } else {
+                echo "El archivo de imagen no existe: " . $fotoPath . "\n";
+            }
 
             $pdf->Output('F', '../../Recursos/Diplomes/' . $row['nom'] . '.pdf');
         }
