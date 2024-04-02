@@ -80,16 +80,38 @@ a.boto{
     color: white;
     text-decoration: none;
 }
+body {
+    margin-bottom: 10%;
+}
 .footer {
     position: static;
     margin-top: 70px;
     bottom: 0px;
     width: 100%;
-    padding-top: 1rem 0;
+    padding: 1rem 0;
     text-align: center;
     background-color: #f5f5f5;
 }
 html {
     position: relative;
     min-height: 100%;
+}
+.file-upload {
+    position: relative;
+    display: inline-block;
+}
+
+.file-upload__input {
+    display: none;
+}
+
+.file-upload__label {
+    padding: 5px 10px;
+    color: white;
+    background-color: #4CAF50;
+    cursor: pointer;
+}
+
+.file-upload__label:hover {
+    background-color: #45a049;
 }

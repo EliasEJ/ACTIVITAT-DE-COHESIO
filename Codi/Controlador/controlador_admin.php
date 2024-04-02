@@ -141,7 +141,7 @@ function mostrarAlumnes()
 function mostrarGrups()
 {
     try {
-        $grups = mostrarGrupos()->fetchAll();
+        $grups = obtenimGrups()->fetchAll();
         $html = "<div class='container'>";
         $html .= "<div class='row'>";
         foreach ($grups as $grup) {

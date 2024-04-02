@@ -120,6 +120,11 @@ $idProfessor = obtenerIdProfessor();
                                 <?php mostrarClassificació() ?>
                             </tbody>
                         </table>
+
+                        <div>
+                            <button id="generarDiplomas" class="btn btn-warning w-100"><b>Generar diplomes</b></button>
+                        </div>
+
                     </div>
 
 

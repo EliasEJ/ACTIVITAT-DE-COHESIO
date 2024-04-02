@@ -117,7 +117,7 @@ DROP TABLE IF EXISTS `grup`;
 CREATE TABLE IF NOT EXISTS `grup` (
   `grup_id` int(11) NOT NULL AUTO_INCREMENT,
   `nom` varchar(50) NOT NULL,
-  `foto` text NOT NULL,
+  `foto` text NOT NULL DEFAULT 'default.jpg',
   `puntuacio` int(11) NOT NULL,
   `id_professor_encarregat` tinyint(1) NOT NULL, 
   PRIMARY KEY (`grup_id`)
