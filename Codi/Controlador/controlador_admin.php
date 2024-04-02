@@ -233,39 +233,6 @@ function mostrarProfesoresDisponibles()
         echo "Error mostrarProfesoresDisponibles: " . $e->getMessage();
     }
 }
-
-<<<<<<< HEAD
-        //Tornem a ordenar els alumnes per curs, classe i any, per facilitar l'assignacio de grups
-        usort($alumnes, function($a, $b) {
-            if ($a['curs'].$a['classe'].$a['any'] == $b['curs'].$b['classe'].$b['any']) {
-                return 0;
-            }
-            return ($a['curs'].$a['classe'].$a['any'] > $b['curs'].$b['classe'].$b['any']) ? 1 : -1;
-        });
-    
-        // Eliminem tots els grups existents
-        eliminarGrups();
-        $grupo = [];
-        $cursoActual = '';
-        $claseActual = '';
-        $anyActual = '';
-        $contador = 0;
-        foreach($alumnes as $alumno) {
-            // Si el curso o la clase cambia, o el grupo tiene 20 alumnos, guarda el grupo y crea uno nuevo
-            if ($alumno['curs'] != $cursoActual || $alumno['classe'] != $claseActual || $alumno['any'] != $anyActual || $contador > 19) {
-                $contador = 0;
-                if (!empty($grupo)) {
-                    guardarGrupo($grupo);
-                }
-                $alumoId = $alumno['alumne_id'];
-                $cursoActual = $alumno['curs'];
-                $claseActual = $alumno['classe'];
-                $anyActual = $alumno['any'];
-            }
-            $contador++;
-            // Añade el alumno al grupo
-            $grupo[] = $alumno;
-=======
 function mostrarTodosProfesores()
 {
     try {
@@ -274,7 +241,7 @@ function mostrarTodosProfesores()
         $html .= "<select class='form-select form-select-sm' name='professorDisponible' aria-label='.form-select-sm'>";
         foreach ($profDispo as $prof) {
             $html .= "<option value='" . $prof['professor_id'] . "'>" . $prof['cognom'] . ", " . $prof['nom'] . "</option>";
->>>>>>> b20b3cdb7483a6a34b40c456b1f9b2a58cebb20f
+
         }
         $html .= "</select>";
         echo $html;
@@ -379,7 +346,6 @@ function crearGrupsAutomaticament()
     <!-- <script>
             location.replace("../Vista/index_admin.php")
         </script> -->
-<<<<<<< HEAD
         <?php
     }
     function mostrarGrupsAdmin(){
@@ -455,8 +421,5 @@ function crearGrupsAutomaticament()
     echo $html;
 }
 ?>
-=======
 <?php
-}
 ?>
->>>>>>> b20b3cdb7483a6a34b40c456b1f9b2a58cebb20f
