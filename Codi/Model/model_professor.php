@@ -107,3 +107,18 @@ function obtenirPosMapA(){
         echo "Error obtenirPosMap: " . $e->getMessage();
     }
 }
+
+function guardarImagenGrup($grup_id, $imatge){
+    try{
+        $con = connect();
+        $statement = $con->prepare("UPDATE grup SET foto = :imatge WHERE grup_id = :grup_id");
+        $statement->execute(
+            array(
+                ':imatge' => $imatge,
+                ':grup_id' => $grup_id
+            )
+        );
+    }catch(PDOException $e){
+        echo "Error guardarImagenGrup: " . $e->getMessage();
+    }
+}

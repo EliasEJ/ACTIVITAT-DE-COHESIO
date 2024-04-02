@@ -95,3 +95,22 @@ html {
     position: relative;
     min-height: 100%;
 }
+.file-upload {
+    position: relative;
+    display: inline-block;
+}
+
+.file-upload__input {
+    display: none;
+}
+
+.file-upload__label {
+    padding: 5px 10px;
+    color: white;
+    background-color: #4CAF50;
+    cursor: pointer;
+}
+
+.file-upload__label:hover {
+    background-color: #45a049;
+}

@@ -4,8 +4,33 @@ include_once("../Model/model_activitat.php");
 include_once("../Model/model.php");
 include_once("../Controlador/controlador_admin.php");
 
+if (isset($_GET['accio']) && $_GET['accio'] == 'subirImagen') {
+    $idGrup = $_GET['idGrup'];
+    $target_dir = "../../Recursos/IMG/";
+    $target_file = $target_dir . basename($_FILES["imagen"]["name"]);
+    $uploadOk = 1;
+    $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
 
+    $check = getimagesize($_FILES["imagen"]["tmp_name"]);
+    if($check !== false) {
+        echo "El archivo es una imagen - " . $check["mime"] . ".";
+        $uploadOk = 1;
+    } else {
+        echo "El archivo no es una imagen.";
+        $uploadOk = 0;
+    }
 
+    if ($uploadOk == 0) {
+        echo "Lo siento, tu archivo no fue subido.";
+    } else {
+        if (move_uploaded_file($_FILES["imagen"]["tmp_name"], $target_file)) {
+            guardarImagenGrup($idGrup, basename($_FILES["imagen"]["name"]));
+            echo "<script>alert('La imatge se n'ha pujat amb èxit.');</script>";
+        } else {
+            echo "Lo siento, hubo un error al subir tu archivo.";
+        }
+    }
+}
 function obtenerIdProfessor()
 {
     require_once("../Model/model_professor.php");
@@ -224,13 +249,21 @@ function mostrarGrupsProfessor($idProf)
             $html .= "<td>";
             $html .= "<button class='btn btn-danger deleteGrup'><a href='../Controlador/administrar_grup.php?accio=eliminar&idGrup=" . $gr['grup_id'] . "  ' style='color:white;'>Eliminar</a></button>";
             $html .= "</td>";
-
+            $html .= "<td>";
+            $html .= "<form action='../Controlador/administrar_grup.php?accio=subirImagen&idGrup=" . $gr['grup_id'] . "' method='post' enctype='multipart/form-data'>";
+            $html .= "<div class='file-upload'>";
+            $html .= "<label for='file-upload-" . $gr['grup_id'] . "' class='btn btn-primary w-100'>Selecciona imatge</label>";
+            $html .= "<input id='file-upload-" . $gr['grup_id'] . "' class='file-upload__input' type='file' name='imagen' accept='image/jpeg'>";
+            $html .= "</div>";
+            $html .= "<input type='submit' class='btn btn-success' value='Enviar' name='submit'>";
+            $html .= "</form>";
+            $html .= "</td>";
             $html .= "</tr>";
             $html .= "</tbody>";
             $html .= "</table>";
         }
         $html .= "<button class='btn btn-primary'><a href='../Controlador/administrar_grup.php?accio=crear' style='color:white;'>Crear Grup</a></button>";
-            $html .= "<button type='submit' name='generarGrups' class='btn btn-primary'><a href='?generarGrups=true' class='btn btn-primary'>Generar Grups</a></button>";
+        $html .= "<button type='submit' name='generarGrups' class='btn btn-primary'><a href='?generarGrups=true' class='btn btn-primary'>Generar Grups</a></button>";
         $html .= "</div>";
         return $html;
     } catch (PDOException $e) {
