@@ -69,6 +69,22 @@ function crearActivitat($nom, $idProfessor, $diferencia){
 
 }
 
+function aplicarActividadProfesor($idProf, $idAct){
+    try{
+        $con = connect();
+        $statement = $con->prepare("UPDATE professor SET actividad_id = :actividad_id WHERE professor_id = :id_profesor");
+        $statement->execute(
+            array(
+                ':actividad_id' => $idProf,
+                ':id_profesor' => $idAct
+            )
+        );
+        
+    }catch(PDOException $e){
+        echo "Error mostrarGrupos: " . $e->getMessage();
+    }
+}
+
 function obtenimGrups(){
     try{
         $con = connect();

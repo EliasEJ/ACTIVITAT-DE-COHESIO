@@ -20,14 +20,14 @@ VALUES
 /*INSERIR POSICIONS*/
 INSERT INTO posicion (posicion_id, nom, descripcio)
 VALUES 
-(1, "pati", "Zona principal de l'entrada de l'institut. Enfront dels cicles."),
-(2, "aula 2", "Aula 2 dels cicles."),
-(3, "pista1", "Zona de la pista on darrere dels cicles. On les porteries de futbol."),
-(4, "pista2", "Zona de la pista enfront de les taules de ping-pong. On les canastes de bàsquet."),
-(5, "pista 3", "Cistella de bàsquet situat a la cantonada inferior esquerra."),
-(6, "pista 4", "Pista de bàsquet situat al costat de la pista de futbol."),
-(7, "aula 3", "Aula 3 dels cicles."),
-(8,"taules ping pong", "Enfront de la cafeteria. On les taules de ping-pong.");
+(1, "posicio 1", "Zona principal de l'entrada de l'institut. Enfront dels cicles."),
+(2, "posicio 2", "Aula 2 dels cicles."),
+(3, "posicio 3", "Zona de la pista on darrere dels cicles. On les porteries de futbol."),
+(4, "posicio 4", "Zona de la pista enfront de les taules de ping-pong. On les canastes de bàsquet."),
+(5, "posicio 5", "Cistella de bàsquet situat a la cantonada inferior esquerra."),
+(6, "posicio 6", "Pista de bàsquet situat al costat de la pista de futbol."),
+(7, "posicio 7", "Aula 3 dels cicles."),
+(8,"posicio 8", "Enfront de la cafeteria. On les taules de ping-pong.");
 
 
 /*INSERIR MATERIAL*/

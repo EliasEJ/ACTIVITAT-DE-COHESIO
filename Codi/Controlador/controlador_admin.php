@@ -7,16 +7,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if (isset($_POST["crearActividad"])) {
         $actividades = obtenirActivitats()->fetchAll();
-        $id = count($actividades) + 1;
+        $actividadId = count($actividades) + 1;
         $nombre = $_POST["tituloActividadNueva"];
-        $descripcion = $_POST["descripcionActividadNueva"];
-        $posicion_id = 1;
+        $descripcion = trim($_POST["descripcionActividadNueva"]);
+        $posicion_id = $_POST["posicionNuevaActividad"];
         $professor_id = $_POST["professorDisponible"];
         $grup1 = 8;
         $grup2 = 1;
         $material_id = $_POST["materialNuevaActividad"];
+        $comprarMaterial = $_POST['comprarMaterial'];
 
-        crearActividad($id, $nombre, $descripcion, $posicion_id, $professor_id, $grup1, $grup2, $material_id);
+        crearActividad($actividadId, $nombre, $descripcion, $posicion_id, $professor_id, $grup1, $grup2, $material_id);
+        aplicarActividadProfesor($professor_id, $actividadId);
+        actualizarComprarMaterial($material_id, $comprarMaterial)
+
 ?>
         <script>
             alert("Activitat creat correctament.");
@@ -156,7 +160,7 @@ function mostrarActivitatsAdmin()
             $html .= "<p><b>On es jugará?</b> Posició número: " . $act['posicion_id'] . "</p>";
             $html .= "<p><b>Grups principals:</b> Grup" . $act['grup1'] . " VS Grup" . $act['grup2'] . "</p>";
             $html .= "<p><b> Professor encarregat: </b>" . $professor['nom'] . " " . $professor['cognom'] . "</p>";
-            $html .= "<button class='btn btn-primary deleteAct' ><a style='color:white' href='../Controlador/administrar_activitat.php?accio=delete&idAct=" . $act['actividad_id'] . "  '>Eliminar Activitat</a></button>";
+            $html .= "<button class='btn btn-primary deleteAct' ><a style='color:white' href='../Controlador/administrar_activitat.php?accio=deleteAdmin&idAct=" . $act['actividad_id'] . "  '>Eliminar Activitat</a></button>";
             $html .= "</div>";
             $html .= "</div>";
             $html .= "</div>";
@@ -193,6 +197,22 @@ function mostrarProfesoresDisponibles()
         $html .= "<select class='form-select form-select-sm' name='professorDisponible' aria-label='.form-select-sm'>";
         foreach ($profDispo as $prof) {
             $html .= "<option value='" . $prof['professor_id'] . "'>" . $prof['cognom'] . ", " . $prof['nom'] . "</option>";
+        }
+        $html .= "</select>";
+        echo $html;
+    } catch (PDOException $e) {
+        echo "Error mostrarProfesoresDisponibles: " . $e->getMessage();
+    }
+}
+
+function mostrarPosiciones()
+{
+    try {
+        $posiciones = obtenerPosiciones()->fetchAll();
+        $html = "";
+        $html .= "<select class='form-select form-select-sm' name='posicionNuevaActividad' aria-label='.form-select-sm'>";
+        foreach ($posiciones as $pos) {
+            $html .= "<option value='" . $pos['posicion_id'] . "'>" . $pos['nom'] . "</option>";
         }
         $html .= "</select>";
         echo $html;
