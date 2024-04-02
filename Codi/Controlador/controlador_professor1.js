@@ -34,7 +34,6 @@ $("#crearActividad").click(function () {
     $("#modalCrearActividad").modal('show');
 });
 
-
 $("#cerrarModalAñadirAlumn").click(function () {
     $("#modalAñadirAlumn").modal('hide');
 })
@@ -68,6 +67,8 @@ $(".editAct").click(function () {
     var grup1 = $(this).data("grup1");
     var grup2 = $(this).data("grup2");
     var id_professor = $(this).data("id-professor");
+
+    console.log(id);
 
     $("#tituloActividadEdit").val(nom);
     $("#descripcionActividadEdit").val(descripcio);

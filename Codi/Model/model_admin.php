@@ -30,6 +30,17 @@ function obtenerGruposDisponibles(){
 
 }
 
+function eliminarEnfrentamientos(){
+    try {
+        $con = connect();
+        $statement = $con->prepare("DELETE FROM enfrentaments");
+        $statement->execute();
+    } catch (PDOException $e) {
+        echo "Error eliminarEnfrentamientos: " . $e->getMessage();
+    }
+    
+}
+
 function guardarEnfrentamientos($enfrentamientos){
     try {
         $con = connect();

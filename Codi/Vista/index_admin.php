@@ -122,6 +122,10 @@ $idProfessor = obtenerIdProfessor();
                         </div>
                     </div>
                     <div class="tab-pane fade" id="taulaClassificació">
+                        <br>
+                        <form action="../Controlador/controlador_admin.php" method="post" id="formGenerarEnfrentamientos" >
+                            <input type="submit" name="generarEnfrentamientos"  class="btn btn-primary" id="generarEnfrentamientos" value="Generar ordre d'activitats als grups">
+                        </form>
                         <table class="table table-striped">
                             <thead class="sticky-top bg-white">
                                 <tr>
@@ -243,7 +247,7 @@ $idProfessor = obtenerIdProfessor();
                         <div class="modal-dialog modal-dialog-centered" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h5 class="modal-title" >Editar activitat</h5>
+                                    <h5 class="modal-title">Editar activitat</h5>
                                 </div>
                                 <div class="modal-body">
                                     <form id="" action="../Controlador/controlador_admin.php" method="POST">
@@ -259,7 +263,7 @@ $idProfessor = obtenerIdProfessor();
                                         </div>
                                         <div class="form-group">
                                             <label for="materialEditActividad" class="w-100 mt-2">Seleccionar material:</label>
-                                            <?php mostrarMaterialDisponible() ?>
+                                            <?php materialEdit() ?>
                                         </div>
                                         <div class="form-group">
                                             <label for="comprarMaterial" class="w-100 mt-2">Comprar material?</label>
@@ -270,7 +274,7 @@ $idProfessor = obtenerIdProfessor();
                                         </div>
                                         <div class="form-group">
                                             <label for="posicionEditActividad" class="w-100 mt-2">Posicio activitat:</label>
-                                            <?php mostrarPosiciones() ?>
+                                            <?php mostrarEditPosiciones() ?>
                                         </div>
                                         <div class="form-group">
                                             <label for="professorDisponible" class="w-100 mt-2">Professor encarregat:</label>
@@ -347,10 +351,10 @@ $idProfessor = obtenerIdProfessor();
                 </div>
             </div>
         </footer>
-    <script>
-    let table1 = new DataTable('#myTable1');
-    let table2 = new DataTable('#myTable2');
-    </script>
+        <script>
+            let table1 = new DataTable('#myTable1');
+            let table2 = new DataTable('#myTable2');
+        </script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
 
 </body>
