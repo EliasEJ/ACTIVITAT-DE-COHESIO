@@ -157,6 +157,7 @@ function mostrarActivitatsAdmin()
         $activitats = obtenirActivitats()->fetchAll();
         $html = "";
         foreach ($activitats as $act) {
+            $material = obtenerMaterialActividad($act['actividad_id'])->fetch();
             $professor = obtenirProfessorUnic($act['professor_id'])->fetch();
             $html .= "<div class='accordion-item'>";
             $html .= "";
@@ -169,10 +170,17 @@ function mostrarActivitatsAdmin()
             $html .= "<div class='accordion-body'>";
             $html .= "<h3>" . $act['nom'] . "</h3><br>";
             $html .= "<p><b>Descripció</b></p><p>" . $act['descripcio'] . "</p>";
+            $html .= "<p><b>Material: </b>" . $material['nom'] . "</p>";
+            $comprar =  $material['comprar'] == 1 ? "Si" : "No";
+            $html .= "<p><b>Comprar material? </b> " . $comprar . "</p>";
             $html .= "<p><b>On es jugará?</b> Posició número: " . $act['posicion_id'] . "</p>";
             $html .= "<p><b>Grups principals:</b> Grup" . $act['grup1'] . " VS Grup" . $act['grup2'] . "</p>";
             $html .= "<p><b> Professor encarregat: </b>" . $professor['nom'] . " " . $professor['cognom'] . "</p>";
-            $html .= "<button class='btn btn-primary deleteAct' ><a style='color:white' href='../Controlador/administrar_activitat.php?accio=deleteAdmin&idAct=" . $act['actividad_id'] . "  '>Eliminar Activitat</a></button>";
+            $html .= "<button class='btn btn-danger deleteAct'><a style='color:white' href='../Controlador/administrar_activitat.php?accio=deleteAdmin&idAct=" . $act['actividad_id'] . "  '>Eliminar Activitat</a></button>&nbsp;&nbsp";
+            $html .= "<button class='btn btn-primary editAct' id='" . $act['actividad_id'] . "' data-id='" . $act['actividad_id'] . "' data-nom='" . $act['nom'] . "' data-descripcio='" . $act['descripcio'] . "' data-posicio_id='" . $act['posicion_id'] . "' data-grup1='" . $act['grup1'] . "' data-grup2='" . $act['grup2'] . "' data-id-professor='" . $act['professor_id'] . "' data-toggle='modal' data-target='#modalEditActividad'>
+            Editar Activitat
+            </button>
+            ";
             $html .= "</div>";
             $html .= "</div>";
             $html .= "</div>";

@@ -150,7 +150,7 @@ $idProfessor = obtenerIdProfessor();
                                     </form>
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button" id="cerrarModalAñadirAlumn" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                                    <button type="button" id="cerrarModalAñadirAlumn" class="btn btn-secondary" data-dismiss="modal">Cancel·lar</button>
                                 </div>
                             </div>
                         </div>

@@ -69,6 +69,3 @@ function eliminarActividad($idActividad)
 }
 
 ?>
-<script>
-
-</script>

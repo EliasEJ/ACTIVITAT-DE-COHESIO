@@ -150,12 +150,12 @@ $idProfessor = obtenerIdProfessor();
                                             <?php seleccionGruposNuevoAlumno($idProfessor) ?>
                                         </div>
                                         <br><br>
-                                        <input class="btn btn-primary" type="submit" name="guardarAlumno" value="Guardar">
+                                        <input class="btn btn-success" type="submit" name="guardarAlumno" value="Guardar">
                                     </form>
                                 </div>
                                 <div class="modal-footer">
 
-                                    <button type="button" id="cerrarModalAñadirAlumn" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                                    <button type="button" id="cerrarModalAñadirAlumn" class="btn btn-secondary" data-dismiss="modal">Cancel·lar</button>
                                 </div>
                             </div>
                         </div>
@@ -170,6 +170,7 @@ $idProfessor = obtenerIdProfessor();
                                 </div>
                                 <div class="modal-body">
                                     <form id="" action="../Controlador/controlador_admin.php" method="POST">
+                                        <input type="hidden" id="idActividad" name="idActividad">
                                         <div class="form-group">
                                             <label for="tituloActividadNueva" class="w-100 mt-2">Nom activitat: </label>
                                             <input type="text" class="form-control" name="tituloActividadNueva" id="tituloActividadNueva">
@@ -207,11 +208,68 @@ $idProfessor = obtenerIdProfessor();
                                             <?php mostrarGruposDisponibles2() ?>
                                         </div>
                                         <br><br>
-                                        <input class="btn btn-primary" type="submit" name="crearActividad" value="Guardar">
+                                        <input class="btn btn-success" type="submit" name="crearActividad" value="Guardar">
                                     </form>
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button" id="cerrarModalCrearActividad" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                                    <button type="button" id="cerrarModalCrearActividad" class="btn btn-secondary" data-dismiss="modal">Cancel·lar</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Modal EDITAR ACTIVIDAD-->
+                    <div class="modal fade" id="modalEditarActividad" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" >Editar activitat</h5>
+                                </div>
+                                <div class="modal-body">
+                                    <form id="" action="../Controlador/controlador_admin.php" method="POST">
+                                        <input type="hidden" id="idActividad" name="idActividad">
+                                        <div class="form-group">
+                                            <label for="tituloActividadEdit" class="w-100 mt-2">Nom activitat: </label>
+                                            <input type="text" class="form-control" name="tituloActividadEdit" id="tituloActividadEdit">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="descripcionActividadEdit" class="w-100 mt-2">Descripcio activitat: </label>
+                                            <textarea class="form-control" name="descripcionActividadEdit" id="descripcionActividadEdit">
+                                            </textarea>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="materialEditActividad" class="w-100 mt-2">Seleccionar material:</label>
+                                            <?php mostrarMaterialDisponible() ?>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="comprarMaterial" class="w-100 mt-2">Comprar material?</label>
+                                            <select class='form-select form-select-sm' name="comprarMaterial" id="comprarMaterial">
+                                                <option value='0'>No</option>
+                                                <option value='1'>Si</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="posicionEditActividad" class="w-100 mt-2">Posicio activitat:</label>
+                                            <?php mostrarPosiciones() ?>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="professorDisponible" class="w-100 mt-2">Professor encarregat:</label>
+                                            <?php mostrarProfesoresDisponibles() ?>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="grupo1Disponible" class="w-100 mt-2">Grup inicial 1:</label>
+                                            <?php mostrarGruposDisponibles1() ?>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="grupo2Disponible" class="w-100 mt-2">Grup inicial 2:</label>
+                                            <?php mostrarGruposDisponibles2() ?>
+                                        </div>
+                                        <br><br>
+                                        <input class="btn btn-success" type="submit" name="editarActividad" value="Guardar">
+                                    </form>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" id="cerrarModalEditarActividad" class="btn btn-secondary" data-dismiss="modal">Cancel·lar</button>
                                 </div>
                             </div>
                         </div>

@@ -286,7 +286,7 @@ VALUES (1, /** Activitat ID*/
 3, /*Professor ID */
 3, /*Grup1 ID*/
 6, /*Grup2 ID*/
-1 /*Material ID*/),
+3 /*Material ID*/),
 
 /*Activitat 4*/
 (4, /** Activitat ID*/ 
@@ -296,7 +296,7 @@ VALUES (1, /** Activitat ID*/
 4, /*Professor ID */
 4, /*Grup1 ID*/
 5, /*Grup2 ID*/
-1 /*Material ID*/);
+4 /*Material ID*/);
 
 
 /*INSERIR ADMIN*/

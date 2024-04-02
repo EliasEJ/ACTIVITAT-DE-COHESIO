@@ -30,6 +30,7 @@ $("#crearActividad").click(function () {
     $("#modalCrearActividad").modal('show');
 });
 
+
 $("#cerrarModalAñadirAlumn").click(function () {
     $("#modalAñadirAlumn").modal('hide');
 })
@@ -38,3 +39,24 @@ $("#cerrarModalCrearActividad").click(function () {
     $("#modalCrearActividad").modal('hide');
 });
 
+$(".editAct").click(function () {
+    var id = $(this).data("id");
+    var nom = $(this).data("nom");
+    var descripcio = $(this).data("descripcio");
+    var posicio_id = $(this).data("posicio_id");
+    var grup1 = $(this).data("grup1");
+    var grup2 = $(this).data("grup2");
+    var id_professor = $(this).data("id-professor");
+
+    $("#tituloActividadEdit").val(nom);
+    $("#descripcionActividadEdit").val(descripcio);
+    $("#posicionEditActividad").val(posicio_id);
+    $("#grupo1Disponible").val(grup1);
+    $("#grupo2Disponible").val(grup2);
+    $("#professorDisponible").val(id_professor);
+
+    // También podrías establecer un campo oculto con el ID de la actividad si es necesario
+    $("#idActividad").val(id);
+
+    $("#modalEditarActividad").modal('show');
+});
