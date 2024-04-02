@@ -47,8 +47,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $descriptAct = $_POST['descripcionActividadEdit'];
         $material_id = $_POST['materialEditActividad'];
 
-
-        actualizarActividad($idAct, $nameAct, $descriptAct, $material_id);
+        actualizarActividad($idActividad, $nameAct, $descriptAct, $material_id);
     } else if (isset($_POST["generarEnfrentamientos"])) {
 
         // Paso 1: Obtener la lista de grupos y actividades disponibles
@@ -217,6 +216,22 @@ function mostrarMaterialDisponible()
     }
 }
 
+function materialEdit()
+{
+    try {
+        $material = obtenerMaterial()->fetchAll();
+        $html = "";
+        $html .= "<select class='form-select form-select-sm' name='materialEditActividad' aria-label='.form-select-sm'>";
+        foreach ($material as $mat) {
+            $html .= "<option value='" . $mat['material_id'] . "'>" . $mat['nom'] . "</option>";
+        }
+        $html .= "</select>";
+        echo $html;
+    } catch (PDOException $e) {
+        echo "Error materialEdit: " . $e->getMessage();
+    }
+}
+
 function mostrarProfesoresDisponibles()
 {
     try {
@@ -297,6 +312,23 @@ function mostrarPosiciones()
         echo "Error mostrarPosiciones: " . $e->getMessage();
     }
 }
+
+function mostrarEditPosiciones()
+{
+    try {
+        $posiciones = obtenerPosiciones()->fetchAll();
+        $html = "";
+        $html .= "<select class='form-select form-select-sm' name='posicionEditActividad' aria-label='.form-select-sm'>";
+        foreach ($posiciones as $pos) {
+            $html .= "<option value='" . $pos['posicion_id'] . "'>" . $pos['nom'] . "</option>";
+        }
+        $html .= "</select>";
+        echo $html;
+    } catch (PDOException $e) {
+        echo "Error mostrarPosiciones: " . $e->getMessage();
+    }
+}
+
 
 function crearGrupsAutomaticament()
 {

@@ -249,7 +249,7 @@ $idProfessor = obtenerIdProfessor();
                                         </div>
                                         <div class="form-group">
                                             <label for="materialEditActividad" class="w-100 mt-2">Seleccionar material:</label>
-                                            <?php mostrarMaterialDisponible() ?>
+                                            <?php materialEdit() ?>
                                         </div>
                                         <div class="form-group">
                                             <label for="comprarMaterial" class="w-100 mt-2">Comprar material?</label>
@@ -260,7 +260,7 @@ $idProfessor = obtenerIdProfessor();
                                         </div>
                                         <div class="form-group">
                                             <label for="posicionEditActividad" class="w-100 mt-2">Posicio activitat:</label>
-                                            <?php mostrarPosiciones() ?>
+                                            <?php mostrarEditPosiciones() ?>
                                         </div>
                                         <div class="form-group">
                                             <label for="professorDisponible" class="w-100 mt-2">Professor encarregat:</label>

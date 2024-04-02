@@ -68,6 +68,8 @@ $(".editAct").click(function () {
     var grup2 = $(this).data("grup2");
     var id_professor = $(this).data("id-professor");
 
+    console.log(id);
+
     $("#tituloActividadEdit").val(nom);
     $("#descripcionActividadEdit").val(descripcio);
     $("#posicionEditActividad").val(posicio_id);
