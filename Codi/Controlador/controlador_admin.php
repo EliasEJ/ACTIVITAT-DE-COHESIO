@@ -85,33 +85,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 }
 
-function mostrarUsuariAdmin($idProfe)
-{
-    try {
-        $profe = obtenirProfessorUnic($idProfe)->fetch();
-        $html = "<div class='btn-group'>";
-        $html .= "<button type='button' class='btn dropdown-toggle' data-bs-toggle='dropdown' aria-expanded='false'>";
-        if (isset($_SESSION['picture'])) {
-            $picture = $_SESSION['picture'];
-            $html .= "<img src='$picture' alt='Imagen de perfil del usuario' class='imgPerfil'>";
-        }
-        $nombre = $profe['user'];
-        if ($nombre) {
-            $html .= $nombre;
-        }
-        $html .= "</button>";
-        $html .= "<ul class='dropdown-menu'>";
-        $html .= "<li><a class='dropdown-item ' href='../Vista/index_alumne.php'>Vista Alumne</a></li>";
-        $html .= "<li><a class='dropdown-item ' href='../Vista/index_professor.php'>Vista Professor</a></li>";
-        $html .= "<li><a class='dropdown-item ' href='../Controlador/logout.php'>Tancar sessió</a></li>";
-        $html .= "</ul>";
-        $html .= "</div>";
-        echo $html;
-    } catch (PDOException $e) {
-        echo "Error mostrarUsuari: " . $e->getMessage();
-    }
-}
-
 function mostrarAlumnes()
 {
     try {
@@ -321,7 +294,7 @@ function crearGrupsAutomaticament()
     $contador = 0;
     foreach ($alumnes as $alumno) {
         // Si el curso o la clase cambia, o el grupo tiene 20 alumnos, guarda el grupo y crea uno nuevo
-        if ($alumno['curs'] != $cursoActual || $alumno['classe'] != $claseActual || $alumno['any'] != $anyActual || $contador > 19) {
+        if ($alumno['curs'] != $cursoActual || $alumno['classe'] != $claseActual || $alumno['any'] != $anyActual) {
             $contador = 0;
             if (!empty($grupo)) {
                 guardarGrupo($grupo);
@@ -343,9 +316,9 @@ function crearGrupsAutomaticament()
     assignarGrups($grupo);
     //Com es una accio que nomes pot fer l'administrador li farem una redireccio a la url de l'index de l'administrador
 ?>
-    <!-- <script>
+    <script>
             location.replace("../Vista/index_admin.php")
-        </script> -->
+        </script>
         <?php
     }
     function mostrarGrupsAdmin(){
@@ -420,6 +393,12 @@ function crearGrupsAutomaticament()
 
     echo $html;
 }
-?>
-<?php
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && $_POST['action'] === 'comencarJoc') {
+    comencarJoc();
+    ?>
+    <script>
+        location.replace("../Vista/index_admin.php")
+    </script>
+    <?php
+}
 ?>

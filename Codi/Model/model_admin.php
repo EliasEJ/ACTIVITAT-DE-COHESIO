@@ -192,18 +192,17 @@ function assignarGrups($alumnes){
         ?><script>alert("Hi ha més grups que activitats , es crearan les activitats que faltan, les has d'omplir")</script><?php
         for($i = count($activitats); $i < count($grups)/2; $i++){
             $nom = 'Activitat ' . ($i + 1);
-            crearActivitat($nom ,$idProfessor ,$diferencia);
+            crearActivitat($nom, $idProfessor, $diferencia);
         }
     }
     $activitats = obtenirActivitats()->fetchAll();
     foreach ($activitats as $activitat) {
         $posicio = rand(0, count($grups) - 1);
-        $id_grup1 = $grups[$posicio]['grup_id'];
-        array_splice($grups, $posicio, 1);
         if (empty($grups)) {
-            ?><script>alert("No hi ha prous grups per a totes les activitats")</script><?php
         } else {
             // Si $grups no está vacío, obtén un nuevo índice aleatorio
+            $id_grup1 = $grups[$posicio]['grup_id'];
+            array_splice($grups, $posicio, 1);
             $posicio = rand(0, count($grups) - 1);
             $id_grup2 = $grups[$posicio]['grup_id'];
             while($id_grup1 == $id_grup2){
@@ -238,15 +237,14 @@ function assignarGrups($alumnes){
     $claseActual = $firstAlumne['classe'];
     $anyActual = $firstAlumne['any'];
     $posicio = 0;
+    $contador = 0;
     foreach ($groups as $group) {
         $grups = obtenimGrups()->fetchAll();
-        $contador = 0;
         $id_grup = $grups[$posicio]['grup_id'];
         foreach ($group as $alumne) {
-            if(($alumne['curs'] == $cursoActual && $alumne['classe'] == $claseActual && $alumne['any'] == $anyActual) && !($contador > 20)){
+            if((($alumne['curs'] == $cursoActual || $alumne['classe'] == $claseActual || $alumne['any'] == $anyActual) || !($contador > 20))){
                 $statement = $con->prepare("UPDATE alumne SET grup_id = ? WHERE alumne_id = ?");
                 $statement->execute([$id_grup, $alumne['alumne_id']]);
-                echo $contador . " ";
                 $contador++;
                 $cursoActual = $alumne['curs'];
                 $claseActual = $alumne['classe'];
@@ -265,6 +263,56 @@ function assignarGrups($alumnes){
     
     }catch(PDOException $e){
         echo "Error assignarAlumne: " . $e->getMessage();
+    }
+}
+
+function acabat(){
+    try{
+        $con = connect();
+        $statement = $con->prepare("SELECT * FROM accions WHERE final = 1");
+        $statement->execute();
+       if($statement){
+            return true;
+        }else{
+            return false;
+        }
+    }catch(PDOException $e){
+        echo "Error acabat: " . $e->getMessage();
+    }
+}
+
+function començar(){
+    try{
+        $con = connect();
+        $statement = $con->prepare("SELECT * FROM accions WHERE comencar = 1");
+        $statement->execute();
+        if($statement){
+            return true;
+        }else{
+            return false;
+        }         
+    }catch(PDOException $e){
+        echo "Error començar: " . $e->getMessage();
+    }
+}
+
+function comencarJoc(){
+    try{
+        $con = connect();
+        $statement = $con->prepare("UPDATE accions SET comencar = 1 WHERE id = 1");
+        $statement->execute();
+    }catch(PDOException $e){
+        echo "Error començarJoc: " . $e->getMessage();
+    }
+}
+
+function acabarJoc(){
+    try{
+        $con = connect();
+        $statement = $con->prepare("UPDATE accions SET final = 1 WHERE id = 1");
+        $statement->execute();
+    }catch(PDOException $e){
+        echo "Error acabarJoc: " . $e->getMessage();
     }
 }
 ?>
