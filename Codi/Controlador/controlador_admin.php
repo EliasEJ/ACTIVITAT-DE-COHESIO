@@ -348,7 +348,7 @@ function crearGrupsAutomaticament()
 ?>
     <script>
             location.replace("../Vista/index_admin.php")
-        </script> -->
+        </script>
         <?php
     }
     function mostrarGrupsAdmin(){
@@ -426,6 +426,15 @@ function mostrarGruposAdministrador()
 }
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && $_POST['action'] === 'comencarJoc') {
     comencarJoc();
+    ?>
+    <script>
+        location.replace("../Vista/index_admin.php")
+    </script>
+    <?php
+}
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && $_POST['action'] === 'acabarJoc') {
+    acabarJoc();
     ?>
     <script>
         location.replace("../Vista/index_admin.php")

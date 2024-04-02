@@ -18,11 +18,15 @@
 
 include_once("../Controlador/controlador_professor.php");
 include_once("../Controlador/controlador_admin.php");
+require_once("../Model/model_admin.php");
 $idProfessor = obtenerIdProfessor();
 ?>
 
 
 <body>
+    <?php
+    if(!començar()){
+    ?>
     <div class="content">
         <div class="row g-0">
             <div class="col-12">
@@ -103,7 +107,11 @@ $idProfessor = obtenerIdProfessor();
                                     ?>
                                     <?php
                                         if(començar()){
-                                            echo "<button type='button' id='acabarJoc' class='btn btn-danger w-100 mt-2'>Acabar joc</button>";
+                                            echo "
+                                            <form action='../Controlador/controlador_admin.php' method='post'>
+                                                <input type='hidden' name='action' value='acabarJoc'>
+                                                <input type='submit' id='acabarJoc' class='btn btn-success w-100 mt-2' value='Acabar Joc'>
+                                            </form>";
                                         }
                                     ?>
                                     <!-- Button trigger modal Crear activitat-->
@@ -356,7 +364,15 @@ $idProfessor = obtenerIdProfessor();
             let table2 = new DataTable('#myTable2');
         </script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
-
+        <?php
+    }else{
+    ?>
+    <div>
+        <h1>Activitat: </h1>
+    </div>
+    <?php
+    }
+    ?>
 </body>
 
 </html>

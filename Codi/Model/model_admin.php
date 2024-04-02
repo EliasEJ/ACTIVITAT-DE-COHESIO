@@ -310,7 +310,7 @@ function començar(){
 function comencarJoc(){
     try{
         $con = connect();
-        $statement = $con->prepare("UPDATE accions SET comencar = 1 WHERE id = 1");
+        $statement = $con->prepare("UPDATE accions SET comencar = 1, final = 0 WHERE id = 1");
         $statement->execute();
     }catch(PDOException $e){
         echo "Error començarJoc: " . $e->getMessage();
@@ -320,7 +320,7 @@ function comencarJoc(){
 function acabarJoc(){
     try{
         $con = connect();
-        $statement = $con->prepare("UPDATE accions SET final = 1 WHERE id = 1");
+        $statement = $con->prepare("UPDATE accions SET comencar = 0, final = 1 WHERE id = 1");
         $statement->execute();
     }catch(PDOException $e){
         echo "Error acabarJoc: " . $e->getMessage();

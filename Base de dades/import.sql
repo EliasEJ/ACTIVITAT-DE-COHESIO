@@ -328,6 +328,11 @@ VALUES
 (10,"Alex","Vazquez","avazquez", "a.vazquez2@sapalomera.cat",NULL,10,1);
 
 
+/*INSERIR ACCIONS*/
+INSERT INTO accions (comencar, final)
+VALUES
+(0,0);
+
 ALTER TABLE `activitat`
 ADD CONSTRAINT `activitat_ibfk_1` FOREIGN KEY (`professor_id`) REFERENCES `professor` (`professor_id`) ;
 

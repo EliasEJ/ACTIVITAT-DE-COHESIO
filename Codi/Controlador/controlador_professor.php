@@ -4,6 +4,11 @@ include_once("../Model/model_activitat.php");
 include_once("../Model/model.php");
 include_once("../Controlador/controlador_admin.php");
 
+
+if (isset($_GET['generarGrups'])) {
+    crearGrupsAutomaticament();
+}
+
 if (isset($_GET['accio']) && $_GET['accio'] == 'subirImagen') {
     $idGrup = $_GET['idGrup'];
     $target_dir = "../../Recursos/IMG/";
@@ -388,8 +393,7 @@ function mostrarPosMap($posMap) {
         echo "<p style='color:red;'>No se pudo obtener la posición del grupo.</p>";
     }
 }
-    // Al principio de tu archivo
-    if (isset($_GET['generarGrups'])) {
-        crearGrupsAutomaticament();
-    }
+
+
+
 ?>
