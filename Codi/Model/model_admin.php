@@ -282,6 +282,7 @@ function acabat(){
         $con = connect();
         $statement = $con->prepare("SELECT * FROM accions WHERE final = 1");
         $statement->execute();
+        $statement = $statement->fetchAll(PDO::FETCH_ASSOC);
        if($statement){
             return true;
         }else{
@@ -297,6 +298,7 @@ function començar(){
         $con = connect();
         $statement = $con->prepare("SELECT * FROM accions WHERE comencar = 1");
         $statement->execute();
+        $statement = $statement->fetchAll(PDO::FETCH_ASSOC);
         if($statement){
             return true;
         }else{

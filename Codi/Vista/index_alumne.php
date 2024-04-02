@@ -302,7 +302,7 @@ if(!acabat()){
 }else{
 ?>
 <div>
-    
+
 </div>
 <?php
 }
