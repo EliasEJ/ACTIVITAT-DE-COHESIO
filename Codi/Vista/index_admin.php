@@ -254,7 +254,7 @@ $idProfessor = obtenerIdProfessor();
                                         </div>
                                         <div class="form-group">
                                             <label for="professorDisponible" class="w-100 mt-2">Professor encarregat:</label>
-                                            <?php mostrarProfesoresDisponibles() ?>
+                                            <?php mostrarTodosProfesores() ?>
                                         </div>
                                         <div class="form-group">
                                             <label for="grupo1Disponible" class="w-100 mt-2">Grup inicial 1:</label>
@@ -265,7 +265,7 @@ $idProfessor = obtenerIdProfessor();
                                             <?php mostrarGruposDisponibles2() ?>
                                         </div>
                                         <br><br>
-                                        <input class="btn btn-success" type="submit" name="editarActividad" value="Guardar">
+                                        <input class="btn btn-success editarActividad" type="submit" name="editarActividad" value="Guardar">
                                     </form>
                                 </div>
                                 <div class="modal-footer">

@@ -41,7 +41,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             </script>
     <?php
         }
-    } else {
+    }else if(isset($_POST["editarActividad"])){
+        $idActividad = $_POST['idActividad'];
+        $nameAct = $_POST['tituloActividadEdit'];
+        $descriptAct = $_POST['descripcionActividadEdit'];
+        $material_id = $_POST['materialEditActividad'];
+
+
+        actualizarActividad($idAct, $nameAct, $descriptAct, $material_id);
+    } 
+    else {
 
         // Paso 1: Obtener la lista de grupos y actividades disponibles
         $grupos = obtenirGrups()->fetchAll();
@@ -225,12 +234,29 @@ function mostrarProfesoresDisponibles()
     }
 }
 
+function mostrarTodosProfesores()
+{
+    try {
+        $profDispo = obtenirProfessors()->fetchAll();
+        $html = "";
+        $html .= "<select class='form-select form-select-sm' name='professorDisponible' aria-label='.form-select-sm'>";
+        foreach ($profDispo as $prof) {
+            $html .= "<option value='" . $prof['professor_id'] . "'>" . $prof['cognom'] . ", " . $prof['nom'] . "</option>";
+        }
+        $html .= "</select>";
+        echo $html;
+    } catch (PDOException $e) {
+        echo "Error mostrarProfesoresDisponibles: " . $e->getMessage();
+    }
+}
+
 function mostrarGruposDisponibles1()
 {
     try {
         $grupos = obtenerGruposDisponibles()->fetchAll();
         $html = "";
         $html .= "<select class='form-select form-select-sm' name='grupo1Disponible' aria-label='.form-select-sm'>";
+        $html .= "<option value='0'>Cap grup</option>";
         foreach ($grupos as $grup) {
             $html .= "<option value='" . $grup['grup_id'] . "'>" . $grup['nom'] . "</option>";
         }
@@ -247,6 +273,7 @@ function mostrarGruposDisponibles2()
         $grupos = obtenerGruposDisponibles()->fetchAll();
         $html = "";
         $html .= "<select class='form-select form-select-sm' name='grupo2Disponible' aria-label='.form-select-sm'>";
+        $html .= "<option value='0'>Cap grup</option>";
         foreach ($grupos as $grup) {
             $html .= "<option value='" . $grup['grup_id'] . "'>" . $grup['nom'] . "</option>";
         }
@@ -269,7 +296,7 @@ function mostrarPosiciones()
         $html .= "</select>";
         echo $html;
     } catch (PDOException $e) {
-        echo "Error mostrarProfesoresDisponibles: " . $e->getMessage();
+        echo "Error mostrarPosiciones: " . $e->getMessage();
     }
 }
 

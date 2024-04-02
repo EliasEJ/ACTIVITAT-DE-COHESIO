@@ -11,6 +11,10 @@ $(document).ready(function () {
     $(".deleteGrup").click(confirmarAccion);
 });
 
+$(document).ready(function () {
+    $(".editarActividad").click(confirmarAccion);
+});
+
 
 function confirmarAccion() {
     if (confirm('Deseas continuar?')) {
