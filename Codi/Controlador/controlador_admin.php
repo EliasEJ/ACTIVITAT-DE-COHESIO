@@ -441,4 +441,27 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $_POST['action'] === 'acabarJoc') {
     </script>
     <?php
 }
+
+function puntuar($idprofessor){
+    try {
+        $html = "";
+        $html .= "<div class='col'><h3>Puntuar</h3><br>";
+        $html .= "<form action='../Controlador/administrar_grup.php' method='POST'><table class='table table-striped' id='myTable2'><thead class='sticky-top bg-white'><tr><th>Alumne</th><th>Grup</th><th>Punts</th></tr></thead><tbody>";
+        $alumnes = obtenirAlumnes()->fetchAll();
+        foreach ($alumnes as $al) {
+            $html .= "<tr>";
+            $html .= "<input type='hidden' name='alumne_id[]' value='" . $al['alumne_id'] . "'>";
+            $html .= "<td>" . $al['cognom'] . ", " . $al['nom'] . "</td>";
+            $html .= "<td>" . $al['grup_id'] . "</td>";
+            $html .= "<td><input type='number' name='punts[" . $al['alumne_id'] . "]' value='0'></td>";
+            $html .= "</tr>";
+        }
+        $html .= "</tbody>";
+        $html .= "</table><input type='submit' class='btn btn-success' value='Salvar'></form>";
+        $html .= "</div>";
+        echo $html;
+    } catch (PDOException $e) {
+        echo "Error mostrarAdministrarActivitat: " . $e->getMessage();
+    }
+}
 ?>

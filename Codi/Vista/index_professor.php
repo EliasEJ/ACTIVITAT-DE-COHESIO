@@ -216,7 +216,9 @@ $idProfessor = obtenerIdProfessor();
     }else{
     ?>
     <div>
-        <h1>Activitat: </h1>
+        <?php
+        puntuar();
+        ?>
     </div>
     <?php
     }

@@ -95,22 +95,18 @@ $idProfessor = obtenerIdProfessor();
                                 <div class="accordion accordion-flush" id="accordionActivitatsPadre">
                                     <h3>Activitats</h3>
                                     <?php
-                                        if(acabat() && començar()){
                                             echo "
                                             <form action='../Controlador/controlador_admin.php' method='post'>
                                                 <input type='hidden' name='action' value='comencarJoc'>
                                                 <input type='submit' id='començarJoc' class='btn btn-success w-100 mt-2' value='Començar joc'>
                                             </form>";
-                                        }
                                     ?>
                                     <?php
-                                        if(començar()){
                                             echo "
                                             <form action='../Controlador/controlador_admin.php' method='post'>
                                                 <input type='hidden' name='action' value='acabarJoc'>
                                                 <input type='submit' id='acabarJoc' class='btn btn-success w-100 mt-2' value='Acabar Joc'>
                                             </form>";
-                                        }
                                     ?>
                                     <!-- Button trigger modal Crear activitat-->
                                     <button type="button" id="crearActividad" class="btn btn-primary w-100 mt-2">
