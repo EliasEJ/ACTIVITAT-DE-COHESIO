@@ -1,5 +1,19 @@
 <?php
 require_once("model.php");
+
+function obtenerProfesoresDisponibles(){
+
+    try{
+        $con = connect();
+        $statement = $con->prepare("SELECT * FROM professor WHERE actividad_id IS NULL");
+        $statement->execute();
+        return $statement;
+    }catch (PDOException $e){
+        echo "Error obtenerProfesoresDisponibles: " . $e->getMessage();
+    }
+
+}
+
 function guardarEnfrentamientos($enfrentamientos){
     try {
         $con = connect();

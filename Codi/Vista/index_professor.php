@@ -145,10 +145,11 @@ $idProfessor = obtenerIdProfessor();
                                             <label for="newAlumnGrupo" class="w-100 mt-2">Grup</label>
                                             <?php seleccionGruposNuevoAlumno($idProfessor) ?>
                                         </div>
+                                        <br><br>    
+                                        <input class="btn btn-primary" type="submit" name="guardarAlumno" value="Guardar">
                                     </form>
                                 </div>
                                 <div class="modal-footer">
-                                    <input class="btn btn-primary" type="submit" name="guardarAlumno" value="Guardar">
                                     <button type="button" id="cerrarModalAñadirAlumn" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
                                 </div>
                             </div>

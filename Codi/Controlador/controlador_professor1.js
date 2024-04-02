@@ -24,9 +24,17 @@ function confirmarAccion() {
 
 $("#añadirAlumn").click(function () {
     $("#modalAñadirAlumn").modal('show');
-})
+});
+
+$("#crearActividad").click(function () {
+    $("#modalCrearActividad").modal('show');
+});
 
 $("#cerrarModalAñadirAlumn").click(function () {
     $("#modalAñadirAlumn").modal('hide');
 })
+
+$("#cerrarModalCrearActividad").click(function () {
+    $("#modalCrearActividad").modal('hide');
+});
 
