@@ -12,24 +12,36 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $descripcion = trim($_POST["descripcionActividadNueva"]);
         $posicion_id = $_POST["posicionNuevaActividad"];
         $professor_id = $_POST["professorDisponible"];
-        $grup1 = 8;
-        $grup2 = 1;
+        $grup1 = $_POST["grupo1Disponible"];
+        $grup2 = $_POST["grupo2Disponible"];
         $material_id = $_POST["materialNuevaActividad"];
         $comprarMaterial = $_POST['comprarMaterial'];
 
-        crearActividad($actividadId, $nombre, $descripcion, $posicion_id, $professor_id, $grup1, $grup2, $material_id);
-        aplicarActividadProfesor($professor_id, $actividadId);
-        actualizarComprarMaterial($material_id, $comprarMaterial)
-
+        if ($nombre == "" || $descripcion == "") {
 ?>
-        <script>
-            alert("Activitat creat correctament.");
-        </script>
+            <script>
+                alert("Error: El nom o la descripció de l'activitat no poden estar buits.");
+            </script>
+        <?php
+        } else if ($grup1 == $grup2) {
+        ?>
+            <script>
+                alert("Error: No es pot repetir l'equip a confrontar.");
+            </script>
+        <?php
+        } else {
+
+            crearActividad($actividadId, $nombre, $descripcion, $posicion_id, $professor_id, $grup1, $grup2, $material_id);
+            aplicarActividadProfesor($professor_id, $actividadId);
+            actualizarComprarMaterial($material_id, $comprarMaterial)
+
+        ?>
+            <script>
+                alert("Activitat creat correctament.");
+            </script>
     <?php
-
+        }
     } else {
-
-
 
         // Paso 1: Obtener la lista de grupos y actividades disponibles
         $grupos = obtenirGrups()->fetchAll();
@@ -202,6 +214,38 @@ function mostrarProfesoresDisponibles()
         echo $html;
     } catch (PDOException $e) {
         echo "Error mostrarProfesoresDisponibles: " . $e->getMessage();
+    }
+}
+
+function mostrarGruposDisponibles1()
+{
+    try {
+        $grupos = obtenerGruposDisponibles()->fetchAll();
+        $html = "";
+        $html .= "<select class='form-select form-select-sm' name='grupo1Disponible' aria-label='.form-select-sm'>";
+        foreach ($grupos as $grup) {
+            $html .= "<option value='" . $grup['grup_id'] . "'>" . $grup['nom'] . "</option>";
+        }
+        $html .= "</select>";
+        echo $html;
+    } catch (PDOException $e) {
+        echo "Error mostrarGruposDisponibles1: " . $e->getMessage();
+    }
+}
+
+function mostrarGruposDisponibles2()
+{
+    try {
+        $grupos = obtenerGruposDisponibles()->fetchAll();
+        $html = "";
+        $html .= "<select class='form-select form-select-sm' name='grupo2Disponible' aria-label='.form-select-sm'>";
+        foreach ($grupos as $grup) {
+            $html .= "<option value='" . $grup['grup_id'] . "'>" . $grup['nom'] . "</option>";
+        }
+        $html .= "</select>";
+        echo $html;
+    } catch (PDOException $e) {
+        echo "Error mostrarGruposDisponibles2: " . $e->getMessage();
     }
 }
 

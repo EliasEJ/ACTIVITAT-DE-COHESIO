@@ -191,12 +191,20 @@ $idProfessor = obtenerIdProfessor();
                                             </select>
                                         </div>
                                         <div class="form-group">
+                                            <label for="posicionNuevaActividad" class="w-100 mt-2">Posicio activitat:</label>
+                                            <?php mostrarPosiciones() ?>
+                                        </div>
+                                        <div class="form-group">
                                             <label for="professorDisponible" class="w-100 mt-2">Professor encarregat:</label>
                                             <?php mostrarProfesoresDisponibles() ?>
                                         </div>
                                         <div class="form-group">
-                                            <label for="posicionNuevaActividad" class="w-100 mt-2">Posicio activitat:</label>
-                                            <?php mostrarPosiciones() ?>
+                                            <label for="grupo1Disponible" class="w-100 mt-2">Grup inicial 1:</label>
+                                            <?php mostrarGruposDisponibles1() ?>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="grupo2Disponible" class="w-100 mt-2">Grup inicial 2:</label>
+                                            <?php mostrarGruposDisponibles2() ?>
                                         </div>
                                         <br><br>
                                         <input class="btn btn-primary" type="submit" name="crearActividad" value="Guardar">

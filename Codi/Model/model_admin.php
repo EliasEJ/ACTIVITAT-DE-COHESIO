@@ -14,6 +14,22 @@ function obtenerProfesoresDisponibles(){
 
 }
 
+function obtenerGruposDisponibles(){
+
+    try{
+        $con = connect();
+        $statement = $con->prepare("SELECT g.*
+        FROM grup g
+        LEFT JOIN activitat a ON g.grup_id = a.grup1 OR g.grup_id = a.grup2
+        WHERE a.actividad_id IS NULL");
+        $statement->execute();
+        return $statement;
+    }catch (PDOException $e){
+        echo "Error obtenerGruposDisponibles: " . $e->getMessage();
+    }
+
+}
+
 function guardarEnfrentamientos($enfrentamientos){
     try {
         $con = connect();
