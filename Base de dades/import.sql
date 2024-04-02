@@ -24,7 +24,7 @@ VALUES
 (2, "aula 2", "Aula 2 dels cicles."),
 (3, "pista1", "Zona de la pista on darrere dels cicles. On les porteries de futbol."),
 (4, "pista2", "Zona de la pista enfront de les taules de ping-pong. On les canastes de bàsquet."),
-(5, "pista 3", "Cistella de bàsquet situat a la cantonada inferior esquerra".),
+(5, "pista 3", "Cistella de bàsquet situat a la cantonada inferior esquerra."),
 (6, "pista 4", "Pista de bàsquet situat al costat de la pista de futbol."),
 (7, "aula 3", "Aula 3 dels cicles."),
 (8,"taules ping pong", "Enfront de la cafeteria. On les taules de ping-pong.");
