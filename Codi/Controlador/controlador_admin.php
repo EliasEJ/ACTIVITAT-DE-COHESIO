@@ -58,7 +58,7 @@ function mostrarAlumnes()
 function mostrarGrups()
 {
     try {
-        $grups = mostrarGrupos()->fetchAll();
+        $grups = obtenimGrups()->fetchAll();
         $html = "<div class='container'>";
         $html .= "<div class='row'>";
         foreach ($grups as $grup) {
@@ -145,7 +145,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 function crearGrupsAutomaticament(){
         $alumnes = obtenirAlumnes()->fetchAll(PDO::FETCH_ASSOC);
 
-        //Ordenem els alumnes per curs, classe i any, si no es fes aixo es crearian molts mes grups dels necesaris
+        //Tornem a ordenar els alumnes per curs, classe i any, per facilitar l'assignacio de grups
         usort($alumnes, function($a, $b) {
             if ($a['curs'].$a['classe'].$a['any'] == $b['curs'].$b['classe'].$b['any']) {
                 return 0;
@@ -189,4 +189,76 @@ function crearGrupsAutomaticament(){
         </script> -->
         <?php
     }
+    function mostrarGrupsAdmin(){
+        try {
+            $html = "";
+    
+            $grups = obtenimGrups()->fetchAll();
+    
+            $html .= "<div class='col'><h3>Grups</h3><br>";
+            foreach ($grups as $gr) {
+                $html .= "<table class='table table-striped'";
+                $html .= "<tbody>";
+                $html .= "<tr>";
+                $html .= "<td>";
+                $html .= "<label>" . $gr['nom'] . "</label>";
+                $html .= "</td>";
+                $html .= "<td>";
+                $html .= "<button class='btn btn-danger deleteGrup'><a href='../Controlador/administrar_grup.php?accio=eliminar&idGrup=" . $gr['grup_id'] . "  ' style='color:white;'>Eliminar</a></button>";
+                $html .= "</td>";
+                $html .= "</tr>";
+                $html .= "</tbody>";
+                $html .= "</table>";
+            }
+            $html .= "<button class='btn btn-primary'><a href='../Controlador/administrar_grup.php?accio=crear' style='color:white;'>Crear Grup</a></button>";
+            $html .= "<button type='submit' name='generarGrups' class='btn btn-primary'><a href='?generarGrups=true' class='btn btn-primary'>Generar Grups</a></button>";
+            $html .= "</div>";
+            return $html;
+        } catch (PDOException $e) {
+            echo "Error mostrarGrupsProfessor:" . $e->getMessage();
+        }
+    }
+
+    function seleccioAlumnesAdmin(){
+        try {
+            $html = "";
+    
+            $grups = obtenimGrups()->fetchAll();
+            $alumnes = obtenerAlumnosTotal()->fetchAll();
+    
+            $html .= "<div class='col'><h3>Alumnes</h3><br>";
+            $html .= "<form action='../Controlador/administrar_grup.php' method='POST'><table class='table table-striped' id='myTable2'><thead class='sticky-top bg-white'><tr><th>Alumne</th><th>Grup</th><th>Canviar grup</th></tr></thead><tbody>";
+            foreach ($alumnes as $al) {
+                if ($al['asistencia'] == 1) {
+    
+                    $html .= "<tr>";
+                    $html .= "<input type='hidden' name='alumne_id[]' value='" . $al['alumne_id'] . "'>";
+                    $html .= "<td>" . $al['cognom'] . ", " . $al['nom'] . "</td>";
+                    $html .= "<td>" . $al['grup_id'] . "</td>";
+                    $html .= "<td><select class='form-select form-select-sm' name='grup[" . $al['alumne_id'] . "]' aria-label='.form-select-sm'>";
+                    $html .= "<option value='0'>Cap grup</option>";
+                    foreach ($grups as $gr) {
+                        $selected = ($al['grup_id'] == $gr['grup_id']) ? "selected" : "";
+                        $html .= "<option value='" . $gr['grup_id'] . "' $selected>" . $gr['nom'] . "</option>";
+                    }
+                    $html .= "</select></td>";
+                    $html .= "</tr>";
+                }
+            }
+            $html .= "</tbody>";
+            $html .= "</table><input type='submit' class='btn btn-success' value='Salvar'></form>";
+            $html .= "</div>";
+            return $html;
+        } catch (PDOException $e) {
+            echo "Error mostrarAdministrarActivitat: " . $e->getMessage();
+        }
+    }
+    function mostrarGruposAdministrador()
+{
+    $html = "";
+        $html .= mostrarGrupsAdmin();
+        $html .= seleccioAlumnesAdmin();
+
+    echo $html;
+}
 ?>

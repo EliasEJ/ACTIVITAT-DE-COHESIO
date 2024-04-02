@@ -42,10 +42,10 @@ function crearActivitat($nom, $idProfessor, $diferencia){
     try{
         $con = connect();
         if($diferencia != 0){
-        $statement = $con->prepare("INSERT INTO activitat (nom, posicion_id, professor_id, material_id) VALUES (?, ?, ?, ?)");
+        $statement = $con->prepare("INSERT INTO activitat (actividad_id,nom, posicion_id, professor_id, material_id) VALUES (?, ?, ?, ?)");
         $statement->execute([$nom, 1, $idProfessor, 1]);
         }else{
-        $statement = $con->prepare("UPDATE activitat (nom, posicion_id, professor_id, material_id) VALUES (?, ?, ?, ?)");
+        $statement = $con->prepare("UPDATE activitat (actividad_id,nom, posicion_id, professor_id, material_id) VALUES (?, ?, ?, ?)");
         $statement->execute([$nom, 1, $idProfessor, 1]);
         }
         
@@ -146,7 +146,7 @@ function assignarGrups($alumnes){
         ?><script>alert("Hi ha més grups que activitats , es crearan les activitats que faltan, les has d'omplir")</script><?php
         for($i = count($activitats); $i < count($grups)/2; $i++){
             $nom = 'Activitat ' . ($i + 1);
-            crearActivitat($nom, $idProfessor, $diferencia);
+            crearActivitat($nom ,$idProfessor ,$diferencia);
         }
     }
     $activitats = obtenirActivitats()->fetchAll();
@@ -154,58 +154,69 @@ function assignarGrups($alumnes){
         $posicio = rand(0, count($grups) - 1);
         $id_grup1 = $grups[$posicio]['grup_id'];
         array_splice($grups, $posicio, 1);
-        $id_grup2 = $grups[$posicio]['grup_id'];
-        while($id_grup1 == $id_grup2){
+        if (empty($grups)) {
+            ?><script>alert("No hi ha prous grups per a totes les activitats")</script><?php
+        } else {
+            // Si $grups no está vacío, obtén un nuevo índice aleatorio
             $posicio = rand(0, count($grups) - 1);
             $id_grup2 = $grups[$posicio]['grup_id'];
-        }        
-        array_splice($grups, $posicio, 1);
-        $statement = $con->prepare("UPDATE activitat SET grup1 = ?, grup2 = ? WHERE actividad_id = ?");
-        $statement->execute([$id_grup1, $id_grup2, $activitat['actividad_id']]);
+            while($id_grup1 == $id_grup2){
+                if(count($grups)){
+                    $id_grup2 = $grups[1]['grup_id'];
+                    return;
+                }
+                $posicio = rand(0, count($grups) - 1);
+                $id_grup2 = $grups[$posicio]['grup_id'];
+            }        
+            array_splice($grups, $posicio, 1);
+            $statement = $con->prepare("UPDATE activitat SET grup1 = ?, grup2 = ? WHERE actividad_id = ?");
+            $statement->execute([$id_grup1, $id_grup2, $activitat['actividad_id']]);
+        }
     }
 
     $alumnes = obtenirAlumnes()->fetchAll();
-
-    // $DAW2 = [];
-    // $DAW1 = [];
-    // $ASIX1 = [];
-    // $ASIX2 = []; 
-    // $SMX1A = [];
-    // $SMX1B = [];
-    // $SMX1C = [];
-    // $SMX2A = [];
-    // $SMX2B = [];
-    // $SMX2C = [];
-    // foreach ($alumnes as $alumne) {
-    //     if($alumne['classe'] == "A" && $alumne['curs'] == "DAW" && $alumne['any'] == '2n'){
-    //         $DAW2[] = $alumne;
-    //     }else if($alumne['classe'] == "A" && $alumne['curs'] == "DAW" && $alumne['any'] == '1r'){
-    //         $DAW1[] = $alumne;
-    //     }else if($alumne['classe'] == "A" && $alumne['curs'] == "ASIX" && $alumne['any'] == '1r'){
-    //         $ASIX1[] = $alumne;
-    //     }else if($alumne['classe'] == "A" && $alumne['curs'] == "ASIX" && $alumne['any'] == '2n'){
-    //         $ASIX2[] = $alumne;
-    //     }
-    //     if($alumne['classe'] == "A" && $alumne['curs'] == "SMX" && $alumne['any'] == '1r'){
-    //         $SMX1A[] = $alumne;
-    //     }
-    //     if($alumne['classe'] == "B" && $alumne['curs'] == "SMX" && $alumne['any'] == '1r'){
-    //         $SMX1B[] = $alumne;
-    //     }
-    //     if($alumne['classe'] == "C" && $alumne['curs'] == "SMX" && $alumne['any'] == '1r'){
-    //         $SMX1C[] = $alumne;
-    //     }
-    //     if($alumne['classe'] == "A" && $alumne['curs'] == "SMX" && $alumne['any'] == '2n'){
-    //         $SMX2A[] = $alumne;
-    //     }
-    //     if($alumne['classe'] == "B" && $alumne['curs'] == "SMX" && $alumne['any'] == '2n'){
-    //         $SMX2B[] = $alumne;
-    //     }
-    //     if($alumne['classe'] == "C" && $alumne['curs'] == "SMX" && $alumne['any'] == '2n'){
-    //         $SMX2C[] = $alumne;
-    //     }
-    // }
-
+    usort($alumnes, function($a, $b) {
+        if ($a['curs'].$a['classe'].$a['any'] == $b['curs'].$b['classe'].$b['any']) {
+            return 0;
+        }
+        return ($a['curs'].$a['classe'].$a['any'] > $b['curs'].$b['classe'].$b['any']) ? 1 : -1;
+    });
+    $groups = [];
+    foreach ($alumnes as $alumne) {
+        $key = $alumne['curs'] . $alumne['any'] . $alumne['classe'];
+        $groups[$key][] = $alumne;
+    }
+    $firstGroup = reset($groups);
+    $firstAlumne = reset($firstGroup);
+    $cursoActual = $firstAlumne['curs'];
+    $claseActual = $firstAlumne['classe'];
+    $anyActual = $firstAlumne['any'];
+    $posicio = 0;
+    foreach ($groups as $group) {
+        $grups = obtenimGrups()->fetchAll();
+        $contador = 0;
+        $id_grup = $grups[$posicio]['grup_id'];
+        foreach ($group as $alumne) {
+            if(($alumne['curs'] == $cursoActual && $alumne['classe'] == $claseActual && $alumne['any'] == $anyActual) && !($contador > 20)){
+                $statement = $con->prepare("UPDATE alumne SET grup_id = ? WHERE alumne_id = ?");
+                $statement->execute([$id_grup, $alumne['alumne_id']]);
+                echo $contador . " ";
+                $contador++;
+                $cursoActual = $alumne['curs'];
+                $claseActual = $alumne['classe'];
+                $anyActual = $alumne['any'];
+            }
+            else{
+                $cursoActual = $alumne['curs'];
+                $claseActual = $alumne['classe'];
+                $anyActual = $alumne['any'];
+                break;
+            }
+            array_splice($grups, $posicio, 1);
+        }
+        $posicio++;
+    }
+    
     }catch(PDOException $e){
         echo "Error assignarAlumne: " . $e->getMessage();
     }

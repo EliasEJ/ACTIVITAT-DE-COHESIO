@@ -152,7 +152,7 @@ function eliminarGrup($idGrup)
         //reordenarGrupo();
         addConstraintsGrupId();
     } catch (PDOException $e) {
-        echo "Error crearGrup: " . $e->getMessage();
+        echo "Error eliminar grup: " . $e->getMessage();
     }
 }
 

@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ACTIVITAT DE COHESIÓ</title>
     <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.datatables.net/2.0.2/css/dataTables.dataTables.css" />
+    <script src="https://cdn.datatables.net/2.0.2/js/dataTables.js"></script>
     <link rel="stylesheet" href="../../Recursos/bootstrap-5.0.2/dist/css/bootstrap.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.2/js/bootstrap.bundle.min.js" integrity="sha512-72WD92hLs7T5FAXn3vkNZflWG6pglUDDpm87TeQmfSg8KnrymL2G30R7as4FmTwhgu9H7eSzDCX3mjitSecKnw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <link rel="stylesheet" href="../../Recursos/CSS/styleProfessor.css  ">
@@ -63,7 +65,7 @@ $idProfessor = obtenerIdProfessor();
                     <div class="tab-pane fade show active" id="taulaAlumnat">
                         <form action="../Controlador/administrar_alumnado.php" method="post">
 
-                            <table class="table table-striped">
+                            <table class="table table-striped" id="myTable1">
                                 <thead class="sticky-top bg-white">
                                     <tr>
                                         <th>Cognoms, Nom</th>
@@ -99,9 +101,8 @@ $idProfessor = obtenerIdProfessor();
                     </div>
                     <div class="tab-pane fade" id="taulaGrups">
                         <div class="row">
-                            <?php mostrarGruposTutorProfe($idProfessor) ?>
+                            <?php mostrarGruposAdministrador() ?>
                         </div>
-
                     </div>
                     <div class="tab-pane fade" id="taulaClassificació">
                         <table class="table table-striped">
@@ -207,7 +208,10 @@ $idProfessor = obtenerIdProfessor();
             </div>
         </div>
     </footer>
-
+    <script>
+    let table1 = new DataTable('#myTable1');
+    let table2 = new DataTable('#myTable2');
+    </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
 
 </body>
