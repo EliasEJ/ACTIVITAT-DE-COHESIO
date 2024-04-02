@@ -194,16 +194,6 @@ if (!isset($_COOKIE['asistencia_confirmada'])) {
         </div>
         <div class="col-lg-6 col-md-6 col-sm-12">
             <div class="col-10">
-            <h2 class="marginLeft pb-1">ACTIVITATS</h2>
-                <div class="marginLeft grup border">
-                    <div class="p-3">
-                        
-                    </div>
-
-
-                    <button type="button" class="btn" data-toggle="modal" data-target="#infoActivitatpModal">
-                        <b>INFO</b>
-                    </button>
 
                     <div class="modal fade" id="infoGrupModal" tabindex="-1" role="dialog" aria-labelledby="infoActivitatpModal" aria-hidden="true">
                         <div class="modal-dialog" role="document">
